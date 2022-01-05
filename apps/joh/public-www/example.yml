@@ -16,7 +16,7 @@ spec:
       releaseName: hello-world
       values: |
         host: public-hello-world.joh.k8s.sl.zone
-        image: sikalabs/hello-world-server:v0.3.0-dev-1
+        image: sikalabs/hello-world-server:ondrejsika
   syncPolicy:
     automated:
       prune: true
