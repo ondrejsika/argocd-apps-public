@@ -5,11 +5,11 @@
 ### Cluster: Panda
 
 ```
-kubectl apply -f ./meta/panda.json
+kubectl apply -f ./meta/panda.yml
 ```
 
 ### Cluster: Joh
 
 ```
-kubectl apply -f ./meta/joh.json
+kubectl apply -f ./meta/joh.yml
 ```
