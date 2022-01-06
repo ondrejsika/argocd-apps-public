@@ -8,11 +8,11 @@ help:
 .PHONY: install-argocd-sikademo
 install-argocd-sikademo:
 	(cd _argocd && helm dependency update)
-	helm upgrade \
-		--install \
+	helm upgrade --install \
+		argocd ./_argocd \
 		--create-namespace \
 		--namespace argocd \
-		argocd ./_argocd \
+		--wait \
 		--values ./_argocd/values-sikademo.yaml
 
 setup-sikademo:
