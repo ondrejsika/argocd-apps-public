@@ -13,3 +13,9 @@ kubectl apply -f ./meta/panda.yml
 ```
 kubectl apply -f ./meta/joh.yml
 ```
+
+### Cluster: sikademo
+
+```
+kubectl apply -f ./meta/sikademo.yml
+```
