@@ -14,6 +14,7 @@ spec:
     targetRevision: 4.0.13
     helm:
       releaseName: ingress-nginx
+      # https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml
       values: |
         controller:
           ingressClassResource:
