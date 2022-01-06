@@ -17,6 +17,8 @@ spec:
       # https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml
       values: |
         controller:
+          service:
+            type: ClusterIP
           ingressClassResource:
             default: true
           kind: DaemonSet
