@@ -16,7 +16,7 @@ spec:
       releaseName: hello-world-cra
       values: |
         host: cra.panda.k8s.oxs.cz
-        image: sikalabs/hello-world-server:ondrejsika
+        image: sikalabs/hello-world-server:cra
   syncPolicy:
     automated:
       prune: true
