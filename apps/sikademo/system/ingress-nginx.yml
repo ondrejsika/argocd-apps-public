@@ -28,6 +28,16 @@ spec:
             enabled: true
             serviceMonitor:
               enabled: true
+        defaultBackend:
+          enabled: true
+          image:
+            registry: docker.io
+            image: sikalabs/hello-world-server
+            tag: ondrejsika
+          extraEnvs:
+            - name: TEXT
+              value: "default backend: sikademo"
+          port: 8000
   syncPolicy:
     automated:
       prune: true
