@@ -17,6 +17,13 @@ spec:
       # https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml
       values: |
         controller:
+          config:
+            proxy-body-size: 10m
+            client-body-buffer-size: 128k
+            proxy-connect-timeout: '180'
+            proxy-buffer-size: 128k
+            proxy-buffers-number: '4 256k'
+            large-client-header-buffers: '4 16k'
           service:
             type: ClusterIP
           ingressClassResource:
