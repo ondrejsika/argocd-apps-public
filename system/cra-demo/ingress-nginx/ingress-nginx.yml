@@ -1,0 +1,45 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: system-ingress-nginx
+  namespace: cra-argocd
+spec:
+  destination:
+    namespace: cra-ingress-nginx
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    chart: ingress-nginx
+    targetRevision: 4.0.19
+    helm:
+      releaseName: ingress-nginx
+      # https://github.com/kubernetes/ingress-nginx/blob/main/charts/ingress-nginx/values.yaml
+      values: |
+        controller:
+          service:
+            type: LoadBalancer
+            loadBalancerIP: 212.158.132.222
+          ingressClassResource:
+            default: true
+          kind: DaemonSet
+          hostPort:
+            enabled: false
+          metrics:
+            enabled: true
+        defaultBackend:
+          enabled: true
+          image:
+            registry: docker.io
+            image: sikalabs/hello-world-server
+            tag: ondrejsika
+          extraEnvs:
+            - name: TEXT
+              value: "cra-demo"
+          port: 8000
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
