@@ -17,6 +17,7 @@ spec:
       values: |
         host: hello-cra.k8s.sikademo.com
         image: sikalabs/hello-world-server:cra
+        replicas: 2
   syncPolicy:
     automated:
       prune: true

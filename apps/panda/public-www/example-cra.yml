@@ -17,6 +17,7 @@ spec:
       values: |
         host: cra.panda.k8s.oxs.cz
         image: sikalabs/hello-world-server:cra
+        replicas: 2
   syncPolicy:
     automated:
       prune: true
