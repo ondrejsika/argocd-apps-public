@@ -18,6 +18,7 @@ spec:
         host: fingood.panda.k8s.oxs.cz
         image: sikalabs/hello-world-server
         replicas: 2
+        TEXT: Fingood
   syncPolicy:
     automated:
       prune: true
