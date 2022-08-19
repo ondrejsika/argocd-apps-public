@@ -16,9 +16,8 @@ spec:
       releaseName: hello-world-fingood
       values: |
         host: fingood.panda.k8s.oxs.cz
-        image: sikalabs/hello-world-server
+        image: sikalabs/hello-world-server:fingood
         replicas: 2
-        TEXT: Fingood
   syncPolicy:
     automated:
       prune: true
