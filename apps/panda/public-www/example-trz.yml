@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: public-example-trz
+  namespace: argocd
+spec:
+  destination:
+    namespace: public-www
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/hello-world
+    helm:
+      releaseName: hello-world-trz
+      values: |
+        host: trz.panda.k8s.oxs.cz
+        replicas: 2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
