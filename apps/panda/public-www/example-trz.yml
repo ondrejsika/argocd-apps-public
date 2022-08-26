@@ -16,7 +16,7 @@ spec:
       releaseName: hello-world-trz
       values: |
         host: trz.panda.k8s.oxs.cz
-        replicas: 3
+        image: sikalabs/hello-world-server:trz
   syncPolicy:
     automated:
       prune: true
