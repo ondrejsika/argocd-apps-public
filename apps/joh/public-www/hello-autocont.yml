@@ -17,7 +17,6 @@ spec:
       values: |
         host: hello-autocont.joh.k8s.sl.zone
         image: sikalabs/hello-world-server
-        replicas: 5
         TEXT: Hello Autocont!
   syncPolicy:
     automated:
