@@ -17,6 +17,7 @@ spec:
       values: |
         host: hello-o2.joh.k8s.sl.zone
         image: sikalabs/hello-world-server:o2
+        replicas: 5
   syncPolicy:
     automated:
       prune: true
