@@ -17,6 +17,7 @@ spec:
       values: |
         host: trz.panda.k8s.oxs.cz
         image: sikalabs/hello-world-server:trz
+        replicas: 2
   syncPolicy:
     automated:
       prune: true
