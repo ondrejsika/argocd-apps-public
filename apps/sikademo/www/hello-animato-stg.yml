@@ -16,7 +16,7 @@ spec:
       releaseName: hello-animato-stg
       values: |
         host: hello-animato-stg.k8s.sikademo.com
-        image: sikalabs/hello-world-server:animato-stg
+        image: sikalabs/hello-world-server:animato
         TEXT: '[STG] Hello Animato (staging)!'
   syncPolicy:
     automated:
