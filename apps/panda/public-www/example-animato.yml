@@ -17,7 +17,7 @@ spec:
       values: |
         host: animato.panda.k8s.oxs.cz
         image: sikalabs/hello-world-server:animato
-        replicas: 5
+        replicas: 1
         TEXT: Ahoj Animato!
   syncPolicy:
     automated:
