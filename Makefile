@@ -15,9 +15,12 @@ install-argocd-sikademo:
 		--wait \
 		--values ./_argocd/values-sikademo.yaml
 
+apply-app-of-apps-sikademo:
+	kubectl apply -f ./meta/sikademo.yml
+
 setup-sikademo:
 	make install-argocd-sikademo
-	kubectl apply -f ./meta/sikademo.yml
+	make apply-app-of-apps-sikademo
 
 argocd-proxy:
 	kubectl port-forward -n argocd svc/argocd-server 8443:443
