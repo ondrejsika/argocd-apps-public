@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd-image-updater
+  name: argocd-image-updater-example
   namespace: argocd
   annotations:
     argocd-image-updater.argoproj.io/image-list: 1=ondrejsika/argocd-image-updater-example:latest
@@ -11,7 +11,7 @@ metadata:
     argocd-image-updater.argoproj.io/1.platforms: linux/amd64
 spec:
   destination:
-    namespace: www
+    namespace: argocd-image-updater-example
     server: https://kubernetes.default.svc
   project: default
   source:
@@ -19,9 +19,9 @@ spec:
     targetRevision: HEAD
     path: charts/one-image
     helm:
-      releaseName: argocd-image-updater
+      releaseName: argocd-image-updater-example
       values: |
-        host: argocd-image-updater.k8s.sikademo.com
+        host: argocd-image-updater-example.k8s.sikademo.com
         image: ondrejsika/argocd-image-updater-example
   syncPolicy:
     automated:
