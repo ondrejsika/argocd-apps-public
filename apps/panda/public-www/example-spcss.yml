@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: public-example-spcss
+  namespace: argocd
+spec:
+  destination:
+    namespace: public-www
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/hello-world
+    helm:
+      releaseName: hello-world-spcss
+      values: |
+        host: spcss.panda.k8s.sl.zone
+        image: sikalabs/hello-world-server:spcss
+        replicas: 2
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
