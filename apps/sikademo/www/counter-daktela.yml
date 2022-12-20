@@ -16,6 +16,7 @@ spec:
       releaseName: counter-daktela
       values: |
         host: counter-daktela.k8s.sikademo.com
+        replicas: 5
   syncPolicy:
     automated:
       prune: true
