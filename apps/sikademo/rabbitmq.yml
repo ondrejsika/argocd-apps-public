@@ -20,7 +20,7 @@ spec:
         auth:
           username: admin
           password: admin
-        replicaCount: 3
+        replicaCount: 5
         ingress:
           enabled: true
           ingressClassName: nginx
