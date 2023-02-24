@@ -18,7 +18,7 @@ spec:
       releaseName: counter
       values: |
         host: counter.k8s.sikademo.com
-        replicas: 80
+        replicas: 4
   syncPolicy:
     automated:
       prune: true
