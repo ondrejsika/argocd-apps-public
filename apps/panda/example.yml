@@ -17,7 +17,7 @@ spec:
     helm:
       releaseName: hello-world
       values: |
-        host: public-hello-world.panda.k8s.oxs.cz
+        host: public-hello-world.panda.k8s.sl.zone
         image: sikalabs/hello-world-server:ondrejsika
   syncPolicy:
     automated:
