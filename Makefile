@@ -1,6 +1,6 @@
 sikademo-setup:
 	make install-argocd-sikademo
-	make apply-app-of-apps-sikademo
+	make sikademo-apply-app-of-apps
 
 install-argocd-sikademo:
 	slu scripts kubernetes install-argocd --domain argocd.k8s.sikademo.com
