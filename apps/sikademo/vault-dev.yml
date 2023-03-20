@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: vault-dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/vault-dev
+    helm:
+      releaseName: vault-dev
+      values: |
+        host: vault.k8s.sikademo.com
+        VAULT_DEV_ROOT_TOKEN_ID: root
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
