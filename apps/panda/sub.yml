@@ -20,6 +20,7 @@ spec:
         host: sub.panda.k8s.sl.zone
         image: sikalabs/hello-world-server:ondrejsika
         TEXT: "Hallo S&B!"
+        replicas: 10
   syncPolicy:
     automated:
       prune: true
