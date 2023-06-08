@@ -19,6 +19,7 @@ spec:
       values: |
         host: microcomp-example.panda.k8s.sl.zone
         image: sikalabs/hello-world-server:v0.6.0
+        replicas: 3
         containerEnv:
           - name: TEXT
             value: "Hello from Microcomp"
