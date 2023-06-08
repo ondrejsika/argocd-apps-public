@@ -22,9 +22,5 @@ spec:
         containerEnv:
           - name: TEXT
             value: "Hello from Microcomp"
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
     syncOptions:
     - CreateNamespace=true
