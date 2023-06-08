@@ -20,5 +20,3 @@ spec:
         host: microcomp-example.panda.k8s.sl.zone
         image: sikalabs/hello-world-server:v0.6.0
         TEXT: "Hello from Microcomp"
-    syncOptions:
-    - CreateNamespace=true
