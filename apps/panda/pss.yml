@@ -24,3 +24,4 @@ spec:
         host: pss-example.panda.k8s.sl.zone
         image: sikalabs/hello-world-server:v0.6.0
         TEXT: "Hello from PSS.sk"
+        replicas: 10
