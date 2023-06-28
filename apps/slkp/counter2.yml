@@ -25,3 +25,4 @@ spec:
       values: |
         host: counter2.apps.slkp.uk
         replicas: 3
+        storage: true
