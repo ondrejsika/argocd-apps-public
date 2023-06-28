@@ -24,4 +24,4 @@ spec:
       releaseName: counter
       values: |
         host: counter.apps.slkp.uk
-        replicas: 4
+        replicas: 10
