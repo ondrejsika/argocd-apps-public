@@ -9,7 +9,7 @@ data:
   application.instanceLabelKey: argocd.argoproj.io/instance
   exec.enabled: "false"
   oidc.config: |
-    name: Example SSO
+    name: SikaDemo SSO
     issuer: https://sso.sikademo.com/realms/example
     clientID: argocd
     clientSecret: argocd
