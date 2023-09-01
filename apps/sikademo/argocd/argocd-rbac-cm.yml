@@ -7,5 +7,13 @@ data:
   policy.csv: |
     g, argocd-admin, role:admin
     g, argocd-readonly, role:readonly
+
+    p, argocd-proj-hello-world, projects, get, hello-world, allow
+    p, argocd-proj-hello-world, projects, update, hello-world, allow
+    p, argocd-proj-hello-world, applications, get, hello-world/*, allow
+    p, argocd-proj-hello-world, applications, create, hello-world/*, allow
+    p, argocd-proj-hello-world, applications, update, hello-world/*, allow
+    p, argocd-proj-hello-world, applications, delete, hello-world/*, allow
+
   policy.default: ""
   scopes: '[groups]'
