@@ -10,7 +10,7 @@ data:
   exec.enabled: "false"
   oidc.config: |
     name: SikaDemo SSO
-    issuer: https://sso.sikademo.com/realms/example
+    issuer: https://sso.sikademo.com/realms/sikademo
     clientID: argocd
     clientSecret: argocd
     requestedScopes: ["openid", "profile", "email", "groups"]
