@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: signpost-example-public
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: signpost-example-public
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/signpost
+    helm:
+      releaseName: example
+      values: |
+        host: signpost-example-public.panda.k8s.sl.zone
+        signpost_yaml:
+          SiteHeading: Signpost Demo
+          CompanyName: Demo Company
+          CompanyDomain: example.com
+          CompanyURL: https://example.com
+          Rows:
+          - Cols:
+            - Blocks:
+              - Heading: Main
+                Links:
+                - Title: Gitlab
+                  URL: https://example.com
+                - Title: Stand up (Google Meet)
+                  URL: https://example.com
