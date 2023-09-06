@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-vaultwarden
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: example-vaultwarden
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/vaultwarden
+    helm:
+      releaseName: example-vaultwarden
+      values: |
+        # https://github.com/sikalabs/charts/blob/master/charts/vaultwarden/values.yaml
+        host: example-vaultwarden.joh.k8s.sl.zone
+        ADMIN_TOKEN: admin
