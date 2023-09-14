@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: meta-panda-public
+  name: app-of-apps-panda-public
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
