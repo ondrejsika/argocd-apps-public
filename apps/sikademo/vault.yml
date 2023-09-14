@@ -21,7 +21,7 @@ spec:
     chart: vault
     targetRevision: 0.25.0
     helm:
-      releaseName: hello-world
+      releaseName: vault
       values: |
         global:
           tlsDisable: true
