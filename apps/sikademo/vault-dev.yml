@@ -17,7 +17,7 @@ spec:
     helm:
       releaseName: vault-dev
       values: |
-        host: vault.k8s.sikademo.com
+        host: vault-dev.k8s.sikademo.com
         VAULT_DEV_ROOT_TOKEN_ID: root
   syncPolicy:
     automated:
