@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: vault
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://helm.releases.hashicorp.com
+    chart: vault
+    targetRevision: 0.25.0
+    helm:
+      releaseName: hello-world
+      values: |
+        global:
+          tlsDisable: true
+
+        injector:
+          enabled: false
+
+        server:
+          ingress:
+            enabled: true
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+            ingressClassName: nginx
+            pathType: Prefix
+            tls:
+            - secretName: vault-tls
+              hosts:
+                - vault.k8s.sikademo.com
+            hosts:
+            - host: vault.k8s.sikademo.com
+              paths:
+                - /
+
+          dataStorage:
+            enabled: true
+            size: 1Gi
+
+          auditStorage:
+            enabled: false
+
+          ha:
+            enabled: true
+            replicas: 3
+            raft:
+              enabled: true
