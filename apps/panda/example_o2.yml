@@ -23,5 +23,5 @@ spec:
     helm:
       releaseName: hello-o2
       values: |
-        host: hello-o2.joh.k8s.sl.zone
+        host: hello-o2.panda.k8s.sl.zone
         image: ondrejsika/training-example-o2
