@@ -24,4 +24,7 @@ spec:
       releaseName: example-hello
       values: |
         host: example-hello.panda.k8s.sl.zone
-        image: ttl.sh/ondrej/hello
+        image: ttl.sh/ondrej/counter
+        containerEnv:
+          - name: REDIS_HOST
+            value: lab0.sikademo.com
