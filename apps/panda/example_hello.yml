@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-hello
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: example-hello
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    targetRevision: HEAD
+    path: charts/one-image
+    helm:
+      releaseName: example-hello
+      values: |
+        host: example-hello.panda.k8s.sl.zone
+        image: ttl.sh/ondrej/hello
