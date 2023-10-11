@@ -25,4 +25,4 @@ spec:
       values: |
         host: o2.panda.k8s.sl.zone
         image: ondrejsika/training-example
-        replicas: 3
+        replicas: 10
