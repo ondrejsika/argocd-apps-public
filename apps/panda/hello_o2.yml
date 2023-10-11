@@ -25,3 +25,4 @@ spec:
       values: |
         host: o2.panda.k8s.sl.zone
         image: ondrejsika/training-hello-o2
+        replicas: 3
