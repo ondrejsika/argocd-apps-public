@@ -18,7 +18,7 @@ spec:
       releaseName: example-o2
       values: |
         host: hello-o2.panda.k8s.sl.zone
-        image: sikalabs/hello-world-server:o3
+        image: sikalabs/hello-world-server:o2
         replicas: 1
   syncPolicy:
     automated:
