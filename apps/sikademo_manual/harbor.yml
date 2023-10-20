@@ -1,0 +1,66 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: harbor-dev
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/goharbor/harbor-helm.git
+    targetRevision: HEAD
+    path: .
+    helm:
+      releaseName: harbor
+      values: |
+        # https://github.com/goharbor/harbor-helm/blob/master/values.yaml
+        expose:
+          type: ingress
+          tls:
+            enabled: true
+            certSource: secret
+            secret:
+              secretName: harbor-ingress-tls
+          ingress:
+            hosts:
+              core: harbor.k8s.sikademo.com
+            controller: default
+            className: nginx
+            annotations:
+              cert-manager.io/cluster-issuer: "letsencrypt"
+              ingress.kubernetes.io/ssl-redirect: "true"
+              ingress.kubernetes.io/proxy-body-size: "0"
+              nginx.ingress.kubernetes.io/ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        externalURL: https://harbor.k8s.sikademo.com
+        harborAdminPassword: "asdfasdf"
+        core:
+          extraEnvVars:
+            # https://goharbor.io/docs/2.8.0/administration/configure-authentication/oidc-auth/
+            # https://goharbor.io/docs/2.3.0/install-config/configure-user-settings-cli/
+            - name: CONFIG_OVERWRITE_JSON
+              value: |
+                {
+                  "auth_mode": "oidc_auth",
+                  "oidc_name": "keycloak",
+                  "oidc_endpoint": "https://sso.sikademo.com/realms/sikademo",
+                  "oidc_client_id": "harbor",
+                  "oidc_client_secret": "harbor-client-secret",
+                  "oidc_scope": "openid,email,profile,groups",
+                  "oidc_groups_claim": "groups",
+                  "oidc_admin_group": "harbor-admins"
+                }
+        notary:
+          enabled: false
+        trivy:
+          enabled: false
