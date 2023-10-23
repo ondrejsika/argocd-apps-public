@@ -23,5 +23,5 @@ spec:
     helm:
       releaseName: hello-eon
       values: |
-        host: hello-eon.panda.k8s.oxs.cz
+        host: hello-eon.panda.k8s.sl.zone
         replicas: 10
