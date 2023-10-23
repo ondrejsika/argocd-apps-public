@@ -24,3 +24,4 @@ spec:
       releaseName: hello-eon
       values: |
         host: hello-eon.panda.k8s.oxs.cz
+        replicas: 10
