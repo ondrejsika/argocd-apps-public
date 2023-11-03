@@ -24,4 +24,4 @@ spec:
       releaseName: counter-from-git
       values: |
         host: counter-from-git.apps.okd.aws.sikademo.com
-        counterReplicas: 2
+        counterReplicas: 10
