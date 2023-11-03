@@ -24,6 +24,7 @@ spec:
       releaseName: signpost
       values: |
         host: signpost.apps.okd.aws.sikademo.com
+        ingressClassName: openshift-default
         signpost_yaml:
           SiteHeading: CEPS Rozcestnik
           CompanyName: CEPS
