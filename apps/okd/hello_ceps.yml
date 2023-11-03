@@ -24,5 +24,6 @@ spec:
       releaseName: hello-ceps
       values: |
         host: hello-ceps.apps.okd.aws.sikademo.com
+        image: sikalabs/hello-world-server:ceps
         TEXT: "Hello CEPS"
         ingressClassName: openshift-default
