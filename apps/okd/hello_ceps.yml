@@ -27,3 +27,4 @@ spec:
         image: sikalabs/hello-world-server:ceps
         TEXT: "Hello CEPS"
         ingressClassName: openshift-default
+        replicas: 2
