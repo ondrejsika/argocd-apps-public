@@ -25,3 +25,4 @@ spec:
       values: |
         host: hello-ceps.apps.okd.aws.sikademo.com
         TEXT: "Hello CEPS"
+        ingressClassName: openshift-default
