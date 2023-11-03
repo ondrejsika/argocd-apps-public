@@ -39,12 +39,14 @@ spec:
                   URL: https://console-openshift-console.apps.okd.aws.sikademo.com/
                 - Title: ArgoCD
                   URL: https://argocd.apps.okd.aws.sikademo.com/
+            - Blocks:
               - Heading: Apps
                 Links:
                 - Title: ceps.cz
                   URL: https://ceps-cz.apps.okd.aws.sikademo.com/
                 - Title: Hello CEPS
                   URL: https://hello-ceps.apps.okd.aws.sikademo.com/
+            - Blocks:
               - Heading: Countes
                 Links:
                 - Title: from Helm
