@@ -17,11 +17,12 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    repoURL: https://raw.githubusercontent.com/ondrejsika/helm-repo-sikademo/master/repo
-    targetRevision: 2023.11.14
-    chart: counter
+    repoURL: https://github.com/sika-training-examples/2023-11-14-helm-chart-example.git
+    targetRevision: HEAD
+    path: .
     helm:
       releaseName: counter
       values: |
         host: countere.panda.k8s.sl.zone
         replicas: 1
+        withoutStorage: true
