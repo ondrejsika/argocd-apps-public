@@ -24,4 +24,4 @@ spec:
       releaseName: counter
       values: |
         host: countere.panda.k8s.sl.zone
-        replicas: 10
+        replicas: 1
