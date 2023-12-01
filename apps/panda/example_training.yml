@@ -25,3 +25,4 @@ spec:
       values: |
         host: example-training.panda.k8s.sl.zone
         TEXT: "Hello from ArgoCD Training"
+        replicas: 3
