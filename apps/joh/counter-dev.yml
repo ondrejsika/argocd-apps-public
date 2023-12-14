@@ -18,7 +18,6 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://github.com/ondrejsika/counter.git
-    targetRevision: generali
     path: charts/counter
     helm:
       values: |
