@@ -23,4 +23,4 @@ spec:
     helm:
       values: |
         host: iceland-2.joh.k8s.sl.zone
-        image: ondrejsika/iceland-2
+        image: ondrejsika/iceland-4
