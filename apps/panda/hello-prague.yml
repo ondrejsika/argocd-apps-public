@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-prague
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: example-elm
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://raw.githubusercontent.com/cybercryptio/example-prague-helm-repo/master
+    targetRevision: 0.1.0
+    chart: hello-elm
+    helm:
+      values: |
+        host: hello-prague.panda.k8s.sl.zone
+
