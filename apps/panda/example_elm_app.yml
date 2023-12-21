@@ -23,4 +23,5 @@ spec:
     helm:
       values: |
         host: example-elm-app.panda.k8s.sl.zone
-
+        backendReplicas: 3
+        frontendReplicas: 3
