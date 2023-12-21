@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-elm-app-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: example-elm-app-dev
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://raw.githubusercontent.com/cybercryptio/example-elm-helm-repo/master
+    targetRevision: 0.3.0
+    chart: example-elm-app
+    helm:
+      valuesObject:
+        host: example-elm-app-dev.jeddah0.sikademo.com
+        backendReplicas: 1
+        frontendReplicas: 1
+
