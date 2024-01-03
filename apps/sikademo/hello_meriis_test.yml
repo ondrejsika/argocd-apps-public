@@ -22,7 +22,7 @@ spec:
     targetRevision: 0.3.0
     helm:
       releaseName: hello-meriis-test
-      valuesOptions:
+      valuesObject:
         host: hello-meriis-test.k8s.sikademo.com
         replicas: 1
         TEXT: "Hello Meriis!"
