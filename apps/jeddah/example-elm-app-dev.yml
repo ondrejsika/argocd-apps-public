@@ -22,7 +22,7 @@ spec:
     chart: example-elm-app
     helm:
       valuesObject:
-        host: example-elm-app-dev.jeddah0.sikademo.com
+        host: example-elm-app-dev.jeddah.sikademo.com
         backendReplicas: 1
         frontendReplicas: 1
 
