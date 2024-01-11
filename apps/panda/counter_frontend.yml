@@ -24,3 +24,5 @@ spec:
       values: |
         host: counter-frontend.panda.k8s.sl.zone
         API_ORIGIN: http://counter-backend-counter
+        FONT_COLOR: "#ffffff"
+        BACKGROUND_COLOR: "#000000"
