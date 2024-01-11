@@ -23,3 +23,4 @@ spec:
       releaseName: counter-backend
       values: |
         host: counter-backend.panda.k8s.sl.zone
+        EXTRA_TEXT: "🎉"
