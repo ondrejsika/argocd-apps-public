@@ -24,4 +24,5 @@ spec:
       releaseName: hello-jt
       values: |
         host: hello-jt.panda.k8s.sl.zone
+        image: sikalabs/hello-world-server:jt
         replicas: 3
