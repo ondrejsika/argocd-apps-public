@@ -26,3 +26,5 @@ spec:
         host: hello-jt.panda.k8s.sl.zone
         TEXT: "Hello J&T!"
         replicas: 3
+        COLOR: white
+        BACKGROND_COLOR: "#054D41"
