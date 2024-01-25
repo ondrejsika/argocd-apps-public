@@ -24,7 +24,7 @@ spec:
       releaseName: hello-jt
       values: |
         host: hello-jt.panda.k8s.sl.zone
-        TEXT: "Hello J&T!"
+        TEXT: "Hello J&T! 🦄🦄🦄"
         replicas: 3
         COLOR: white
         BACKGROND_COLOR: "#054D41"
