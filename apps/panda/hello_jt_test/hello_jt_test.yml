@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-jt-test
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: examples
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://helm.sikalabs.io
+    targetRevision: 0.6.0
+    chart: hello-world
+    helm:
+      releaseName: hello-jt-test
+      values: |
+        host: hello-jt-test.panda.k8s.sl.zone
+        TEXT: "[TEST] Hello J&T!"
+        replicas: 3
+        COLOR: white
+        BACKGROND_COLOR: "#054D41"
