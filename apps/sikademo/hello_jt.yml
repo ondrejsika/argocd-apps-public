@@ -25,3 +25,4 @@ spec:
       valuesObject:
         replicas: 3
         host: hello-jt.k8s.sikademo.com
+        TEXT: Hello J&T
