@@ -25,4 +25,4 @@ spec:
       valuesObject:
         replicas: 3
         host: hello-jt-test.k8s.sikademo.com
-        TEXT: Hello J&T Bank
+        TEXT: '[TEST] Hello J&T Bank'
