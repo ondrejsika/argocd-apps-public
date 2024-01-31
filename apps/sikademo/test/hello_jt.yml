@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-jt-test
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: jt
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://helm.sikalabs.io
+    chart: hello-world
+    targetRevision: 0.8.0
+    helm:
+      releaseName: hello-jt-test
+      valuesObject:
+        replicas: 3
+        host: hello-jt-test.k8s.sikademo.com
+        TEXT: Hello J&T Bank
