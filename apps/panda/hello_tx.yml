@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-tx
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: examples
+    server: https://kubernetes.default.svc
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://helm.sikalabs.io
+    targetRevision: 0.6.0
+    chart: hello-world
+    helm:
+      releaseName: hello-tx
+      values: |
+        host: hello-tx.panda.k8s.sl.zone
+        image: sikalabs/hello-world-server:v0.6.0
+        TEXT: "Hello TX"
