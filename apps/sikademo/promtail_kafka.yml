@@ -1,0 +1,73 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: promtail-kafka
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: spcss-loki
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    chart: promtail
+    targetRevision: 6.15.2
+    helm:
+      releaseName: promtail-kafka
+      valuesObject:
+        # https://artifacthub.io/packages/helm/grafana/promtail?modal=values
+        # https://github.com/grafana/helm-charts/blob/main/charts/promtail/values.yaml
+        daemonset:
+          enabled: false
+        deployment:
+          enabled: true
+
+        serviceMonitor:
+          enabled: true
+
+        config:
+          clients:
+            - url: http://loki-gateway.spcss-loki/loki/api/v1/push
+              tenant_id: 1
+              basic_auth:
+                username: admin
+                password: admin
+
+          snippets:
+            scrapeConfigs: |
+              - job_name: kafka
+                kafka:
+                  brokers:
+                    - 138.68.126.98:30051
+                    - 138.68.126.98:30052
+                    - 138.68.126.98:30053
+                  topics:
+                    - kafka-topic-log1
+                    - kafka-topic-log99
+                  group_id: promtail-group
+                  # client_id: promtail
+                  # min_bytes: 1000000
+                  # max_bytes: 10000000
+                  # max_wait: 5000
+                  # start_from_beginning: true
+                  labels:
+                    job: "kafka"
+
+        # extraVolumes:
+        #   - name: positions
+        #     emptyDir: {}
+
+        # extraVolumeMounts:
+        #   - name: positions
+        #     mountPath: /tmp
+
+        # extraArgs:
+        #   - -config.file=/etc/promtail/promtail.yaml
