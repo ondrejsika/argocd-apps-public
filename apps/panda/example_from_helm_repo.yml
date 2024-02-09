@@ -18,7 +18,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://helm.sikalabs.io
-    targetRevision: 0.6.0
+    targetRevision: 0.9.0
     chart: hello-world
     helm:
       releaseName: example-from-helm-repo
@@ -26,3 +26,5 @@ spec:
         host: example-from-helm-repo.panda.k8s.sl.zone
         image: sikalabs/hello-world-server:v0.6.0
         TEXT: "Example from Helm repo"
+        COLOR: "white"
+        BACKGROUND_COLOR: "black"
