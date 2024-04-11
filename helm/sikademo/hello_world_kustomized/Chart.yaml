@@ -1,0 +1,10 @@
+apiVersion: v2
+name: hello-world-kustomized
+description: Example of Hello World Kustomized
+type: application
+version: 0.1.0
+
+dependencies:
+- name: hello-world
+  version: 0.8.0
+  repository: https://helm.sikalabs.io
