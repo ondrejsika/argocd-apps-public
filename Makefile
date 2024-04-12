@@ -3,7 +3,7 @@ sikademo-setup:
 	make sikademo-apply-app-of-apps
 
 install-argocd-sikademo:
-	slu scripts kubernetes install-argocd --domain argocd.k8s.sikademo.com
+	slu scripts kubernetes install-argocd --domain argocd.k8s.sikademo.com -f values.yml
 
 sikademo-apply-app-of-apps:
 	@slu check kubernetes_context -p do-fra1-sikademo
