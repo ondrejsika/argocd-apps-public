@@ -25,3 +25,4 @@ spec:
         host: hello-astratex.panda.k8s.sl.zone
         image: sikalabs/hello-world-server:v0.6.0
         TEXT: "Hello Astratex!"
+        replicas: 3
