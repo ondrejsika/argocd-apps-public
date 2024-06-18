@@ -20,3 +20,6 @@ spec:
     repoURL: https://helm.sikademo.com
     targetRevision: 0.2.0
     chart: simple-hello-gpe
+    helm:
+      valuesObject:
+        image: registry.sikalabs.com/demo/2024-06-18-hello-gpe-image:v0.1.0
