@@ -18,3 +18,4 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://github.com/sika-training-examples/2024-06-18-gpe-counter-manifests.git
+    path: .
