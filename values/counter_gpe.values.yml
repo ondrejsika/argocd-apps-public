@@ -1,0 +1,3 @@
+host: counter-gpe.panda.k8s.sl.zone
+ingressClassName: nginx
+backendReplicas: 4
