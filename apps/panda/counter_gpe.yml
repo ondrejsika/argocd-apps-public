@@ -18,8 +18,9 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://helm.sikademo.com
-    targetRevision: 0.2.1
+    targetRevision: 0.2.2
     chart: counter-gpe
     helm:
       valuesObject:
         host: counter-gpe.panda.k8s.sl.zone
+        ingressClassName: nginx
