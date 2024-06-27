@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter2-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: counter-helm
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://raw.githubusercontent.com/ondrejsika/helm-repo-sikademo/master/repo
+    chart: counter-astratex
+    targetRevision: 0.1.0
+    helm:
+      releaseName: c2
+      valuesObject:
+        host: c2.astratex.sikademo.com
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: c1-frontend
+      namespace: counter-helm
+      jsonPointers:
+        - /spec/replicas
+    - group: apps
+      kind: Deployment
+      name: c1-backend
+      namespace: counter-helm
+      jsonPointers:
+        - /spec/replicas
