@@ -21,7 +21,7 @@ spec:
     path: .
     helm:
       releaseName: c4
-      valueObject:
+      valuesObject:
         host: c4.astratex.sikademo.com
   ignoreDifferences:
     - group: apps

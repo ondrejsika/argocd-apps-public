@@ -21,7 +21,7 @@ spec:
     path: .
     helm:
       releaseName: c3
-      valueObject:
+      valuesObject:
         host: c3.astratex.sikademo.com
   ignoreDifferences:
     - group: apps
