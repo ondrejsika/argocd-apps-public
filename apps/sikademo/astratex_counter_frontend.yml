@@ -17,8 +17,8 @@ spec:
     syncOptions:
       - CreateNamespace=true
   source:
-    repoURL: https://github.com/ondrejsika/counter.git
-    path: charts/counter
+    repoURL: https://github.com/ondrejsika/counter-frontend.git
+    path: chart
     helm:
       valuesObject:
         API_ORIGIN: http://astratex-counter-backend-counter
