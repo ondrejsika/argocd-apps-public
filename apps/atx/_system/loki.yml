@@ -1,0 +1,188 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    namespace: loki
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+  ignoreDifferences:
+    - group: apps
+      kind: StatefulSet
+      name: loki-minio
+      jsonPointers:
+        - /spec/volumeClaimTemplates
+  source:
+    repoURL: https://grafana.github.io/helm-charts
+    chart: loki
+    targetRevision: 5.43.6
+    helm:
+      releaseName: loki
+      valuesObject:
+        # https://artifacthub.io/packages/helm/grafana/loki?modal=values
+
+        # Disable Prometheus CRDs
+        monitoring:
+          selfMonitoring:
+            grafanaAgent:
+              installOperator: true
+
+        global:
+          clusterDomain: cluster.local
+          dnsNamespace: kube-system
+          dnsService: rke2-coredns-rke2-coredns
+
+        minio:
+          enabled: true
+          replicas: 1
+          drivesPerNode: 1
+          rootUser: admin
+          rootPassword: ZCui_4wai_Qlbf_8oa9
+          buckets:
+            - name: chunks
+              policy: none
+              purge: false
+            - name: ruler
+              policy: none
+              purge: false
+            - name: admin
+              policy: none
+              purge: false
+          persistence:
+            size: 10Gi
+            storageClass: nfs-client
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
+
+        loki:
+          auth_enabled: false
+          server:
+            http_server_write_timeout: 310s
+            http_server_read_timeout: 310s
+            grpc_server_max_recv_msg_size: 104857600  # 100 Mb
+            grpc_server_max_send_msg_size: 104857600  # 100 Mb
+          ingester:
+            chunk_encoding: snappy
+            chunk_idle_period: 2h
+            chunk_target_size: 1536000 # 1.5 Mb
+            max_chunk_age: 2h
+          limits_config:
+            max_query_parallelism: 24
+            ingestion_rate_mb: 20
+            ingestion_burst_size_mb: 30
+            per_stream_rate_limit: "3MB"
+            per_stream_rate_limit_burst: "10MB"
+            query_timeout: 300s
+            max_query_series: 5000
+            max_entries_limit_per_query: 10000
+            retention_period: 24h
+          compactor:
+            working_directory: /var/loki/retention
+            compaction_interval: 10m
+            retention_enabled: true
+            retention_delete_delay: 2h
+            retention_delete_worker_count: 150
+            shared_store: s3
+          query_scheduler:
+            max_outstanding_requests_per_tenant: 2048
+            grpc_client_config:
+              max_recv_msg_size: 104857600  # 100 Mb
+              max_send_msg_size: 104857600  # 100 Mb
+          query_range:
+            parallelise_shardable_queries: false
+            align_queries_with_step: true
+            max_retries: 5
+            cache_results: true
+          querier:
+            max_concurrent: 8
+            engine:
+              timeout: 300s
+          frontend_worker:
+            match_max_concurrent: true
+          commonConfig:
+            replication_factor: 1
+          storage:
+            type: 's3'
+            s3:
+              endpoint: http://loki-minio:9000
+              accessKeyId: admin
+              secretAccessKey: ZCui_4wai_Qlbf_8oa9
+              s3ForcePathStyle: true
+              insecure: false
+          storage_config:
+            boltdb_shipper:
+              active_index_directory: /var/loki/index
+              cache_location: /var/loki/cache
+              shared_store: s3
+
+        backend:
+          replicas: 1
+          resources:
+            requests:
+              cpu: 200m
+              memory: 250Mi
+            limits:
+              cpu: 800m
+              memory: 400Mi
+          persistence:
+            size: 3Gi
+            storageClass: nfs-client
+
+        read:
+          replicas: 1
+          resources:
+            requests:
+              cpu: 200m
+              memory: 250Mi
+            limits:
+              cpu: 800m
+              memory: 800Mi
+          persistence:
+            size: 3Gi
+            storageClass: nfs-client
+
+        write:
+          replicas: 1
+          resources:
+            requests:
+              cpu: 200m
+              memory: 250Mi
+            limits:
+              cpu: 800m
+              memory: 800Mi
+          persistence:
+            size: 5Gi
+            storageClass: nfs-client
+
+        gateway:
+          replicas: 1
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 500m
+              memory: 200Mi
+
+        sidecar:
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 100m
+              memory: 100Mi
