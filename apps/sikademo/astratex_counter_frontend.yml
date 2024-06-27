@@ -24,3 +24,5 @@ spec:
         API_ORIGIN: http://astratex-counter-backend-counter
         host: astratex-counter-frontend.k8s.sikademo.com
         replicas: 4
+        FONT_COLOR: white
+        BACKGROUND_COLOR: black
