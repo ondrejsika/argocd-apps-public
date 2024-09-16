@@ -21,7 +21,6 @@ spec:
     chart: vault
     targetRevision: 0.27.0
     helm:
-      releaseName: vault
       valuesObject:
         global:
           tlsDisable: true
