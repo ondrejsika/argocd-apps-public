@@ -21,7 +21,7 @@ spec:
     path: chart
     helm:
       releaseName: counter-frontend
-      values: |
+      valuesObject:
         host: counter-frontend.sikademo.com
         API_ORIGIN: http://counter-backend-counter
         FONT_COLOR: "#ffffff"

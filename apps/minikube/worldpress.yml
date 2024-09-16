@@ -22,5 +22,5 @@ spec:
     chart: postgresql
     helm:
       releaseName: example-from-helm-repo
-      values: |
+      valuesObject:
       valuesObject:

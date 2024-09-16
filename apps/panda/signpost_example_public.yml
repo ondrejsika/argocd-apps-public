@@ -22,7 +22,7 @@ spec:
     path: charts/signpost
     helm:
       releaseName: example
-      values: |
+      valuesObject:
         host: signpost-example-public.panda.k8s.sl.zone
         signpost_yaml:
           SiteHeading: Signpost Demo

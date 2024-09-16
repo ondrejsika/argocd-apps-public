@@ -22,7 +22,7 @@ spec:
     path: charts/hello-world
     helm:
       releaseName: example-from-git-repo
-      values: |
+      valuesObject:
         host: example-from-git-repo.panda.k8s.sl.zone
         image: sikalabs/hello-world-server:v0.6.0
         TEXT: "Example from Git repo"

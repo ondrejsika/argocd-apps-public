@@ -21,6 +21,6 @@ spec:
     path: charts/counter
     helm:
       releaseName: counter-backend
-      values: |
+      valuesObject:
         host: counter-backend.sikademo.com
         EXTRA_TEXT: "🎉"

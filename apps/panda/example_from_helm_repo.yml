@@ -22,7 +22,7 @@ spec:
     chart: hello-world
     helm:
       releaseName: example-from-helm-repo
-      values: |
+      valuesObject:
         host: example-from-helm-repo.panda.k8s.sl.zone
         image: sikalabs/hello-world-server:v0.6.0
         TEXT: "Example from Helm repo"

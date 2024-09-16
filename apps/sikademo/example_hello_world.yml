@@ -22,6 +22,6 @@ spec:
     path: charts/hello-world
     helm:
       releaseName: hello-world-public
-      values: |
+      valuesObject:
         host: hello-world.k8s.sikademo.com
         image: sikalabs/hello-world-server:ondrejsika

@@ -21,6 +21,6 @@ spec:
     targetRevision: 2023.12.20
     chart: counter
     helm:
-      values: |
+      valuesObject:
         host: counter.jeddah.sikademo.com
 

@@ -22,6 +22,6 @@ spec:
     path: charts/one-image
     helm:
       releaseName: example-iceland-1
-      values: |
+      valuesObject:
         host: example-iceland-1.k8s.sikademo.com
         image: ghcr.io/ondrejsika/iceland-1

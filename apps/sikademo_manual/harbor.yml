@@ -22,7 +22,7 @@ spec:
     path: .
     helm:
       releaseName: harbor
-      values: |
+      valuesObject:
         # https://github.com/goharbor/harbor-helm/blob/master/values.yaml
         expose:
           type: ingress

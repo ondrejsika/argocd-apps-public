@@ -21,6 +21,6 @@ spec:
     targetRevision: 0.1.0
     chart: hello-elm
     helm:
-      values: |
+      valuesObject:
         host: hello-elm.panda.k8s.sl.zone
 
