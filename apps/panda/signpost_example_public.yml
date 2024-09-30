@@ -32,9 +32,31 @@ spec:
           Rows:
           - Cols:
             - Blocks:
-              - Heading: Main
+              - Heading: Global
                 Links:
                 - Title: Gitlab
                   URL: https://example.com
+                - Title: Grafana
+                  URL: https://example.com
+                - Title: Uptime Kuma
+                  URL: https://example.com
                 - Title: Stand up (Google Meet)
+                  URL: https://example.com
+            - Blocks:
+              - Heading: Prod Environment
+                Links:
+                - Title: ArgoCD Prod
+                  URL: https://example.com
+                - Title: Grafana Prod
+                  URL: https://example.com
+                - Title: Minio Prod
+                  URL: https://example.com
+            - Blocks:
+              - Heading: Dev Environment
+                Links:
+                - Title: ArgoCD Dev
+                  URL: https://example.com
+                - Title: Grafana Dev
+                  URL: https://example.com
+                - Title: Minio Dev
                   URL: https://example.com
