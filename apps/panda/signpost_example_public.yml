@@ -25,10 +25,10 @@ spec:
       valuesObject:
         host: signpost-example-public.panda.k8s.sl.zone
         signpost_yaml:
-          SiteHeading: Signpost Demo
-          CompanyName: Demo Company
-          CompanyDomain: example.com
-          CompanyURL: https://example.com
+          SiteHeading: ACME.com Signpost
+          CompanyName: ACME Company
+          CompanyDomain: acme.com
+          CompanyURL: https://acme.com
           Rows:
           - Cols:
             - Blocks:
