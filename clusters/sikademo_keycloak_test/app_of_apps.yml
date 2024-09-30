@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  source:
+    path: apps/sikademo_keycloak_test
+    repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+    directory:
+      recurse: true
+      exclude: '{*.values.yml,*.values.yaml,values.yml,values.yaml}'
+
