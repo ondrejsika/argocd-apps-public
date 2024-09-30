@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: keycloak
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://charts.bitnami.com/bitnami
+      chart: keycloak
+      targetRevision: 22.2.6
+      helm:
+        releaseName: keycloak
+        valueFiles:
+          - $values/apps/sikademo_keycloak_test/keycloak/keycloak.values.yml
+    - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+      ref: values
+

@@ -1,0 +1,70 @@
+image:
+  # https://github.com/sikalabs/sikalabs-container-images/tree/master/bitnami-keycloak-sikalabs-theme
+  repository: sikalabs/bitnami-keycloak-sikalabs-theme
+  tag: 25.0.6-debian-12-r0
+  pullPolicy: Always
+
+global:
+  storageClass: do-block-storage-retain
+
+replicaCount: 1
+
+extraDeploy:
+  - apiVersion: v1
+    kind: Secret
+    metadata:
+      name: keycloak-creds
+      namespace: keycloak
+    stringData:
+      admin-password: admin
+      management-password: admin
+      password: admin
+      postgresPassword: admin
+
+auth:
+  existingSecret: keycloak-creds
+  adminUser: admin
+  managementUser: manager
+
+proxyAddressForwarding: true
+
+proxy: edge
+production: true
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1024Mi
+  requests:
+    cpu: 250m
+    memory: 512Mi
+
+service:
+  type: ClusterIP
+
+metrics:
+  enabled: false
+  serviceMonitor:
+    enabled: false
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hostname: sso.k8s.sikademo.com
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/proxy-body-size: 250m
+    nginx.ingress.kubernetes.io/proxy-buffer-size: "64k"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+  extraTls:
+    - hosts:
+        - sso.k8s.sikademo.com
+      secretName: sso.k8s.sikademo.com-tls
+
+postgresql:
+  auth:
+    existingSecret: keycloak-creds
+    secretKeys:
+      adminPasswordKey: postgresPassword
+      userPasswordKey: password
