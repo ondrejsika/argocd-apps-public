@@ -6,10 +6,10 @@ metadata:
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
+  project: default
   destination:
     namespace: signpost-example-public
     server: https://kubernetes.default.svc
-  project: default
   syncPolicy:
     automated:
       prune: true
