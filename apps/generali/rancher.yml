@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rancher
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: cattle-system
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://releases.rancher.com/server-charts/latest
+    chart: rancher
+    targetRevision: 2.9.0
+    helm:
+      valuesObject:
+        hostname: rancher.k8s.sikademo.com
+        bootstrapPassword: admin
+        ingress:
+          tls:
+            source: letsEncrypt
+        letsEncrypt:
+          email: le@sikademo.com
+          ingress:
+            class: nginx
