@@ -1,0 +1,54 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: harbor
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://helm.goharbor.io
+    targetRevision: 1.14.0
+    chart: harbor
+    helm:
+      valuesObject:
+        # https://github.com/goharbor/harbor-helm/blob/master/values.yaml
+        # https://artifacthub.io/packages/helm/harbor/harbor?modal=values
+        expose:
+          type: ingress
+          tls:
+            enabled: true
+            certSource: secret
+            secret:
+              secretName: harbor-ingress-tls
+          ingress:
+            hosts:
+              core: harbor.k8s.sikademo.com
+            controller: default
+            className: nginx
+            annotations:
+              cert-manager.io/cluster-issuer: "letsencrypt"
+              ingress.kubernetes.io/ssl-redirect: "true"
+              ingress.kubernetes.io/proxy-body-size: "0"
+              nginx.ingress.kubernetes.io/ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        externalURL: https://harbor.k8s.sikademo.com
+        harborAdminPassword: admin
+        notary:
+          enabled: false
+        persistence:
+          persistentVolumeClaim:
+            registry:
+              size: 20Gi
+            trivy:
+              size: 20Gi
