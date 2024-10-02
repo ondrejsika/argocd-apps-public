@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: foo
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: foo
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  source:
+    repoURL: https://helm.sikalabs.io
+    chart: hello-world
+    targetRevision: 0.10.0
+    helm:
+      valuesObject:
+        host: foo.k8s.sikademo.com
+        image: harbor.k8s.sikademo.com/foo/hello
+        replicas: 3
