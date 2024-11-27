@@ -28,6 +28,28 @@ spec:
         rootUser: admin
         rootPassword: asdfasdf
 
+        ingress:
+          enabled: true
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+          hosts:
+            - minio.k8s-us.sikademo.com
+          tls:
+           - secretName: minio.k8s-us.sikademo.com-tls
+             hosts:
+               - minio.k8s-us.sikademo.com
+
+        consoleIngress:
+          enabled: true
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+          hosts:
+            - minio-console.k8s-us.sikademo.com
+          tls:
+           - secretName: minio-console.k8s-us.sikademo.com-tls
+             hosts:
+               - minio-console.k8s-us.sikademo.com
+
         buckets:
           - name: loki-chunks
             policy: none
