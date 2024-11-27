@@ -115,3 +115,16 @@ spec:
 
         gateway:
           replicas: 2
+          ingress:
+            enabled: true
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+            hosts:
+              - host: loki.k8s-us.sikademo.com
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - secretName: loki.k8s-us.sikademo.com-tls
+                hosts:
+                  - loki.k8s-us.sikademo.com
