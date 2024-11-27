@@ -41,6 +41,7 @@ spec:
             chunk_target_size: 1536000 # 1.5 Mb
             max_chunk_age: 2h
           limits_config:
+            volume_enabled: true
             max_query_parallelism: 24
             ingestion_rate_mb: 20
             ingestion_burst_size_mb: 30
