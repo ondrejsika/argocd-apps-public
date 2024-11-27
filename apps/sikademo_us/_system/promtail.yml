@@ -26,3 +26,4 @@ spec:
             - url: http://loki99.sikademo.com:3100/loki/api/v1/push
               external_labels:
                 cluster: us
+                promtail_source: k8s
