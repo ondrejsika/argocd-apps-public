@@ -61,6 +61,16 @@ spec:
             policy: none
             purge: false
 
+          - name: loki2-chunks
+            policy: none
+            purge: false
+          - name: loki2-ruler
+            policy: none
+            purge: false
+          - name: loki2-admin
+            policy: none
+            purge: false
+
         replicas: 2
         drivesPerNode: 1
 
