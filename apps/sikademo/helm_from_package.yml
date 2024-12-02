@@ -21,6 +21,5 @@ spec:
     chart: hello-world
     targetRevision: 0.3.0
     helm:
-      releaseName: helm-from-package
       valuesObject:
         replicas: 3
