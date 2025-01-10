@@ -5,17 +5,17 @@
 ### Cluster: Panda
 
 ```
-kubectl apply -f ./meta/panda.yml
+kubectl apply -f ./clusters/panda.yml
 ```
 
 ### Cluster: Joh
 
 ```
-kubectl apply -f ./meta/joh.yml
+kubectl apply -f ./clusters/joh.yml
 ```
 
 ### Cluster: sikademo
 
 ```
-kubectl apply -f ./meta/sikademo.yml
+kubectl apply -f ./clusters/sikademo.yml
 ```
