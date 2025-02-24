@@ -23,6 +23,9 @@ spec:
     helm:
       valuesObject:
         # https://artifacthub.io/packages/helm/jfrog/artifactory?modal=values
+        artifactory:
+          persistence:
+            size: 100Gi
         ingress:
           enabled: true
           annotations:
