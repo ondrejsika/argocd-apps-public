@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: keycloak
+  name: keycloak-sikademo-com
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
-    namespace: keycloak
+    namespace: keycloak-sikademo-com
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
@@ -18,30 +18,32 @@ spec:
     - CreateNamespace=true
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 22.2.5
+    targetRevision: 26.1.2
     chart: keycloak
     helm:
       valuesObject:
         # https://github.com/bitnami/charts/blob/main/bitnami/keycloak/values.yaml
         # https://artifacthub.io/packages/helm/bitnami/keycloak?modal=values
         replicaCount: 1
-        proxy: edge
+        global:
+          security:
+            allowInsecureImages: true
         image:
+          registry: ghcr.io
           repository: sikalabs/bitnami-keycloak-sikalabs-theme
-          tag: 25.0.5-debian-12-r1
-          pullPolicy: Always
+          tag: 26.1.2-debian-12-r0
         auth:
           createAdminUser: true
           adminUser: admin
           adminPassword: admin
-          managementUser: manager
-          managementPassword: manager
+          managementUser: management
+          managementPassword: management
         proxyAddressForwarding: true
         service:
           type: ClusterIP
         ingress:
           enabled: true
-          hostname: sso.k8s.sikademo.com
+          hostname: keycloak.sikademo.com
           tls: true
           annotations:
             kubernetes.io/ingress.class: nginx
@@ -49,8 +51,6 @@ spec:
             nginx.ingress.kubernetes.io/proxy-buffer-size: "64k"
             cert-manager.io/cluster-issuer: letsencrypt
         postgresql:
-          image:
-            tag: 15.8.0-debian-12-r11
           auth:
             postgresPassword: pg
             password: pg
