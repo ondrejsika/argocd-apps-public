@@ -18,7 +18,7 @@ spec:
     - CreateNamespace=true
   source:
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 26.1.2
+    targetRevision: 24.4.10
     chart: keycloak
     helm:
       valuesObject:
