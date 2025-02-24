@@ -31,7 +31,7 @@ spec:
           annotations:
             kubernetes.io/ingress.class: nginx
             cert-manager.io/cluster-issuer: letsencrypt
-            nginx.ingress.kubernetes.io/proxy-body-size: "1000m"
+            nginx.ingress.kubernetes.io/proxy-body-size: "1500m"
           hosts:
             - artifactory.sikademo.com
           tls:
