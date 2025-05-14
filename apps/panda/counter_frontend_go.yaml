@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-frontend-go
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: counter
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/ondrejsika/counter-frontend.git
+    path: chart
+    helm:
+      valuesObject:
+        host: counter-frontend-go.sikademo.com
+        API_ORIGIN: http://counter-backend-counter
+        image: ghcr.io/ondrejsika/counter-frontend-go:stable
