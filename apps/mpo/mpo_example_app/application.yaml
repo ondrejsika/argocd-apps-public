@@ -18,13 +18,13 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: harbor.sl.zone/mpo-example-app/helm
-    targetRevision: 0.3.0
+    targetRevision: 0.4.0
     chart: mpo-example-app
     helm:
       valuesObject:
         redisImage: harbor.sl.zone/mpo-example-app/redis
-        backendImage: harbor.sl.zone/mpo-example-app/backend:0.3.0
-        frontendImage:  harbor.sl.zone/mpo-example-app/frontend:0.3.0
+        backendImage: harbor.sl.zone/mpo-example-app/backend:0.4.0
+        frontendImage:  harbor.sl.zone/mpo-example-app/frontend:0.4.0
         frontendHost: mpo-example-app.mpo.sikademo.com
         sluImage: harbor.sl.zone/mpo-example-app/slu:v0.85.0
         licenseKeySecretName: license
