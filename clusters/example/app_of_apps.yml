@@ -15,7 +15,7 @@ spec:
     repoURL: https://github.com/ondrejsika/argocd-apps-public.git
     directory:
       recurse: true
-      exclude: '{**/manifests/**,**/Chart.yaml,**/templates/**,**/values.yaml,**/values.*.yaml}'
+      exclude: '{**/manifests/**,**/Chart.yaml,**/values.y*ml,**/*.values.y*ml,**/templates/**}'
   syncPolicy:
     automated:
       prune: true
