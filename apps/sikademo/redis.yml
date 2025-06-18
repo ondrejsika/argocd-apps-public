@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redis
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: redis
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://git.plzen.eu/helm/helm/-/raw/master
+    chart: single-container-app
+    targetRevision: 0.1.2
+    helm:
+      valuesObject:
+        registry: foo.com
+        registryUsername: foo
+        registryPassword: bar
+        image: redis
+        replicas: 4
+        project: redis
+        port: 6379
+        ingress:
+          enabled: false
+          hosts: []
