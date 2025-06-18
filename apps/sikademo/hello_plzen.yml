@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-plzen
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: hello-plzen
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://git.plzen.eu/helm/helm/-/raw/master
+    chart: single-container-app
+    targetRevision: 0.1.0
+    helm:
+      valuesObject:
+        registry: foo.com
+        registryUsername: foo
+        registryPassword: bar
+        image: ghcr.io/ondrejsika/counter
+        project: hello-plzen
+        port: 80
+
+        ingress:
+          hosts:
+            - "hello-plzen.k8s.sikademo.com"
+          tls: true
+          extraAnnotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+
+        env:
+          BACKEND: inmemory
+
+        extraExposes:
+          - name: whatever
+            protocol: TCP
+            externalPort: 31999
+            containerPort: 80
