@@ -26,6 +26,7 @@ spec:
         registryUsername: foo
         registryPassword: bar
         image: ghcr.io/ondrejsika/counter
+        replicas: 4
         project: hello-plzen
         port: 80
 
