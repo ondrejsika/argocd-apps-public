@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: backend
+spec:
+  replicas: 10
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/ondrejsika/counter
+          env:
+            - name: BACKEND
+              value: inmemory
+            - name: PORT
+              value: "8000"
+            - name: EXTRA_TEXT
+              value: v6
+  strategy:
+    blueGreen:
+      activeService: backend-active
+      previewService: backend-preview
+      autoPromotionEnabled: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-active
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 80
+      targetPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-preview
+spec:
+  selector:
+    app: backend
+  ports:
+    - port: 80
+      targetPort: 8000
