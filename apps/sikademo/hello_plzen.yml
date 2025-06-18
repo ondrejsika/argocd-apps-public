@@ -38,7 +38,7 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt
 
         env:
-          REDIS: redis.app:80
+          REDIS: 10.150.1.47
 
         extraExposes:
           - name: whatever
