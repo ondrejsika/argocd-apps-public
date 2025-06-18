@@ -14,6 +14,15 @@ configs:
     policy.default: ""
     policy.csv: |
       g, argocd-admin, role:admin
+
+      g, argocd-plzen, role:argocd-plzen
+      p, role:argocd-plzen, projects, get, plzen/*, allow
+      p, role:argocd-plzen, applications, get, plzen/*, allow
+      p, role:argocd-plzen, applications, action/apps/Deployment/restart, plzen/*, allow
+      p, role:argocd-plzen, applications, sync, plzen/*, allow
+      p, role:argocd-plzen, applications, update, plzen/*, allow
+      p, role:argocd-plzen, logs, get, plzen/*, allow
+      p, role:argocd-plzen, exec, create, plzen/*, allow
 server:
   ingress:
     enabled: true
