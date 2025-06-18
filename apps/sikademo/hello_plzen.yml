@@ -38,7 +38,7 @@ spec:
             cert-manager.io/cluster-issuer: letsencrypt
 
         env:
-          BACKEND: inmemory
+          REDIS: redis.app:80
 
         extraExposes:
           - name: whatever
