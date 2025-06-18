@@ -16,6 +16,7 @@ spec:
     targetRevision: HEAD
     directory:
       recurse: true
+      exclude: '{**/manifests/**,**/Chart.yaml,**/values.y*ml,**/*.values.y*ml,**/templates/**}'
   syncPolicy:
     automated:
       prune: true
