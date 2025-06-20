@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: generali-counter
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: generali-counter
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2025-06-20_generali_example_helm.git
+    path: .
+    helm:
+      valuesObject:
+        frontend:
+          host: generali-counter.k8s.sikademo.com
+          FONT_COLOR: "#C11F0D"
