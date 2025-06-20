@@ -23,5 +23,6 @@ spec:
       valuesObject:
         host: hello-generali.openshift.sikademo.com
         image: ghcr.io/sikalabs/hello-world-server:generali
+        ingressClassName: openshift-default
         replicas: 3
 
