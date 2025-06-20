@@ -21,7 +21,7 @@ spec:
     path: charts/hello-world
     helm:
       valuesObject:
-        host: hello-world.k8s.sikademo.com
+        host: hello-generali.k8s.sikademo.com
         image: ghcr.io/sikalabs/hello-world-server:generali
         replicas: 3
 
