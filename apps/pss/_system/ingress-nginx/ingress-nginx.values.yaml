@@ -1,0 +1,28 @@
+controller:
+  config:
+    use-proxy-protocol: "false"
+    enable-real-ip: "true"
+  hostPort:
+    enabled: true
+  ingressClassResource:
+    default: true
+  kind: DaemonSet
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
+  service:
+    type: ClusterIP
+  watchIngressWithoutClass: true
+defaultBackend:
+  enabled: true
+  image:
+    registry: docker.io
+    image: sikalabs/sikalabs-kubernetes-ingress-default-page
+    tag: latest
+  extraEnvs:
+    - name: CLUSTER
+      value: "pss"
+    - name: DOMAIN
+      value: "k8s.sikademo.com"
+  port: 8000
