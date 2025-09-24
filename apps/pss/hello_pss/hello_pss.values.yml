@@ -1,5 +1,0 @@
-host: hello-pss.k8s.sikademo.com
-path: /
-port: 80
-containerPort: 8000
-replicas: 4
