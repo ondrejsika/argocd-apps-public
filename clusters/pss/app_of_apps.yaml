@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: app-of-apps-prod
+  name: app-of-apps-pss
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
