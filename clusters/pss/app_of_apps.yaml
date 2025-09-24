@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps-prod
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: app-of-apps
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+      allowEmpty: true
+    syncOptions:
+      - PruneLast=true
+  sources:
+    - repoURL: https://gitlab.sikalabs.com/examples/pss/pss-argocd-apps.git
+      path: apps/pss
+      directory:
+        recurse: true
+        exclude: '{**/manifests/**,**/Chart.yaml,**/values.y*ml,**/*.values.y*ml,**/templates/**}'
+    - repoURL: https://gitlab.sikalabs.com/examples/pss/pss-argocd-apps.git
+      path: clusters/pss
+      directory:
+        recurse: true
