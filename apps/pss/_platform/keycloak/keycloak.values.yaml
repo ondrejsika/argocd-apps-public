@@ -1,7 +1,7 @@
 image:
   repository: sikalabs/bitnami-keycloak-sikalabs-theme
   tag: 26.1.0-debian-12-r0
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 auth:
   existingSecret: keycloak-creds
