@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-3"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: system
+  destination:
+    namespace: keycloak
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: registry-1.docker.io/bitnamicharts
+      chart: keycloak
+      targetRevision: 24.4.6
+      helm:
+        valueFiles:
+          - $values/apps/pss/_platform/keycloak/keycloak.values.yaml
+    - repoURL: https://gitlab.sikalabs.com/examples/pss/pss-argocd-apps.git
+      ref: values
+
+    - repoURL: https://gitlab.sikalabs.com/examples/pss/pss-argocd-apps.git
+      path: apps/pss/_platform/keycloak/manifests

@@ -1,0 +1,52 @@
+image:
+  repository: sikalabs/bitnami-keycloak-sikalabs-theme
+  tag: 26.1.0-debian-12-r0
+  pullPolicy: IfNotPresent
+
+auth:
+  existingSecret: keycloak-creds
+  adminUser: admin
+  managementUser: manager
+
+global:
+  storageClass: do-block-storage
+  security:
+    allowInsecureImages: true # for the custom image
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 250m
+    nginx.ingress.kubernetes.io/proxy-buffer-size: 64k
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+  enabled: true
+  extraTls:
+    - hosts:
+        - sso.k8s.sikademo.com
+      secretName: sso.k8s.sikademo.com-tls
+  hostname: sso.k8s.sikademo.com
+  ingressClassName: nginx
+
+postgresql:
+  auth:
+    existingSecret: keycloak-creds
+    secretKeys:
+      adminPasswordKey: postgresAdminPassword
+      userPasswordKey: postgresPassword
+
+production: true
+proxy: edge
+proxyAddressForwarding: true
+replicaCount: 1
+
+resources:
+  limits:
+    cpu: 1500m
+    memory: 1500Mi
+  requests:
+    cpu: 250m
+    memory: 512Mi
+
+service:
+  type: ClusterIP

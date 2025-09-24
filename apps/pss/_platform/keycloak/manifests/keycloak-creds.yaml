@@ -1,0 +1,16 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: keycloak-creds
+  namespace: keycloak
+spec:
+  refreshInterval: "1m"
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: vault
+  target:
+    name: keycloak-creds
+  dataFrom:
+    - extract:
+        # secret keys: admin-password, management-password, postgresAdminPassword, postgresPassword
+        key: secret/pss/_platform/keycloak
