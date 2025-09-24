@@ -1,0 +1,65 @@
+global:
+  tlsDisable: true
+
+injector:
+  enabled: false
+
+server:
+  ingress:
+    enabled: true
+    ingressClassName: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
+    pathType: Prefix
+    tls:
+      - secretName: vault.k8s.sikademo.com-tls
+        hosts:
+          - vault.k8s.sikademo.com
+    hosts:
+      - host: vault.k8s.sikademo.com
+        paths:
+          - /
+
+  dataStorage:
+    enabled: true
+    size: 1Gi
+    storageClassName: default
+
+  auditStorage:
+    enabled: true
+    size: 1Gi
+    storageClassName: default
+
+  ha:
+    enabled: true
+    replicas: 3
+    disruptionBudget:
+      enabled: false
+    raft:
+      enabled: true
+      config: |
+        disable_mlock = true
+
+        ui = true
+
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+        }
+
+        service_registration "kubernetes" {}
+
+        storage "raft" {
+          path = "/vault/data"
+
+          retry_join {
+            leader_api_addr = "http://vault-0.vault-internal:8200"
+          }
+          retry_join {
+            leader_api_addr = "http://vault-1.vault-internal:8200"
+          }
+          retry_join {
+            leader_api_addr = "http://vault-2.vault-internal:8200"
+          }
+        }
