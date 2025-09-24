@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-pss
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: hello-pss
+  destination:
+    namespace: hello-pss
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  sources:
+  - repoURL: https://gitlab.sikalabs.com/examples/pss/pss-charts.git
+    path: charts/pss-app
+    helm:
+      valueFiles:
+      - '$values/apps/pss/hello_pss/hello_pss.values.yml'
+      - '$values/apps/pss/hello_pss/hello_pss.image.values.yml'
+  - repoURL: https://gitlab.sikalabs.com/examples/pss/pss-argocd-apps.git
+    ref: values
