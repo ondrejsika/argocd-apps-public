@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pss-counter-dev-mongo
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: pss-counter-dev
+  destination:
+    namespace: pss-counter-dev
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  sources:
+  - repoURL: https://gitlab.sikalabs.com/examples/pss/pss-charts.git
+    path: charts/pss-mongodb-single
+    helm:
+      valueFiles:
+      - '$values/mongo.common.values.yaml'
+      - '$values/mongo.dev.values.yaml'
+  - repoURL: https://gitlab.sikalabs.com/examples/pss/project-counter/pss-counter-values.git
+    ref: values
