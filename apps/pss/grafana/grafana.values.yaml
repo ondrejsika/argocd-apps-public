@@ -1,0 +1,4 @@
+image: grafana/grafana
+host: grafana.k8s.sikademo.com
+port: 80
+containerPort: 3000
