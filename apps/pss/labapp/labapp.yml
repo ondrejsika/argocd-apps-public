@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: labapp
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: labapp
+  destination:
+    namespace: labapp
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  sources:
+  - repoURL: https://gitlab.sikalabs.com/examples/pss/pss-charts.git
+    path: charts/pss-app
+    helm:
+      valueFiles:
+      - '$values/labapp.values.yaml'
+      - '$values/labapp.image.values.yaml'
+  - repoURL: https://gitlab.sikalabs.com/examples/pss/project-labapp/labapp-values.git
+    ref: values
