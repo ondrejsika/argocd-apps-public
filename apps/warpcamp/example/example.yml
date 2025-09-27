@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: example
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  sources:
+  - repoURL: https://github.com/sikalabs/charts.git
+    path: ./charts/one-image
+    helm:
+      valuesObject:
+        image: ttl.sh/ondrejsika/warpcamp25/example
+        host: example.warpcamp.sikademo.com
+        containerPort: 8000
+        replicas: 2
+        containerEnv:
+          - name: REFRESH_INTERVAL
+            value: 2
+          - name: VAULT_ADDR
+            value: http://vault.vault:8200
+          - name: VAULT_ROLE
+            value: example
