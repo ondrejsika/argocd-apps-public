@@ -1,0 +1,19 @@
+crds:
+  enabled: true
+  keep: true
+extraObjects:
+  - |
+    apiVersion: cert-manager.io/v1
+    kind: ClusterIssuer
+    metadata:
+      name: letsencrypt
+    spec:
+      acme:
+        email: ondrejsika@ondrejsika.com
+        server: https://acme-v02.api.letsencrypt.org/directory
+        privateKeySecretRef:
+          name: letsencrypt-issuer-account-key
+        solvers:
+          - http01:
+              ingress:
+                class: nginx
