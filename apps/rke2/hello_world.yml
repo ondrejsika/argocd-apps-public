@@ -23,4 +23,5 @@ spec:
       valuesObject:
         host: hello-world.wo1.sikademo.com
         replicas: 3
+        ingressClassName: ""
 
