@@ -25,3 +25,4 @@ spec:
         ingressClassName: ""
         EXTRA_TEXT: "Hello from ArgoCD!"
         BACKGROUND_COLOR: lightorange
+        backendReplicas: 10
