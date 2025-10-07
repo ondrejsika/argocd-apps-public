@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-helm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: counter-helm
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2025-10-07-counter-helm.git
+    path: .
+    helm:
+      valuesObject:
+        host: counter-helm.wo1.sikademo.com
+        ingressClassName: ""
+        EXTRA_TEXT: "Hello from ArgoCD!"
+        BACKGROUND_COLOR: lightorange
