@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  source:
+    path: apps/rke2 # Adjust this path as needed
+    repoURL: https://github.com/ondrejsika/argocd-apps-public.git # Replace with your repository URL
+    directory:
+      recurse: true
+      exclude: '{**/manifests/**,**/Chart.yaml,**/values.y*ml,**/*.values.y*ml,**/templates/**}'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
