@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:
-  project: default
+  project: system
   destination:
     namespace: cert-manager
     server: https://kubernetes.default.svc
