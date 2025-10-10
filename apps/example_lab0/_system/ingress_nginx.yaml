@@ -53,7 +53,7 @@ spec:
             pullPolicy: Always
           extraEnvs:
             - name: CLUSTER
-              value: "rke2"
+              value: "lab0"
             - name: DOMAIN
-              value: "rke2.sikademo.com"
+              value: "lab0.sikademo.com"
           port: 8000
