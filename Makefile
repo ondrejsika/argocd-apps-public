@@ -1,16 +1,7 @@
-sikademo-setup:
-	make install-argocd-sikademo
-	make sikademo-apply-app-of-apps
+default:
+	@echo "Please specify a target, e.g., 'make setup-sikademo'"
 
-install-argocd-sikademo:
-	slu scripts kubernetes install-argocd --domain argocd.k8s.sikademo.com -f values.yml
-
-sikademo-apply-app-of-apps:
+setup_sikademo:
 	@slu check kubernetes_context -p do-fra1-sikademo
-	kubectl apply -f ./meta/sikademo.yml
-
-argocd-proxy:
-	kubectl port-forward -n argocd svc/argocd-server 8443:443
-
-argocd-password:
-	@slu argocd initial-password
+	slu scripts kubernetes install-argocd
+	kubectl apply -f ./clusters/sikademo
