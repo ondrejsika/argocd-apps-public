@@ -53,7 +53,7 @@ spec:
             pullPolicy: Always
           extraEnvs:
             - name: CLUSTER
-              value: "example"
+              value: "asseco-example"
             - name: DOMAIN
               value: "k8s.sikademo.com"
           port: 8000
