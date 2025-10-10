@@ -23,4 +23,3 @@ spec:
       valuesObject:
         host: hello-world.k8s.sikademo.com
         replicas: 3
-        TEXT: "Hello Asseco!"
