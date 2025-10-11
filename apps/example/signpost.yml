@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: signpost
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: signpost
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: charts/signpost
+    helm:
+      valuesObject:
+        host: signpost.k8s.sikalabs.com
+        signpost_yaml:
+          SiteHeading: k8s
+          CompanyName: Training
+          CompanyDomain: sika.io
+          CompanyURL: https://sika.io
+          Rows:
+          - Cols:
+            - Blocks:
+              - Heading: Platform
+                Links:
+                - Title: ArgoCD
+                  URL: https://argocd.k8s.sikalabs.com
+                - Title: Headlamp
+                  URL: https://headlamp.k8s.sikalabs.com
+            - Blocks:
+              - Heading: Apps
+                Links:
+                - Title: Hello World
+                  URL: https://hello-world.k8s.sikademo.com
