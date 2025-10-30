@@ -18,7 +18,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://github.com/ondrejsika/counter.git
-    path: charts/counter
+    path: kubernetes/chart
     helm:
       releaseName: counter-backend
       valuesObject:
