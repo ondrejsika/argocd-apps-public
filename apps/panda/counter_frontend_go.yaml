@@ -18,7 +18,7 @@ spec:
       - CreateNamespace=true
   source:
     repoURL: https://github.com/ondrejsika/counter-frontend.git
-    path: chart
+    path: kubernetes/chart
     helm:
       valuesObject:
         host: counter-frontend-go.sikademo.com
