@@ -6,3 +6,37 @@
 > 👉 [Více informací a registrace zde](https://ondrej-sika.cz/skoleni/argocd)
 
 # Ondrej Sika's ArgoCD Apps Public
+
+## Setup
+
+Install ArgoCD (using Helm) and deploy app-of-apps (ArgoCD Application)
+
+### panda cluster
+
+```sh
+make setup_panda
+```
+
+### sikademo cluster
+
+```sh
+make setup_sikademo
+```
+
+### example cluster
+
+```sh
+make setup_example
+```
+
+### example_lab0 cluster
+
+```sh
+make setup_example_lab0
+```
+
+### rke2 cluster
+
+```sh
+make setup_example_rke2
+```
