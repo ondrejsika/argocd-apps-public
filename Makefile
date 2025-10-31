@@ -6,6 +6,11 @@ setup_sikademo:
 	slu scripts kubernetes install-argocd
 	kubectl apply -f ./clusters/sikademo
 
+setup_example:
+	@slu check kubernetes_context -p do-fra1-sikademo
+	slu scripts kubernetes install-argocd
+	kubectl apply -f ./clusters/example
+
 setup_example_lab0:
 	@slu check kubernetes_context -p k3d-default
 	slu scripts kubernetes install-argocd
