@@ -22,6 +22,7 @@ spec:
     helm:
       valuesObject:
         host: hello-world.apps.akc.germanywestcentral.aroapp.io
+        TEXT: "Hello Akcenta!"
         replicas: 3
 
         ingressClassName: openshift-default
