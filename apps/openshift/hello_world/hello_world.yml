@@ -23,5 +23,9 @@ spec:
       valuesObject:
         host: hello-world.apps.training.germanywestcentral.aroapp.io
         replicas: 3
-        ingressClassName: openshift-default
 
+        ingressClassName: openshift-default
+        ingressTlsDisable: true
+        ingressExtraAnnotations:
+          route.openshift.io/termination: edge
+          route.openshift.io/insecureEdgeTerminationPolicy: Redirect
