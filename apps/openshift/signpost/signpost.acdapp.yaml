@@ -21,12 +21,8 @@ spec:
     path: charts/signpost
     helm:
       valuesObject:
-        host: signpost.apps.training.germanywestcentral.aroapp.io
+        host: signpost.openshift.sikademo.com
         ingressClassName: openshift-default
-        ingressTlsDisable: true
-        ingressExtraAnnotations:
-          route.openshift.io/termination: edge
-          route.openshift.io/insecureEdgeTerminationPolicy: Redirect
         signpost_yaml:
           SiteHeading: OpenShift Signpost
           CompanyName: Ondrej Sika Training
