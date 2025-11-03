@@ -37,3 +37,8 @@ spec:
                   URL: https://console-openshift-console.apps.training.germanywestcentral.aroapp.io
                 - Title: ArgoCD
                   URL: https://openshift-gitops-server-openshift-gitops.apps.training.germanywestcentral.aroapp.io
+            - Blocks:
+              - Heading: Apps
+                Links:
+                - Title: Hello World
+                  URL: https://hello-world.apps.training.germanywestcentral.aroapp.io
