@@ -1,0 +1,12 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: external-secrets-operator
+  namespace: external-secrets-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "-93"
+  labels:
+    app.kubernetes.io/managed-by: argocd
+    app.kubernetes.io/instance: external-secrets
+spec:
+  upgradeStrategy: Default
