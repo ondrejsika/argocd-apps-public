@@ -12,5 +12,3 @@ subjects:
   - kind: ServiceAccount
     name: openshift-gitops-argocd-application-controller
     namespace: openshift-gitops
-  - kind: Group
-    name: openshift-admins
