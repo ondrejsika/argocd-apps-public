@@ -1,0 +1,21 @@
+host: signpost.openshift.sikademo.com
+ingressClassName: openshift-default
+signpost_yaml:
+  SiteHeading: OpenShift Signpost
+  CompanyName: Ondrej Sika Training
+  CompanyDomain: sika.io
+  CompanyURL: https://sika.io
+  Rows:
+  - Cols:
+    - Blocks:
+      - Heading: OpenShift Platform
+        Links:
+        - Title: Console
+          URL: https://console-openshift-console.apps.training.germanywestcentral.aroapp.io
+        - Title: ArgoCD
+          URL: https://openshift-gitops-server-openshift-gitops.apps.training.germanywestcentral.aroapp.io
+    - Blocks:
+      - Heading: Apps
+        Links:
+        - Title: Hello World
+          URL: https://hello-world.apps.training.germanywestcentral.aroapp.io
