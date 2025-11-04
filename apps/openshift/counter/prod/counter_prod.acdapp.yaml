@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: counter
+  name: counter-prod
   namespace: openshift-gitops
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
-    namespace: counter
+    namespace: counter-prod
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
@@ -18,4 +18,4 @@ spec:
     - CreateNamespace=true
   source:
     repoURL: https://github.com/sika-training-examples/2025-11-04_akcenta_counter_example.git
-    path: .
+    path: env/prod
