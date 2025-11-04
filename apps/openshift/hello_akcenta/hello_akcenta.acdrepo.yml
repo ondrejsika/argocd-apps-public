@@ -1,0 +1,29 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: repo-hello-akcenta
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "-98"
+spec:
+  refreshInterval: "1m"
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: vault
+  target:
+    name: repo-hello-akcenta
+    template:
+      engineVersion: v2
+      type: Opaque
+      metadata:
+        labels:
+          argocd.argoproj.io/secret-type: repository
+      data:
+        project: hello-akcenta
+        type: git
+        url: https://gitlab.sikalabs.com/examples/akcenta-private/hello-akcenta.git
+        username: token
+        password: "{{ .password }}"
+  dataFrom:
+    - extract:
+        key: repo-hello-akcenta-token
