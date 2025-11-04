@@ -13,3 +13,13 @@ spec:
       g, cluster-admins, role:admin
       g, argocd-admin, role:admin
       g, argocd-admins, role:admin
+
+      g, argocd-proj-counter, role:counter
+      p, role:counter, projects, get, counted*, allow
+      p, role:counter, applicationsets, get, counter*, allow
+      p, role:counter, applications, get, counter*, allow
+      p, role:counter, applications, action/apps/Deployment/restart, counter*, allow
+      p, role:counter, applications, sync, counter*, allow
+      p, role:counter, applications, update, counter*, allow
+      p, role:counter, logs, get, counter*, allow
+      p, role:counter, exec, create, counter*, allow
