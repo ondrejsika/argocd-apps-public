@@ -25,3 +25,23 @@ setup_example_rke2:
 	@slu check kubernetes_context -p rke2
 	slu scripts kubernetes install-argocd
 	kubectl apply -f ./clusters/example_rke2
+
+setup_openshift:
+	@slu check kubernetes_context -p default/api-training-germanywestcentral-aroapp-io
+	kubectl apply -f ./apps/openshift/_system/argocd/manifests/01_ns.yaml
+	kubectl apply -f ./apps/openshift/_system/argocd/manifests/02_operatorgroup.yaml
+	kubectl apply -f ./apps/openshift/_system/argocd/manifests/03_subscription.yaml
+	kubectl apply -f ./apps/openshift/_system/argocd/manifests/04_rbac.yaml
+	kubectl wait --for condition=established --timeout=600s crd/argocds.argoproj.io
+	kubectl apply -f ./apps/openshift/_system/argocd/manifests/05_argocd_config.yaml
+	kubectl wait --for condition=established --timeout=600s crd/applications.argoproj.io
+	kubectl apply -f ./clusters/openshift
+
+setup_akc:
+	@slu check kubernetes_context -p default/api-akc-germanywestcentral-aroapp-io
+	kubectl apply -f ./apps/akc/_system/argocd/manifests/01_ns.yaml
+	kubectl apply -f ./apps/akc/_system/argocd/manifests/02_operatorgroup.yaml
+	kubectl apply -f ./apps/akc/_system/argocd/manifests/03_subscription.yaml
+	kubectl apply -f ./apps/akc/_system/argocd/manifests/04_rbac.yaml
+	kubectl wait --for condition=established --timeout=600s crd/applications.argoproj.io
+	kubectl apply -f ./clusters/akc
