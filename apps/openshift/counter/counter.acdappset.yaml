@@ -17,7 +17,7 @@ spec:
       name: counter-{{env}}
       namespace: openshift-gitops
     spec:
-      project: default
+      project: counter
       destination:
         namespace: counter-{{env}}
         server: https://kubernetes.default.svc
