@@ -19,3 +19,8 @@ signpost_yaml:
         Links:
         - Title: Hello World
           URL: https://hello-world.apps.training.germanywestcentral.aroapp.io
+        - Title: Counter
+          URL: https://counter.apps.training.germanywestcentral.aroapp.io
+          ExtraLinks:
+            - Title: sikademo.com
+              URL: https://counter.openshift.sikademo.com
