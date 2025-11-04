@@ -21,6 +21,22 @@ spec:
             - preferred_username
           groups:
             - groups
+    - type: OpenID
+      name: EMAIL_SSO
+      mappingMethod: claim
+      openID:
+        issuer: "https://sso-email.sikalabs.com"
+        clientID: client
+        clientSecret:
+          name: openid-client-secret-email-sso
+        claims:
+          email:
+            - email
+          name:
+            - email
+          preferredUsername:
+            - email
+        extraScopes: []
 ---
 apiVersion: v1
 kind: Secret
@@ -30,3 +46,12 @@ metadata:
 type: Opaque
 stringData:
   clientSecret: example_client_secret
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: openid-client-secret-email-sso
+  namespace: openshift-config
+type: Opaque
+stringData:
+  clientSecret: xxx
