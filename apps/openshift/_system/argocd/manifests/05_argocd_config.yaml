@@ -5,3 +5,11 @@ metadata:
   namespace: openshift-gitops
 spec:
   resourceTrackingMethod: annotation
+  rbac:
+    defaultPolicy: ''
+    scopes: '[groups]'
+    policy: |
+      g, system:cluster-admins, role:admin
+      g, cluster-admins, role:admin
+      g, argocd-admin, role:admin
+      g, argocd-admins, role:admin
