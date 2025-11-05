@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: counter
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  generators:
+  - list:
+      elements:
+      - env: prod
+      - env: preprod
+      - env: dev
+  template:
+    metadata:
+      name: counter-{{env}}
+      namespace: openshift-gitops
+    spec:
+      project: counter
+      destination:
+        namespace: counter-{{env}}
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      source:
+        repoURL: https://github.com/sika-training-examples/2025-11-04_akcenta_counter_example.git
+        path: env/{{env}}
