@@ -51,6 +51,8 @@ spec:
             nginx.ingress.kubernetes.io/proxy-buffer-size: "64k"
             cert-manager.io/cluster-issuer: letsencrypt
         postgresql:
+          image:
+            repository: bitnamilegacy/postgresql
           auth:
             postgresPassword: pg
             password: pg
