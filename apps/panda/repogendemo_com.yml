@@ -22,4 +22,4 @@ spec:
     helm:
       valuesObject:
         host: repogendemo.com
-        image: ghcr.io/ondrejsika/sikademo.com
+        image: ghcr.io/sikalabs/repogendemo.com
