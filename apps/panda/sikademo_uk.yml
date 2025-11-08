@@ -22,4 +22,4 @@ spec:
     helm:
       valuesObject:
         host: sikademo.uk
-        image: ghcr.io/ondrejsika/sikademo.com
+        image: ghcr.io/sikalabs/sikademo.com
