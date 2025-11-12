@@ -21,7 +21,7 @@ spec:
     path: charts/signpost
     helm:
       valuesObject:
-        host: signpost.k8s.sikalabs.com
+        host: signpost.k8s.sikademo.com
         signpost_yaml:
           SiteHeading: k8s
           CompanyName: Training
@@ -33,9 +33,9 @@ spec:
               - Heading: Platform
                 Links:
                 - Title: ArgoCD
-                  URL: https://argocd.k8s.sikalabs.com
+                  URL: https://argocd.k8s.sikademo.com
                 - Title: Headlamp
-                  URL: https://headlamp.k8s.sikalabs.com
+                  URL: https://headlamp.k8s.sikademo.com
             - Blocks:
               - Heading: Apps
                 Links:
