@@ -21,7 +21,7 @@ spec:
     path: charts/signpost
     helm:
       valuesObject:
-        host: signpost.rke2.sikalabs.com
+        host: signpost.rke2.sikademo.com
         signpost_yaml:
           SiteHeading: rke2
           CompanyName: Training
@@ -33,7 +33,7 @@ spec:
               - Heading: Platform
                 Links:
                 - Title: ArgoCD
-                  URL: https://argocd.rke2.sikalabs.com
+                  URL: https://argocd.rke2.sikademo.com
             - Blocks:
               - Heading: Apps
                 Links:
