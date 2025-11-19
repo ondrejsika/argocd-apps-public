@@ -8,11 +8,20 @@ loki:
     replication_factor: 3
 
   limits_config:
-    retention_period: 24h
+    retention_period: 7d
     retention_stream:
       - selector: '{namespace=~"kube-.*"}'
         priority: 1
-        period: 1h
+        period: 1d
+      - selector: '{namespace="loggen-3d"}'
+        priority: 4
+        period: 3d
+      - selector: '{namespace="loggen-2d"}'
+        priority: 3
+        period: 2d
+      - selector: '{namespace="loggen-1d"}'
+        priority: 2
+        period: 1d
 
   compactor:
     retention_enabled: true
