@@ -17,12 +17,20 @@ buckets:
   - name: loki-scalable-chunks
     policy: none
     purge: false
-
   - name: loki-scalable-ruler
     policy: none
     purge: false
-
   - name: loki-scalable-admin
+    policy: none
+    purge: false
+
+  - name: loki-k8s-chunks
+    policy: none
+    purge: false
+  - name: loki-k8s-ruler
+    policy: none
+    purge: false
+  - name: loki-k8s-admin
     policy: none
     purge: false
 
