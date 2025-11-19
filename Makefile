@@ -36,3 +36,8 @@ setup_openshift:
 	kubectl apply -f ./apps/openshift/_system/argocd/manifests/05_argocd_config.yaml
 	kubectl wait --for condition=established --timeout=600s crd/applications.argoproj.io
 	kubectl apply -f ./clusters/openshift
+
+setup_loki:
+	@slu check kubernetes_context -p do-fra1-loki
+	slu scripts kubernetes install-argocd
+	kubectl apply -f ./clusters/loki
