@@ -1,0 +1,61 @@
+# https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+
+assertNoLeakedSecrets: false
+
+replicas: 1
+
+admin:
+  existingSecret: ""
+  userKey: admin-user
+  passwordKey: admin-password
+
+env:
+  GF_SERVER_ROOT_URL: https://grafana.loki.sikademo.com
+
+# SSO Configuration
+grafana.ini:
+  server:
+    root_url: https://grafana.loki.sikademo.com
+  auth.generic_oauth:
+    enabled: true
+    name: SSO
+    allow_sign_up: true
+    client_id: example_client_id
+    client_secret: example_client_secret
+    scopes: openid profile email groups
+    auth_url: https://sso.sikalabs.com/realms/training/protocol/openid-connect/auth
+    token_url: https://sso.sikalabs.com/realms/training/protocol/openid-connect/token
+    api_url: https://sso.sikalabs.com/realms/training/protocol/openid-connect/userinfo
+    role_attribute_path: contains(groups[*], 'grafana-admins') && 'Admin' || 'Viewer'
+    allow_assign_grafana_admin: true
+
+# Datasources - Loki instances
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Loki Single
+        type: loki
+        access: proxy
+        url: http://loki-single.loki-single.svc.cluster.local:3100
+        isDefault: true
+        jsonData:
+          maxLines: 1000
+      - name: Loki Scalable
+        type: loki
+        access: proxy
+        url: http://loki-scalable-gateway.loki-scalable.svc.cluster.local
+        jsonData:
+          maxLines: 1000
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - grafana.loki.sikademo.com
+  tls:
+    - secretName: grafana-tls
+      hosts:
+        - grafana.loki.sikademo.com
