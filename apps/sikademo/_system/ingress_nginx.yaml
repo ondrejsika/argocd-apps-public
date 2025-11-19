@@ -46,7 +46,7 @@ spec:
           enabled: true
           image:
             registry: ghcr.io
-            image: sikalabs/sikalabs-kubernetes-ingress-default-page
+            image: sikalabs/sikalabs-kubernetes-homepage
             tag: latest
             pullPolicy: Always
           extraEnvs:
