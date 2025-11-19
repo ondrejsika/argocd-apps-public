@@ -11,7 +11,7 @@ spec:
     policy: |
       g, system:cluster-admins, role:admin
       g, cluster-admins, role:admin
-      g, argocd-admin, role:admin
+      g, argocd-admins, role:admin
       g, argocd-admins, role:admin
 
       g, argocd-proj-counter, role:counter
