@@ -7,6 +7,18 @@ loki:
   commonConfig:
     replication_factor: 3
 
+  limits_config:
+    retention_period: 24h
+    retention_stream:
+      - selector: '{namespace=~"kube-.*"}'
+        priority: 1
+        period: 1h
+
+  compactor:
+    retention_enabled: true
+    retention_delete_delay: 2h
+    retention_delete_worker_count: 150
+
   storage:
     bucketNames:
       chunks: loki-k8s-chunks
