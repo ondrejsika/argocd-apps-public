@@ -18,7 +18,7 @@ defaultBackend:
   enabled: true
   image:
     registry: docker.io
-    image: sikalabs/sikalabs-kubernetes-ingress-default-page
+    image: sikalabs/sikalabs-kubernetes-homepage
     tag: latest
   extraEnvs:
     - name: CLUSTER
