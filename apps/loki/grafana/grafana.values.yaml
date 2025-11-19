@@ -34,11 +34,17 @@ datasources:
   datasources.yaml:
     apiVersion: 1
     datasources:
+      - name: Loki k8s
+        type: loki
+        access: proxy
+        url: http://loki-k8s-gateway.loki-k8s.svc.cluster.local
+        isDefault: true
+        jsonData:
+          maxLines: 1000
       - name: Loki Single
         type: loki
         access: proxy
         url: http://loki-single.loki-single.svc.cluster.local:3100
-        isDefault: true
         jsonData:
           maxLines: 1000
       - name: Loki Scalable
