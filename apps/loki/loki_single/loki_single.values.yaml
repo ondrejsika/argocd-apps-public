@@ -1,3 +1,5 @@
+# https://github.com/grafana/loki/blob/main/production/helm/loki/values.yaml
+
 deploymentMode: SingleBinary
 
 singleBinary:
@@ -133,3 +135,16 @@ gateway:
     limits:
       cpu: 100m
       memory: 100Mi
+
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+
+  hosts:
+    - loki-single.loki.sikademo.com
+  tls:
+   - hosts:
+      - loki-single.loki.sikademo.com
+     secretName: loki-single.loki.sikademo-tls
