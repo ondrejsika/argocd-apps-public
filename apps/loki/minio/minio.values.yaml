@@ -34,6 +34,16 @@ buckets:
     policy: none
     purge: false
 
+  - name: loki-multitenant-chunks
+    policy: none
+    purge: false
+  - name: loki-multitenant-ruler
+    policy: none
+    purge: false
+  - name: loki-multitenant-admin
+    policy: none
+    purge: false
+
 users: []
 
 replicas: 1
