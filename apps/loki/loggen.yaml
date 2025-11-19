@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: loggen
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  generators:
+  - list:
+      elements:
+      - name: default
+      - name: 3d
+      - name: 2d
+      - name: 1d
+  template:
+    metadata:
+      name: loggen-{{name}}
+      namespace: argocd
+    spec:
+      project: default
+      destination:
+        namespace: loggen-{{name}}
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      source:
+        repoURL: https://github.com/sikalabs/charts.git
+        path: charts/loggen
+        helm:
+          values: |
+            prefix: '{{name}}'
+            replicas: 2
