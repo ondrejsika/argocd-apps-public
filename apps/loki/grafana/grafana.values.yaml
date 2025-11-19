@@ -53,6 +53,24 @@ datasources:
         url: http://loki-scalable-gateway.loki-scalable.svc.cluster.local
         jsonData:
           maxLines: 1000
+      - name: Loki Multitenant (foo)
+        type: loki
+        access: proxy
+        url: http://loki-multitenant-gateway.loki-multitenant.svc.cluster.local
+        jsonData:
+          maxLines: 1000
+          httpHeaderName1: 'X-Scope-OrgID'
+        secureJsonData:
+          httpHeaderValue1: 'foo'
+      - name: Loki Multitenant (bar)
+        type: loki
+        access: proxy
+        url: http://loki-multitenant-gateway.loki-multitenant.svc.cluster.local
+        jsonData:
+          maxLines: 1000
+          httpHeaderName1: 'X-Scope-OrgID'
+        secureJsonData:
+          httpHeaderValue1: 'bar'
 
 ingress:
   enabled: true
