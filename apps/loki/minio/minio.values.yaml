@@ -3,7 +3,17 @@
 rootUser: admin
 rootPassword: asdfasdf
 
-buckets: []
+buckets:
+  - name: loki-single-chunks
+    policy: none
+    purge: false
+  - name: loki-single-ruler
+    policy: none
+    purge: false
+  - name: loki-single-admin
+    policy: none
+    purge: false
+
 users: []
 
 replicas: 1
