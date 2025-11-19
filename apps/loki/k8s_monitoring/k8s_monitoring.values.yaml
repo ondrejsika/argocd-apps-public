@@ -6,12 +6,9 @@ cluster:
   name: loki-training-cluster
 
 destinations:
-  - name: loki-single
+  - name: loki
     type: loki
-    url: http://loki-single.loki-single.svc.cluster.local:3100/loki/api/v1/push
-  - name: loki-scalable
-    type: loki
-    url: http://loki-scalable-gateway.loki-scalable.svc.cluster.local/loki/api/v1/push
+    url: http://loki-k8s-gateway.loki-k8s.svc.cluster.local/loki/api/v1/push
 
 clusterEvents:
   enabled: true
