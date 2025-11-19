@@ -34,6 +34,18 @@ tolerations:
     value: "minio"
     effect: "NoExecute"
 
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+  hosts:
+    - minio.loki.sikademo.com
+  tls:
+    - secretName: minio-tls
+      hosts:
+        - minio.loki.sikademo.com
+
 consoleIngress:
   enabled: true
   ingressClassName: nginx
