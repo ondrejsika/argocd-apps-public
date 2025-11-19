@@ -19,6 +19,9 @@ users: []
 replicas: 1
 drivesPerNode: 1
 
+deploymentUpdate:
+  type: Recreate
+
 mode: standalone
 
 metrics:
