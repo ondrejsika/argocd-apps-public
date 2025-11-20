@@ -34,4 +34,4 @@ spec:
         helm:
           values: |
             prefix: '{{name}}'
-            replicas: 2
+            replicas: 10
