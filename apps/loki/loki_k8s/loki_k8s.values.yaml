@@ -56,7 +56,18 @@ loki:
         store: memberlist
     enable_sharding: true
     remote_write:
-      enabled: false
+      enabled: true
+      clients:
+        prometheus:
+          url: http://prometheus-server.prometheus.svc.cluster.local/api/v1/write
+          queue_config:
+            capacity: 10000
+            max_shards: 50
+            min_shards: 1
+            max_samples_per_send: 5000
+            batch_send_deadline: 5s
+            min_backoff: 30ms
+            max_backoff: 5s
     storage:
       type: s3
 
