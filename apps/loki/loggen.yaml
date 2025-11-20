@@ -35,3 +35,4 @@ spec:
           values: |
             prefix: '{{name}}'
             replicas: 10
+            sleepTime: 100
