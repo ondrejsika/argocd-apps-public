@@ -3,6 +3,9 @@
 rootUser: admin
 rootPassword: asdfasdf
 
+environment:
+  MINIO_BROWSER_REDIRECT_URL: https://minio-console.loki.sikademo.com
+
 buckets:
   - name: loki-single-chunks
     policy: none
