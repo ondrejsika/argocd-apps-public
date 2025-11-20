@@ -21,7 +21,7 @@ spec:
   sources:
     - repoURL: https://prometheus-community.github.io/helm-charts
       chart: prometheus
-      targetRevision: 25.30.1
+      targetRevision: 27.45.0
       helm:
         valueFiles:
           - $values/apps/loki/prometheus/prometheus.values.yaml
