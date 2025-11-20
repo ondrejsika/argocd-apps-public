@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prometheus
+  namespace: argocd
+  annotations:
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: prometheus
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: prometheus
+      targetRevision: 25.30.1
+      helm:
+        valueFiles:
+          - $values/apps/loki/prometheus/prometheus.values.yaml
+    - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+      ref: values
