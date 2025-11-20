@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: example-iceland
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  generators:
+  - list:
+      elements:
+      - suffix: '1'
+      - suffix: '2'
+      - suffix: '3'
+      - suffix: '4'
+      - suffix: '5'
+  template:
+    metadata:
+      name: example-iceland-{{suffix}}
+      namespace: argocd
+    spec:
+      project: default
+      destination:
+        namespace: example-iceland
+        server: https://kubernetes.default.svc
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+      source:
+        repoURL: https://github.com/sikalabs/charts.git
+        path: charts/one-image
+        helm:
+          values: |
+            host: example-iceland-{{suffix}}.loki.sikademo.com
+            image: ghcr.io/ondrejsika/iceland-{{suffix}}
