@@ -36,3 +36,4 @@ spec:
           values: |
             host: example-iceland-{{suffix}}.loki.sikademo.com
             image: ghcr.io/ondrejsika/iceland-{{suffix}}
+            replicas: 4
