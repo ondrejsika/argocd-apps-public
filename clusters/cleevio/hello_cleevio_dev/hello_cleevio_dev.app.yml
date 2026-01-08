@@ -21,7 +21,7 @@ spec:
       path: charts/hello-world
       helm:
         valueFiles:
-          - $values/.helm/common.values.yml
-          - $values/.helm/dev.values.yml
+          - $values/.helm/common.values.yaml
+          - $values/.helm/dev.values.yaml
     - repoURL: https://gitlab.sikalabs.com/examples/cleevio/hello-cleevio.git
       ref: values
