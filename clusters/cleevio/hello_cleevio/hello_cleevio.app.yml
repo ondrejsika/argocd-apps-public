@@ -24,4 +24,4 @@ spec:
         TEXT: "Hello Cleevio & CleevioX!"
         BACKGROUND_COLOR: "#FDC72F"
         host: hello-cleevio.k8s.sikademo.com
-        replicas: 3
+        replicas: 10
