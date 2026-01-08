@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-hello-cleevio-prod
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+  annotations:
+    argocd.argoproj.io/sync-wave: "-99"
+stringData:
+  project: hello-cleevio-prod
+  type: git
+  url: https://gitlab.sikalabs.com/examples/cleevio/hello-cleevio.git
+  username: token
+  password: glpat-rhJhO8LwNxqFUWOu5kI30286MQp1OjZ3CA.01.0y0jz6xjg

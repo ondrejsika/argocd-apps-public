@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-cleevio-prod
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: hello-cleevio-prod
+  destination:
+    namespace: hello-cleevio-prod
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sikalabs/charts.git
+      path: charts/hello-world
+      helm:
+        valueFiles:
+          - $values/.helm/common.values.yaml
+          - $values/.helm/prod.values.yaml
+    - repoURL: https://gitlab.sikalabs.com/examples/cleevio/hello-cleevio.git
+      ref: values
