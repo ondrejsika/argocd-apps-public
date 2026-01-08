@@ -22,4 +22,5 @@ spec:
     helm:
       valuesObject:
         TEXT: "Hello Cleevio & CleevioX!"
+        host: hello-cleevio.k8s.sikademo.com
         replicas: 3
