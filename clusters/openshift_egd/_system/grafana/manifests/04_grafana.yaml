@@ -6,8 +6,24 @@ metadata:
   labels:
     dashboards: grafana
 spec:
+  config:
+    server:
+      root_url: "https://grafana.apps.egd.germanywestcentral.aroapp.io"
+    auth.generic_oauth:
+      enabled: "true"
+      name: "SSO"
+      allow_sign_up: "true"
+      client_id: "example_client_id"
+      client_secret: "example_client_secret"
+      scopes: "openid profile email groups"
+      auth_url: "https://sso.sikalabs.com/realms/training/protocol/openid-connect/auth"
+      token_url: "https://sso.sikalabs.com/realms/training/protocol/openid-connect/token"
+      api_url: "https://sso.sikalabs.com/realms/training/protocol/openid-connect/userinfo"
+      role_attribute_path: "contains(groups[*], 'grafana-admins') && 'Admin' || 'Viewer'"
+      allow_assign_grafana_admin: "true"
   route:
     spec:
+      host: grafana.apps.egd.germanywestcentral.aroapp.io
       to:
         kind: Service
         name: grafana-service
