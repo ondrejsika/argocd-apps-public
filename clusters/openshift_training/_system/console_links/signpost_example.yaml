@@ -1,0 +1,11 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: signpost-sikademo
+spec:
+  applicationMenu:
+    imageURL: https://raw.githubusercontent.com/sikalabs/signpost/refs/heads/master/signpost_icon.png
+    section: Signpost
+  href: https://signpost.sikademo.com
+  location: ApplicationMenu
+  text: signpost.sikademo.com

@@ -1,0 +1,11 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: dela-website
+spec:
+  applicationMenu:
+    imageURL: https://raw.githubusercontent.com/ondrejsika/openshift-training/refs/heads/master/images/dela_icon_openshift.jpg
+    section: Doggos
+  href: https://dela.is
+  location: ApplicationMenu
+  text: dela.is
