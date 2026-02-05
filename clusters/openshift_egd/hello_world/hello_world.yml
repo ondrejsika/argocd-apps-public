@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: hello-world
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: charts/hello-world
+    helm:
+      valuesObject:
+        host: hello-world.apps.egd.germanywestcentral.aroapp.io
+        image: ghcr.io/sikalabs/hello-world-server:egd
+        replicas: 3
+
+        ingressClassName: openshift-default
+        ingressTlsDisable: true
+        ingressExtraAnnotations:
+          route.openshift.io/termination: edge
+          route.openshift.io/insecureEdgeTerminationPolicy: Redirect
