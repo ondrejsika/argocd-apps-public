@@ -18,4 +18,4 @@ spec:
       - CreateNamespace=true
   sources:
     - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
-      path: ./clusters/openshift_training/_system/oauth/manifests
+      path: ./clusters/openshift_training/_system/openshift/manifests
