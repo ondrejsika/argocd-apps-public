@@ -4,8 +4,6 @@ metadata:
   name: grafana
   namespace: grafana
 spec:
-  ingress:
-    enabled: false
   route:
     spec:
       to:
