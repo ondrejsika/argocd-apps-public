@@ -1,0 +1,15 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: Grafana
+metadata:
+  name: grafana
+  namespace: grafana
+  labels:
+    dashboards: grafana
+spec:
+  route:
+    spec:
+      to:
+        kind: Service
+        name: grafana-service
+      tls:
+        termination: edge
