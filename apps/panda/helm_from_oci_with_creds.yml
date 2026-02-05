@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-helm-from-oci-with-creds
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  type: helm
+  enableOCI: "true"
+  url: registry.sikademo.com/docker/hello-egd
+  username: ondrejsika
+  password: asdfasdf
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: repo-helm-from-oci-with-creds
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: deleteme-repo-helm-from-oci-with-creds
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: registry.sikademo.com/docker/hello-egd
+    chart: hello-egd
+    targetRevision: 0.1.0
+    helm:
+      valuesObject:
+        host: repo-helm-from-oci-with-creds.panda.k8s.sl.zone
+        image: ghcr.io/sikalabs/hello-world-server:egd
