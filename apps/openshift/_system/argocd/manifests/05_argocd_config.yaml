@@ -15,7 +15,7 @@ spec:
       g, argocd-admins, role:admin
 
       g, argocd-proj-counter, role:counter
-      p, role:counter, projects, get, counted*, allow
+      p, role:counter, projects, get, counter*, allow
       p, role:counter, applicationsets, get, counter*, allow
       p, role:counter, applications, get, counter*, allow
       p, role:counter, applications, action/apps/Deployment/restart, counter*, allow
