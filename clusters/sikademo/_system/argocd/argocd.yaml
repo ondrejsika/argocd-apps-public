@@ -23,8 +23,8 @@ spec:
       targetRevision: 9.1.3
       helm:
         valueFiles:
-          - $values/apps/sikademo/_system/argocd/argocd.values.yaml
+          - $values/clusters/sikademo/_system/argocd/argocd.values.yaml
     - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
       ref: values
     - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
-      path: ./apps/sikademo/_system/argocd/manifests
+      path: ./clusters/sikademo/_system/argocd/manifests
