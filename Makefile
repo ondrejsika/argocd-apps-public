@@ -43,10 +43,12 @@ setup_openshift_training:
 	kubectl apply -f ./clusters/openshift_training/_system/argocd/manifests/02_operatorgroup.yaml
 	kubectl apply -f ./clusters/openshift_training/_system/argocd/manifests/03_subscription.yaml
 	kubectl apply -f ./clusters/openshift_training/_system/argocd/manifests/04_rbac.yaml
+	sleep 20
 	kubectl wait --for condition=established --timeout=600s crd/argocds.argoproj.io
 	kubectl apply -f ./clusters/openshift_training/_system/argocd/manifests/05_argocd_config.yaml
+	sleep 20
 	kubectl wait --for condition=established --timeout=600s crd/applications.argoproj.io
-	kubectl apply -f ./clusters/openshift_training/_system/app_of_apps
+	kubectl apply -f ./clusters/openshift_training/_app_of_apps
 
 setup_openshift_egd:
 	@slu check kubernetes_context -p default/api-training-germanywestcentral-aroapp-io
