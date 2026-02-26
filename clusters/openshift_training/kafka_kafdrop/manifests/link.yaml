@@ -5,6 +5,6 @@ metadata:
 spec:
   applicationMenu:
     section: Kafdrop
-  href: https://kafka-kafdrop.apps.egd.germanywestcentral.aroapp.io
+  href: https://kafka-kafdrop.apps.training.germanywestcentral.aroapp.io
   location: ApplicationMenu
   text: Kafdrop EGD
