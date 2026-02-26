@@ -1,0 +1,8 @@
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: strimzi-operator-group
+  namespace: kafka
+spec:
+  targetNamespaces:
+    - kafka
