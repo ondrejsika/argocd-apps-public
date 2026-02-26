@@ -9,7 +9,7 @@ setup_panda:
 setup_sikademo:
 	@slu check kubernetes_context -p do-fra1-sikademo
 	slu scripts kubernetes install-argocd
-	kubectl apply -f ./clusters/sikademo
+	kubectl apply -f ./clusters/sikademo/_app_of_apps
 
 setup_example:
 	@slu check kubernetes_context -p do-fra1-sikademo
