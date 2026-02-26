@@ -1,0 +1,62 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  name: loki
+  namespace: openshift-machine-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: egd-cf9xw
+      machine.openshift.io/cluster-api-machineset: loki
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: egd-cf9xw
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: loki
+    spec:
+      lifecycleHooks: {}
+      metadata: {}
+      providerSpec:
+        value:
+          osDisk:
+            diskSettings: {}
+            diskSizeGB: 128
+            managedDisk:
+              securityProfile:
+                diskEncryptionSet: {}
+              storageAccountType: Premium_LRS
+            osType: Linux
+          networkResourceGroup: egd
+          publicLoadBalancer: egd-cf9xw
+          userDataSecret:
+            name: worker-user-data
+          vnet: aro-vnet-mm35on15
+          securityProfile:
+            settings: {}
+          credentialsSecret:
+            name: azure-cloud-credentials
+            namespace: openshift-machine-api
+          diagnostics:
+            boot:
+              storageAccountType: AzureManaged
+          zone: '1'
+          metadata:
+            creationTimestamp: null
+          publicIP: false
+          resourceGroup: aro-infra-mm35ozhy-egd
+          kind: AzureMachineProviderSpec
+          location: germanywestcentral
+          vmSize: Standard_D8s_v5
+          image:
+            offer: aro4
+            publisher: azureopenshift
+            resourceID: ''
+            sku: aro_419
+            type: MarketplaceNoPlan
+            version: 419.6.20250523
+          acceleratedNetworking: true
+          subnet: worker-subnet
+          apiVersion: machine.openshift.io/v1beta1
