@@ -1,0 +1,10 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: kafdrop-egd
+spec:
+  applicationMenu:
+    section: Kafdrop
+  href: https://kafka-kafdrop.apps.egd.germanywestcentral.aroapp.io
+  location: ApplicationMenu
+  text: Kafdrop EGD
