@@ -29,3 +29,4 @@ spec:
         name: grafana-service
       tls:
         termination: edge
+        insecureEdgeTerminationPolicy: Redirect
