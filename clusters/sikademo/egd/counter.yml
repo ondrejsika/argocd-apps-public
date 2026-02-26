@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: egd-counter
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: egd-counter
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2026-02-05_counter_egd_helm_example.git
+    path: .
+    helm:
+      valuesObject:
+        host: egd-counter.k8s.sikademo.com
+        hostExp: gd-counter-exp.k8s.sikademo.com
+
+        EXTRA_TEXT: 'EGD'
+        FONT_COLOR: red
+        BACKGROUND_COLOR: yellow
+
+        backendReplicas: 2
+        frontendReplicas: 2
+        frontendExpReplicas: 2
+
+        ingressClassName: ingress-nginx
+        ingressTlsEnabled: true
+
+        enableArgoCDHooks: true
+        enableServiceMonitor: false
+        openshiftDashboardEnabled: true
+        openshiftConsoleLinkEnabled: false
+        grafanaDashboardEnabled: false
