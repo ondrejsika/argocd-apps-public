@@ -3,8 +3,6 @@ kind: Subscription
 metadata:
   name: grafana-operator
   namespace: grafana
-  annotations:
-    argocd.argoproj.io/sync-wave: "-92"
 spec:
   channel: v5
   name: grafana-operator
