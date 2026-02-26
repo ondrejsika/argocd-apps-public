@@ -3,6 +3,4 @@ kind: OperatorGroup
 metadata:
   name: grafana-operator
   namespace: grafana
-spec:
-  targetNamespaces:
-    - grafana
+spec: {}
