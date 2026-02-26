@@ -37,6 +37,6 @@ spec:
 
         enableArgoCDHooks: true
         enableServiceMonitor: false
-        openshiftDashboardEnabled: true
+        openshiftDashboardEnabled: false
         openshiftConsoleLinkEnabled: false
         grafanaDashboardEnabled: false
