@@ -22,7 +22,7 @@ spec:
     helm:
       valuesObject:
         host: egd-counter.k8s.sikademo.com
-        hostExp: gd-counter-exp.k8s.sikademo.com
+        hostExp: egd-counter-exp.k8s.sikademo.com
 
         EXTRA_TEXT: 'EGD'
         FONT_COLOR: red
