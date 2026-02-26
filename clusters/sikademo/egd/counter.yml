@@ -32,7 +32,7 @@ spec:
         frontendReplicas: 2
         frontendExpReplicas: 2
 
-        ingressClassName: ingress-nginx
+        ingressClassName: nginx
         ingressTlsEnabled: true
 
         enableArgoCDHooks: true
