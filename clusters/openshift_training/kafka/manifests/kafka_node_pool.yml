@@ -24,13 +24,13 @@ spec:
         kraftMetadata: shared
       - id: 1
         type: persistent-claim
-        size: 2Gi
+        size: 10Gi
         deleteClaim: false
       - id: 2
         type: persistent-claim
-        size: 2Gi
+        size: 10Gi
         deleteClaim: false
       - id: 3
         type: persistent-claim
-        size: 2Gi
+        size: 10Gi
         deleteClaim: false
