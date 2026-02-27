@@ -1,0 +1,37 @@
+apiVersion: observability.openshift.io/v1
+kind: ClusterLogForwarder
+metadata:
+  name: collector
+  namespace: openshift-logging
+spec:
+  serviceAccount:
+    name: collector
+  outputs:
+    - name: loki
+      type: lokiStack
+      lokiStack:
+        target:
+          name: loki
+          namespace: openshift-logging
+        authentication:
+          token:
+            from: serviceAccount
+      tls:
+        ca:
+          configMapName: loki-gateway-ca-bundle
+          key: service-ca.crt
+    - name: kafka
+      type: kafka
+      kafka:
+        url: tcp://kafka-kafka-bootstrap.kafka.svc:9092
+        topic: openshift-logs
+
+  pipelines:
+    - name: all-to-loki
+      inputRefs:
+        - application
+        - infrastructure
+        - audit
+      outputRefs:
+        - loki
+        - kafka
