@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: egd-kafka-example
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: egd-kafka-example
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sika-training-examples/2026-02-19_egd-kafka-example.git
+      path: ./kubernetes/manifests
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      name: processor
+      jsonPointers:
+        - /spec/replicas
+    # Allow manual scaling of producer to be able to test the autoscaling
+    - group: apps
+      kind: Deployment
+      name: producer
+      jsonPointers:
+        - /spec/replicas
