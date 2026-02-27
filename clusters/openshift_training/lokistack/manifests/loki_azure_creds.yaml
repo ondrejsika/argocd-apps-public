@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: loki-azure
+  namespace: openshift-logging
+stringData:
+  container: loki-openshift-egd
+  account_name: loki5386325544
+  account_key: YkKhQ13/jDeg0TZCyhoHyxKNI/Lthgeuj0JL6bgyjazarUOoYlnrsrC1pQGv30AOQjLvCFklmPCT+ASt/7SfgQ==
+  environment: AzureGlobal
