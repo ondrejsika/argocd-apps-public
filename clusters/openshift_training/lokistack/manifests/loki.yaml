@@ -18,5 +18,11 @@ spec:
       ingestion:
         ingestionRate: 10
         ingestionBurstSize: 15
+  rules:
+    enabled: true
+    selector:
+      matchLabels: {}
+    namespaceSelector:
+      matchLabels: {}
   tenants:
     mode: openshift-logging
