@@ -28,7 +28,7 @@ spec:
           SiteHeading: ACME.com Signpost
           CompanyName: ACME Company
           CompanyDomain: acme.com
-          CompanyURL: https://acme.com
+          CompanyUrl: https://acme.com
           Rows:
           - Cols:
             - Blocks:

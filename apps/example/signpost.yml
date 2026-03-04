@@ -26,7 +26,7 @@ spec:
           SiteHeading: k8s
           CompanyName: Training
           CompanyDomain: sika.io
-          CompanyURL: https://sika.io
+          CompanyUrl: https://sika.io
           Rows:
           - Cols:
             - Blocks:

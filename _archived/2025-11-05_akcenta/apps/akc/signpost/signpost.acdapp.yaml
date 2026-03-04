@@ -31,7 +31,7 @@ spec:
           SiteHeading: OpenShift Signpost
           CompanyName: Ondrej Sika Training
           CompanyDomain: sika.io
-          CompanyURL: https://sika.io
+          CompanyUrl: https://sika.io
           Rows:
           - Cols:
             - Blocks:
