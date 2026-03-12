@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dhl-prod
+  namespace: openshift-gitops
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: dhl-prod
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+      allowEmpty: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sika-training-examples/2026-03-12_dhl-example-helm.git
+    targetRevision: master
+    path: .
+    helm:
+      valuesObject:
+        hostFrontend: dhl.k8s.sikademo.com
+        hostFrontendGo: dhl-go.k8s.sikademo.com
+        backupSchedule: "*/5 * * * *"
+        EXTRA_TEXT: prod
+        enableArgoCDHooks: true
+        backendReplicas: 6
+        frontendReplicas: 6
+        goFrontendReplicas: 6
+        backendImage:    harbor.apps.training.germanywestcentral.aroapp.io/dhl/backend
+        frontendImage:   harbor.apps.training.germanywestcentral.aroapp.io/dhl/frontend-js
+        goFrontendImage: harbor.apps.training.germanywestcentral.aroapp.io/dhl/frontend
+        ingressClassName: nginx
+        ingressTls: true
+        consoleLinkEnabled: false
