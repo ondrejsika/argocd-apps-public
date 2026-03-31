@@ -1,0 +1,8 @@
+host: hello-ica-api.k8s.sikademo.com
+replicas: 2
+containerPort: 8000
+dockerRegistry: registry.sikalabs.com
+dockerRegistryAuth: dG9rZW46Z2xwYXQtVGhfaFVJMnVfZ0c2eERfVWU3X05qbTg2TVFwMU9qZHVDQS4wMS4weTEyeXlpcGI=
+containerEnv:
+  - name: BACKEND
+    value: inmemory
