@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dev-hello-ica-backend
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: dev-hello-ica
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sikalabs/charts.git
+      path: ./charts/one-image
+      helm:
+        valueFiles:
+          - $values/clusters/sikademo/hello_ica/dev/backend/values/values.yaml
+          - $values/clusters/sikademo/hello_ica/dev/backend/values/values.image.yaml
+    - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+      ref: values
