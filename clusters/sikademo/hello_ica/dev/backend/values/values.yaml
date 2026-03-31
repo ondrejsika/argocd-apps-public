@@ -5,3 +5,5 @@ dockerRegistryAuth: dG9rZW46Z2xwYXQtVGhfaFVJMnVfZ0c2eERfVWU3X05qbTg2TVFwMU9qZHVD
 containerEnv:
   - name: BACKEND
     value: inmemory
+  - name: EXTRA_TEXT_SUFFIX
+    value: '[dev]'
