@@ -1,0 +1,7 @@
+host: dev-hello-ica.k8s.sikademo.com
+containerPort: 3000
+dockerRegistry: registry.sikalabs.com
+dockerRegistryAuth: dG9rZW46Z2xwYXQtVGhfaFVJMnVfZ0c2eERfVWU3X05qbTg2TVFwMU9qZHVDQS4wMS4weTEyeXlpcGI=
+containerEnv:
+  - name: API_ORIGIN
+    value: http://dev-hello-ica-backend
