@@ -34,6 +34,8 @@ spec:
                   Links:
                   - Title: Gitlab
                     URL: https://gitlab.yetanothercorp.com
+                  - Title: Proxmox (direct)
+                    URL: https://pve-1.yac.zone:8006
               - Blocks:
                 - Heading: Prod Environment
                   Links:
