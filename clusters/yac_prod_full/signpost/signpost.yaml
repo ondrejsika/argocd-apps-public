@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: signpost
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: signpost
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: charts/signpost
+    helm:
+      releaseName: example
+      valuesObject:
+        host: signpost.apps.prod.yac.zone
+        signpost_yaml:
+          SiteHeading: YetAnotherCorp
+          CompanyName: YetAnotherCorp
+          CompanyDomain: yetanothercorp.com
+          CompanyUrl: https://yetanothercorp.com
+          Rows:
+            - Cols:
+              - Blocks:
+                - Heading: Global
+                  Links:
+                  - Title: Gitlab
+                    URL: https://gitlab.yetanothercorp.com
+              - Blocks:
+                - Heading: Prod Environment
+                  Links:
+                  - Title: ArgoCD Prod
+                    URL: https://argocd.apps.prod.yac.zone
+              - Blocks:
+                - Heading: Dev Environment
+                  Links:
+                  - Title: ArgoCD Dev
+                    URL: https://argocd.apps.dev.yac.zone
