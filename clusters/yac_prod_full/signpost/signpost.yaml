@@ -21,7 +21,7 @@ spec:
     path: charts/signpost
     helm:
       valuesObject:
-        host: signpost.apps.prod.yac.zone
+        host: signpost.yetanothercorp.com
         signpost_yaml:
           SiteHeading: YetAnotherCorp
           CompanyName: YetAnotherCorp
