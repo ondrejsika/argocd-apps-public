@@ -27,6 +27,7 @@ spec:
           CompanyName: YetAnotherCorp
           CompanyDomain: yetanothercorp.com
           CompanyUrl: https://yetanothercorp.com
+          HtmlHeadExtra: <link rel="icon" type="image/png" href="https://yetanothercorp.com/YAC23_white_on_brown.png" />
           Rows:
             - Cols:
               - Blocks:
