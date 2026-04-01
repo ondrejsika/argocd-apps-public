@@ -23,7 +23,7 @@ spec:
       valuesObject:
         host: signpost.yetanothercorp.com
         signpost_yaml:
-          SiteHeading: YetAnotherCorp
+          SiteHeading: YetAnotherCorp Signpost
           CompanyName: YetAnotherCorp
           CompanyDomain: yetanothercorp.com
           CompanyUrl: https://yetanothercorp.com
