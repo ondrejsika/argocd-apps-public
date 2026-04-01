@@ -44,3 +44,17 @@ spec:
                   Links:
                   - Title: ArgoCD Dev
                     URL: https://argocd.apps.dev.yac.zone
+            - Cols:
+              - Blocks: []
+              - Blocks:
+                - Heading: Prod Apps
+                  Links:
+                  - Title: yetanothercorp.com (site)
+                    URL: https://yetanothercorp.com
+                  - Title: Signpost
+                    URL: https://signpost.yetanothercorp.com
+              - Blocks:
+                - Heading: Dev Apps
+                  Links:
+                  - Title: Hello YAC
+                    URL: https://hello-yac.yac.dev
