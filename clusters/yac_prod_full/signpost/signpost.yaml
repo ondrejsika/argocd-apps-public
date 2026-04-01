@@ -20,7 +20,6 @@ spec:
     repoURL: https://github.com/sikalabs/charts.git
     path: charts/signpost
     helm:
-      releaseName: example
       valuesObject:
         host: signpost.apps.prod.yac.zone
         signpost_yaml:
