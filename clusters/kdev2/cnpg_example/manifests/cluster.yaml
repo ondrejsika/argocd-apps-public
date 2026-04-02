@@ -11,6 +11,7 @@ spec:
     - name: pg-kdev1
       barmanObjectStore:
         destinationPath: s3://test-cnpg-example/kdev1/pg
+        serverName: pg
         endpointURL: https://minio.sl.zone
         s3Credentials:
           accessKeyId:
