@@ -7,7 +7,7 @@ spec:
   cluster:
     name: pg
   instances: 1
-  type: ro
+  type: rw
   pgbouncer:
     poolMode: transaction
     parameters:
