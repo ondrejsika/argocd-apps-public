@@ -1,0 +1,29 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: pg
+  namespace: cnpg-example
+spec:
+  instances: 1
+  storage:
+    size: 1Gi
+  externalClusters:
+    - name: pg-kdev1
+      barmanObjectStore:
+        destinationPath: s3://test-cnpg-example/kdev1/pg
+        endpointURL: https://minio.sl.zone
+        s3Credentials:
+          accessKeyId:
+            name: s3-credentials
+            key: ACCESS_KEY_ID
+          secretAccessKey:
+            name: s3-credentials
+            key: ACCESS_SECRET_KEY
+        wal:
+          compression: gzip
+  bootstrap:
+    recovery:
+      source: pg-kdev1
+  replica:
+    enabled: true
+    source: pg-kdev1
