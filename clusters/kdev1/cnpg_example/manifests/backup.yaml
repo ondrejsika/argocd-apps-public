@@ -9,3 +9,4 @@ spec:
   method: barmanObjectStore
   cluster:
     name: pg
+  immediate: true
