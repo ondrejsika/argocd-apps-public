@@ -1,14 +1,4 @@
 apiVersion: postgresql.cnpg.io/v1
-kind: Backup
-metadata:
-  name: pg-backup-initial
-  namespace: cnpg-example
-spec:
-  method: barmanObjectStore
-  cluster:
-    name: pg
----
-apiVersion: postgresql.cnpg.io/v1
 kind: ScheduledBackup
 metadata:
   name: pg-backup-scheduled
