@@ -14,7 +14,7 @@ metadata:
   name: pg-backup-scheduled
   namespace: cnpg-example
 spec:
-  schedule: "0 2 * * *"
+  schedule: "0 0 2 * * *"
   backupOwnerReference: self
   method: barmanObjectStore
   cluster:
