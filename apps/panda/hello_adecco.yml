@@ -22,3 +22,4 @@ spec:
     helm:
       valuesObject:
         host: hello-adecco.panda.k8s.sl.zone
+        image: ghcr.io/sikalabs/hello-world-server:adecco
