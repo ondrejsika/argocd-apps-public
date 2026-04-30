@@ -24,3 +24,4 @@ spec:
         # https://github.com/sikalabs/charts/blob/master/charts/hello-world/values.yaml
         host: hello-adecco.panda.k8s.sl.zone
         image: ghcr.io/sikalabs/hello-world-server:adecco
+        replicas: 4
