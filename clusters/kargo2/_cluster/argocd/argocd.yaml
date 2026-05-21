@@ -25,6 +25,6 @@ spec:
       targetRevision: 9.5.15
       helm:
         valueFiles:
-          - $values/gitops/clusters/sikademo/_cluster/argocd/argocd.values.yaml
+          - $values/clusters/kargo2/_cluster/argocd/argocd.values.yaml
     - repoURL: git@github.com:ondrejsikax/kcd2026-kargo-test.git
       ref: values
