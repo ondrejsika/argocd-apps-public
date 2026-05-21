@@ -31,7 +31,7 @@ spec:
           install: true
           keep: true
         api:
-          host: kargo.k8s.sikademo.com
+          host: kargo.kargo2.sikademo.com
           tls:
             enabled: false
             terminatedUpstream: true
