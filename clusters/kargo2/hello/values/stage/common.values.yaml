@@ -1,1 +1,2 @@
+ingressClassName: haproxy
 TEXT: Hello from dev
