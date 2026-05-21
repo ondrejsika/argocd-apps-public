@@ -8,7 +8,7 @@ metadata:
 stringData:
   project: default
   type: git
-  url: git@github.com:ondrejsika/kcd2026-kargo-test.git
+  url: git@github.com:ondrejsikax/kcd2026-kargo-test.git
   username: ondrejsika
   sshPrivateKey: |
     -----BEGIN OPENSSH PRIVATE KEY-----

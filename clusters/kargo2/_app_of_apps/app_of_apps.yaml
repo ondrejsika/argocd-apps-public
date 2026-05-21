@@ -14,7 +14,7 @@ spec:
     automated:
       selfHeal: true
   source:
-    repoURL: git@github.com:ondrejsika/kcd2026-kargo-test.git
+    repoURL: git@github.com:ondrejsikax/kcd2026-kargo-test.git
     path: gitops/clusters/sikademo
     directory:
       recurse: true
