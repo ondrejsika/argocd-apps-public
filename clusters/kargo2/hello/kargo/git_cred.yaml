@@ -1,0 +1,40 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: git-cred-hello
+  namespace: hello
+  labels:
+    kargo.akuity.io/cred-type: git
+stringData:
+  repoURL: git@github.com:ondrejsikax/kcd2026-kargo-test.git
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+    NhAAAAAwEAAQAAAQEAt7gg5GR5wX2zgwKaYywD+h/gKzu/DTUaaOeQrBUAJzgQoL5HRe7c
+    9TiV7Bf0BdOGMLQwb4msEuo5QE2QQZoZxY+90M7B4Ky/3fgz1mFc0g7VAJFeYHD43JrW5G
+    h2NeIe4UP4ofUR/TXngB/AylOJCXmrmpuK8wQB0xZroVEQBWzzdsLXvlUzRbY21ttx/tWP
+    6+cPxnhg1FMLf+Fp0mEuHBKJHG1li8Y3+MGfhxtY8k1NjIFcv+rp1Gfcdx6VSNPqdXomrb
+    xanPZSTQ/ONPhLx9/AXWjzHxmVzsP5I6WeW7kzRabq+py+6rUe8gW+tIN1U8kw991pUuXy
+    f0WdAIsdbQAAA7gfNzKHHzcyhwAAAAdzc2gtcnNhAAABAQC3uCDkZHnBfbODAppjLAP6H+
+    ArO78NNRpo55CsFQAnOBCgvkdF7tz1OJXsF/QF04YwtDBviawS6jlATZBBmhnFj73QzsHg
+    rL/d+DPWYVzSDtUAkV5gcPjcmtbkaHY14h7hQ/ih9RH9NeeAH8DKU4kJeauam4rzBAHTFm
+    uhURAFbPN2wte+VTNFtjbW23H+1Y/r5w/GeGDUUwt/4WnSYS4cEokcbWWLxjf4wZ+HG1jy
+    TU2MgVy/6unUZ9x3HpVI0+p1eiatvFqc9lJND840+EvH38BdaPMfGZXOw/kjpZ5buTNFpu
+    r6nL7qtR7yBb60g3VTyTD33WlS5fJ/RZ0Aix1tAAAAAwEAAQAAAQAX5p5w2Bl28LF/48DO
+    EhXaXnc9aKJsR3JOH4IUwQ6qC4MuRlLjaDXauSfX9S3L7D7S6z455IE8XLhiAzU3M6MSrq
+    aVGbDjV9YGPJoR08zNjxxq3H6YsVnO6V33jReD3w0BZWRdPZK/jFm3s2nTaJa1YtzOWlnz
+    T5wlKA+Mhw08hz2bSovy1S51sXaXoSZzQnRTIIHYtsJKVs6nG7gVYRxRPkoV3h4+H5N44l
+    aOmXON7Ivvw35I5118rM5pT//pBpFrqM1qfm89TjXJBP61FUupFacxGzewRTrFHmXZDu9A
+    az/6QJ4cLNF5pkmlbpmrAaEJbpOO/+Mz1qAUEogQjyaBAAAAgQCAu1ajUmnYfYuIhDIb04
+    cG8XaMMha/6Cx7IMOsuXPym3ZcQXsQoe+FXL4AvBfOTdYIcq6n8zThgZH93Mt/VnohgD/d
+    Akfcsb14lN2l62nqx9OYwLuWA8+F7sPhAUHXP8eD0WBRjIdUBhrZ7JJe5NCd1n7wSxdIwN
+    s7Eon/PLNT3QAAAIEA3lJm3Aqj2OjZQfdQLH/gPvycm4QrXIJccz+PKTpzOjUZeWRzNH5H
+    AwVXWwvSvv4liUVNXwzzyA35vyUeyUPvBWL5DxIqnEDGY42ga7ExmaX8lydaPFiJPVv+SG
+    c79pzkdMMao0bld/5UjUmuoHS/KAgmnWu2yqcvOjoztbuo6tEAAACBANOMuXJDLqRR75+/
+    TdYWgFkdQ/B4FsKXOtf38qynRFDpW1NzwKirE+ghiloSbujhWyzRlECVq7IEkyI9sH37Ni
+    GY8/+rES5dOYIT2B9+q/NWReClYYBS/zrFun3je5nz9i5XSv48L3NoVLMsvyeRo2Rxigup
+    1T5qkBvvPOVvTbfdAAAAAAEC
+    -----END OPENSSH PRIVATE KEY-----
+  # insecure: "true"
+  #
+  # public key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC3uCDkZHnBfbODAppjLAP6H+ArO78NNRpo55CsFQAnOBCgvkdF7tz1OJXsF/QF04YwtDBviawS6jlATZBBmhnFj73QzsHgrL/d+DPWYVzSDtUAkV5gcPjcmtbkaHY14h7hQ/ih9RH9NeeAH8DKU4kJeauam4rzBAHTFmuhURAFbPN2wte+VTNFtjbW23H+1Y/r5w/GeGDUUwt/4WnSYS4cEokcbWWLxjf4wZ+HG1jyTU2MgVy/6unUZ9x3HpVI0+p1eiatvFqc9lJND840+EvH38BdaPMfGZXOw/kjpZ5buTNFpur6nL7qtR7yBb60g3VTyTD33WlS5fJ/RZ0Aix1t
