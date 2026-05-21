@@ -24,14 +24,14 @@ spec:
                 path: ./repo
         - uses: yaml-update
           config:
-            path: ./repo/clusters/kargo2/hello/values/stage.values.yaml
+            path: ./repo/clusters/kargo2/hello/values/stage/env.values.yaml
             updates:
               - key: image
                 value: ${{ imageFrom("ttl.sh/ondrejsikax/kcd2026-kargo-test").RepoURL + ":" + imageFrom("ttl.sh/ondrejsikax/kcd2026-kargo-test").Tag }}
         - uses: copy
           config:
-            inPath: ./repo/clusters/kargo2/hello/values/dev.common.values.yaml
-            outPath: ./repo/clusters/kargo2/hello/values/stage.common.values.yaml
+            inPath: ./repo/clusters/kargo2/hello/values/dev/common.values.yaml
+            outPath: ./repo/clusters/kargo2/hello/values/stage/common.values.yaml
         - uses: git-commit
           config:
             path: ./repo
@@ -41,8 +41,8 @@ spec:
               email: sikalabsbot@sikalabs.com
         - uses: copy
           config:
-            inPath: ./repo/clusters/kargo2/hello/values/dev.common.values.yaml
-            outPath: ./repo/clusters/kargo2/hello/values/stage.common.values.yaml
+            inPath: ./repo/clusters/kargo2/hello/values/dev/common.values.yaml
+            outPath: ./repo/clusters/kargo2/hello/values/stage/common.values.yaml
         - uses: git-commit
           config:
             path: ./repo

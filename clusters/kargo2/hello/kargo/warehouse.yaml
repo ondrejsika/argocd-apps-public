@@ -15,4 +15,4 @@ spec:
         repoURL: git@github.com:ondrejsikax/kcd2026-kargo-test.git
         branch: master
         includePaths:
-          - clusters/kargo2/hello/values/dev.common.values.yaml
+          - clusters/kargo2/hello/values/dev/common.values.yaml
