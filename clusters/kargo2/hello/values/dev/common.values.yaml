@@ -1,2 +1,2 @@
 ingressClassName: haproxy
-TEXT: Hello from dev
+TEXT: Hello KCD
