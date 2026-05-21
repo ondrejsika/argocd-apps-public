@@ -31,7 +31,7 @@ spec:
         - uses: git-commit
           config:
             path: ./repo
-            message: 'chore: promote hello:${{ imageFrom("ttl.sh/ondrejsikax/kcd2026-kargo-test").Tag }} to stage'
+            message: 'chore(clusters/kargo2/hello/values): promote hello:${{ imageFrom("ttl.sh/ondrejsikax/kcd2026-kargo-test").Tag }} to stage'
             author:
               name: SikaLabs[bot]
               email: sikalabsbot@sikalabs.com
