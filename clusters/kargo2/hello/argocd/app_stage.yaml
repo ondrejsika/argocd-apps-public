@@ -25,6 +25,7 @@ spec:
       helm:
         valueFiles:
           - $values/clusters/kargo2/hello/values/stage.values.yaml
+          - $values/clusters/kargo2/hello/values/stage.common.values.yaml
     - repoURL: git@github.com:ondrejsikax/kcd2026-kargo-test.git
       targetRevision: master
       ref: values

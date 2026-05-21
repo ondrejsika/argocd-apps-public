@@ -11,3 +11,8 @@ spec:
         allowTags: "^v[0-9]+"
         imageSelectionStrategy: NewestBuild
         discoveryLimit: 5
+    - git:
+        repoURL: git@github.com:ondrejsikax/kcd2026-kargo-test.git
+        branch: master
+        includePaths:
+          - clusters/kargo2/hello/values/dev.common.values.yaml
