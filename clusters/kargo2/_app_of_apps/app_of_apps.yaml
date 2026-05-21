@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: app-of-apps-kcd2026-kargo-test
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  project: default
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      selfHeal: true
+  source:
+    repoURL: git@github.com:ondrejsika/kcd2026-kargo-test.git
+    path: gitops/clusters/sikademo
+    directory:
+      recurse: true
