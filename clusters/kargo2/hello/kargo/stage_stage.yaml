@@ -35,7 +35,18 @@ spec:
         - uses: git-commit
           config:
             path: ./repo
-            message: 'chore(clusters/kargo2/hello/values): promote hello:${{ imageFrom("ttl.sh/ondrejsikax/kcd2026-kargo-test").Tag }} to stage'
+            message: 'chore(clusters/kargo2/hello/values): promote hello:${{ imageFrom("ttl.sh/ondrejsikax/kcd2026-kargo-test").Tag }} image to stage'
+            author:
+              name: SikaLabs[bot]
+              email: sikalabsbot@sikalabs.com
+        - uses: copy
+          config:
+            inPath: ./repo/clusters/kargo2/hello/values/dev.common.values.yaml
+            outPath: ./repo/clusters/kargo2/hello/values/stage.common.values.yaml
+        - uses: git-commit
+          config:
+            path: ./repo
+            message: 'chore(clusters/kargo2/hello/values): promote hello values to stage'
             author:
               name: SikaLabs[bot]
               email: sikalabsbot@sikalabs.com
