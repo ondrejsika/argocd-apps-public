@@ -1,0 +1,43 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  name: dev
+  namespace: hello
+  annotations:
+    kargo.akuity.io/color: "#2196F3"
+spec:
+  requestedFreight:
+    - origin:
+        kind: Warehouse
+        name: hello
+      sources:
+        direct: true
+  promotionTemplate:
+    spec:
+      steps:
+        - uses: git-clone
+          config:
+            repoURL: git@github.com:ondrejsika/kcd2026-kargo-example.git
+            checkout:
+              - branch: master
+                path: ./repo
+        - uses: yaml-update
+          config:
+            path: ./repo/clusters/kcd/hello/values/dev/env.values.yaml
+            updates:
+              - key: image
+                value: ${{ imageFrom("ttl.sh/ondrejsika/kcd2026-kargo-example/hello").RepoURL + ":" + imageFrom("ttl.sh/ondrejsika/kcd2026-kargo-example/hello").Tag }}
+        - uses: git-commit
+          config:
+            path: ./repo
+            message: 'chore(clusters/kcd/hello/values): promote hello:${{ imageFrom("ttl.sh/ondrejsika/kcd2026-kargo-example/hello").Tag }} to dev'
+            author:
+              name: SikaLabs[bot]
+              email: sikalabsbot@sikalabs.com
+        - uses: git-push
+          config:
+            path: ./repo
+        - uses: argocd-update
+          config:
+            apps:
+              - name: hello-dev
