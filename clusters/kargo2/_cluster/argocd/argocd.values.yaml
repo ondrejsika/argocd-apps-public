@@ -9,6 +9,8 @@ server:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
 configs:
+  secret:
+    argocdServerAdminPassword: "$2y$10$XzrBgWSczU1nwG.DcUFWYOA.cr7ObQm1F4LFmittc10.H/Rc9IzRm"
   cm:
     url: https://argocd.kargo2.sikademo.com
     exec.enabled: "true"
