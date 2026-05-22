@@ -30,9 +30,9 @@ spec:
             service:
               type: ClusterIP
               externalIPs:
-                - 64.225.110.172
-                - 165.22.22.125
-                - 207.154.220.137
+                - 178.128.201.43
+                - 134.209.254.122
+                - 164.90.187.166
             ingressClassResource:
               enabled: true
             kind: DaemonSet
