@@ -1,0 +1,23 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: counter
+  namespace: counter
+spec:
+  interval: 1m0s
+  subscriptions:
+    - image:
+        repoURL: ttl.sh/ondrejsikax/kcd2026-kargo-test/backend
+        allowTags: "^v[0-9]+"
+        imageSelectionStrategy: NewestBuild
+        discoveryLimit: 5
+    - image:
+        repoURL: ttl.sh/ondrejsikax/kcd2026-kargo-test/frontend
+        allowTags: "^v[0-9]+"
+        imageSelectionStrategy: NewestBuild
+        discoveryLimit: 5
+    - git:
+        repoURL: git@github.com:ondrejsikax/kcd2026-kargo-test.git
+        branch: master
+        includePaths:
+          - clusters/kargo2/counter/values/dev/common.values.yaml
