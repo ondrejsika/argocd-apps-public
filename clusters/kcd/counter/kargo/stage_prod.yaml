@@ -1,0 +1,57 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  name: prod
+  namespace: counter
+  annotations:
+    kargo.akuity.io/color: "#F44336"
+spec:
+  requestedFreight:
+    - origin:
+        kind: Warehouse
+        name: counter
+      sources:
+        stages:
+          - stage
+  promotionTemplate:
+    spec:
+      steps:
+        - uses: git-clone
+          config:
+            repoURL: git@github.com:ondrejsika/kcd2026-kargo-example.git
+            checkout:
+              - branch: master
+                path: ./repo
+        - uses: yaml-update
+          config:
+            path: ./repo/clusters/kcd/counter/values/prod/env.values.yaml
+            updates:
+              - key: backendImage
+                value: ${{ imageFrom("ttl.sh/ondrejsika/kcd2026-kargo-example/backend").RepoURL + ":" + imageFrom("ttl.sh/ondrejsika/kcd2026-kargo-example/backend").Tag }}
+              - key: frontendImage
+                value: ${{ imageFrom("ttl.sh/ondrejsika/kcd2026-kargo-example/fronend").RepoURL + ":" + imageFrom("ttl.sh/ondrejsika/kcd2026-kargo-example/fronend").Tag }}
+        - uses: git-commit
+          config:
+            path: ./repo
+            message: 'chore(clusters/kcd/counter/values): promote counter backend:${{ imageFrom("ttl.sh/ondrejsika/kcd2026-kargo-example/backend").Tag }} frontend:${{ imageFrom("ttl.sh/ondrejsika/kcd2026-kargo-example/fronend").Tag }} image to prod'
+            author:
+              name: SikaLabs[bot]
+              email: sikalabsbot@sikalabs.com
+        - uses: copy
+          config:
+            inPath: ./repo/clusters/kcd/counter/values/stage/common.values.yaml
+            outPath: ./repo/clusters/kcd/counter/values/prod/common.values.yaml
+        - uses: git-commit
+          config:
+            path: ./repo
+            message: 'chore(clusters/kcd/counter/values): promote counter values to prod'
+            author:
+              name: SikaLabs[bot]
+              email: sikalabsbot@sikalabs.com
+        - uses: git-push
+          config:
+            path: ./repo
+        - uses: argocd-update
+          config:
+            apps:
+              - name: counter-prod

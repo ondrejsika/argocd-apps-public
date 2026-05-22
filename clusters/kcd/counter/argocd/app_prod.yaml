@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: counter-prod
+  namespace: argocd
+  annotations:
+    kargo.akuity.io/authorized-stage: "counter:prod"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  project: default
+  destination:
+    namespace: counter-prod
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: git@github.com:ondrejsika/kcd2026-kargo-example.git
+      path: charts/counter
+      targetRevision: master
+      helm:
+        valueFiles:
+          - $values/clusters/kcd/counter/values/prod/env.values.yaml
+          - $values/clusters/kcd/counter/values/prod/common.values.yaml
+    - repoURL: git@github.com:ondrejsika/kcd2026-kargo-example.git
+      targetRevision: master
+      ref: values
