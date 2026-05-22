@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-dev
+  namespace: argocd
+  annotations:
+    kargo.akuity.io/authorized-stage: "hello:dev"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io/foreground
+spec:
+  project: default
+  destination:
+    namespace: hello-dev
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - repoURL: https://github.com/sikalabs/charts.git
+      path: ./charts/hello-world
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+          - $values/clusters/kcd/hello/values/dev/env.values.yaml
+          - $values/clusters/kcd/hello/values/dev/common.values.yaml
+    - repoURL: git@github.com:ondrejsika/kcd2026-kargo-example.git
+      targetRevision: master
+      ref: values
