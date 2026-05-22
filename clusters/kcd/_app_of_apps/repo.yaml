@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: repo-kargo-example
+  namespace: argocd
+  labels:
+    argocd.argoproj.io/secret-type: repository
+stringData:
+  project: default
+  type: git
+  url: git@github.com:ondrejsika/kcd2026-kargo-example.git
+  sshPrivateKey: |
+    -----BEGIN OPENSSH PRIVATE KEY-----
+    b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+    NhAAAAAwEAAQAAAQEA3YMWFVdkQFZtlLjZbGtW1SFd9z/w5BnaVqSEgOJP/M8GkV/Snsr/
+    qjfe52YG+LJII8LSl2wMgaJgKzS9sAHc26oy4f/Lo8uaAvFjgSRNavPmE5vYZNc6nYmeOi
+    9ad98HW9oheEfGTjs/fZ+2F2PWIMy7LXdCA57HzdJsmOqyhX/f9r/tAN9+R9u4Nxj5/oK3
+    duo5GkGAZ+SaNCJ5YZWBj4JcCppKTqFWxkOp48wp92UzRIAHy9aWGuNqc6VakXsBUgT10J
+    fW/0444IYACUbI3jJaTpxexVDdbxwXtYxvEX580tpMNQeucVrCPMujP3rGnwHtzzRfsYK0
+    aDzO3tUyJwAAA7gP3n2ZD959mQAAAAdzc2gtcnNhAAABAQDdgxYVV2RAVm2UuNlsa1bVIV
+    33P/DkGdpWpISA4k/8zwaRX9Keyv+qN97nZgb4skgjwtKXbAyBomArNL2wAdzbqjLh/8uj
+    y5oC8WOBJE1q8+YTm9hk1zqdiZ46L1p33wdb2iF4R8ZOOz99n7YXY9YgzLstd0IDnsfN0m
+    yY6rKFf9/2v+0A335H27g3GPn+grd26jkaQYBn5Jo0InlhlYGPglwKmkpOoVbGQ6njzCn3
+    ZTNEgAfL1pYa42pzpVqRewFSBPXQl9b/TjjghgAJRsjeMlpOnF7FUN1vHBe1jG8RfnzS2k
+    w1B65xWsI8y6M/esafAe3PNF+xgrRoPM7e1TInAAAAAwEAAQAAAQEAubRvLB8i9ek/XyKF
+    bSakGnQp0eIyMxkVefPc/iw9QMXTTMcXzXaEVpEWd8qKZ68XWZu4b6fu6DNYCoDh0hANt7
+    79f4iykbRcfsEeWaM0oEivh5rtFMV356D7HO6cGsjI45GA49TQhL+ZH9lokD1rw/2/ooNL
+    vbs86OnTj3ObjNyy3FqiFJs9FB1LlOJzxpNs9W3rkA8Gj/1uHawHHVuiWnHHyDD9W+pmYZ
+    oue2udkNQCnCNciPZSa9Cs/ToSdCcJN51holqQr1gwFcmmLQdfe4XiMTPlaW7ZOq7PMyW0
+    MeDbYJPLgXYb3QUROx1QsuOLpHDRIpnR2KFB546+YA7PYQAAAIEAoTBFBNI7AEZ1FUE0n1
+    ZRnEXBOn0mxcyxNEJuXkzczQd3kBvx9qVhgvPDPtjW5O7hU6xXpwVRzwVro4FN/Y96Sp4J
+    8mccoGMcpn7RG2cRIwKB0w2z8/5qd9J3447b0ldbW+oNxsFANMsHFYd4pXLs/dU4yLUTug
+    zE11rgf92L3UIAAACBAPv1EPyVDZ/cWSPyblty1GXBf5XgnNadD6nSegdcjuMV+5TVS7Lc
+    GTloUBB+GCZMKhl1w+pzi69/zkqwlGNPEhMAs7e5IspqRWYNZ76xIFpWmNufD/JggBoKCp
+    GB1N0fkfa9STmbVJ5tuGR0q+DCsdr6ufuuLpV0/PLMdN8Te2zxAAAAgQDhEPa7wVFdYH+M
+    Hj7AcUQY0E+fYZvMWJ3YlxmwFKjDD0v5zfQttA2Nm023PN4zS4BXe6YkfalTbfOMrhIjCH
+    8JtjQ5CZXYp2Np60J30/FGdaUzVq4MGNRF+deTfaJC3QfymVs1vEwPmCD6n+81vHHaWdFD
+    o105yM5zCKAo8UbwlwAAAAAB
+    -----END OPENSSH PRIVATE KEY-----
+
+    # ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDdgxYVV2RAVm2UuNlsa1bVIV33P/DkGdpWpISA4k/8zwaRX9Keyv+qN97nZgb4skgjwtKXbAyBomArNL2wAdzbqjLh/8ujy5oC8WOBJE1q8+YTm9hk1zqdiZ46L1p33wdb2iF4R8ZOOz99n7YXY9YgzLstd0IDnsfN0myY6rKFf9/2v+0A335H27g3GPn+grd26jkaQYBn5Jo0InlhlYGPglwKmkpOoVbGQ6njzCn3ZTNEgAfL1pYa42pzpVqRewFSBPXQl9b/TjjghgAJRsjeMlpOnF7FUN1vHBe1jG8RfnzS2kw1B65xWsI8y6M/esafAe3PNF+xgrRoPM7e1TIn

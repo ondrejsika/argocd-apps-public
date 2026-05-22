@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: haproxy-ingress
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-99"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: haproxy-ingress
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  sources:
+    - repoURL: https://haproxy-ingress.github.io/charts
+      chart: haproxy-ingress
+      targetRevision: 0.16.0
+      helm:
+        valuesObject:
+          # https://artifacthub.io/packages/helm/haproxy-ingress/haproxy-ingress?modal=values
+          controller:
+            service:
+              type: ClusterIP
+              externalIPs:
+                - 64.225.110.172
+                - 165.22.22.125
+                - 207.154.220.137
+            ingressClassResource:
+              enabled: true
+            kind: DaemonSet
+            daemonset:
+              useHostPort: true
+            metrics:
+              enabled: true
+            serviceMonitor:
+              enabled: false

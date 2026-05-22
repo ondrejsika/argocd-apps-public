@@ -1,0 +1,50 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kargo
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-96"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: kargo
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    repoURL: https://github.com/akuity/kargo.git
+    path: charts/kargo
+    targetRevision: v1.10.4
+    helm:
+      valuesObject:
+        image:
+          tag: v1.10.4
+        crds:
+          install: true
+          keep: true
+        api:
+          host: kargo.kcd.sikademo.com
+          tls:
+            enabled: false
+            terminatedUpstream: true
+          adminAccount:
+            enabled: true
+            passwordHash: "$2y$10$WSVPqKHxmyoc6L7RzlVilucuWXnjDDfDQmyQIfAjoG/PL3AEjyuBq"
+            tokenSigningKey: VDq8SYFpzAtxZPIYvVLobJyBle6D6foX
+          ingress:
+            enabled: true
+            ingressClassName: haproxy
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+            tls:
+              enabled: true
+              selfSignedCert: false
+              secretName: kargo-api-tls
