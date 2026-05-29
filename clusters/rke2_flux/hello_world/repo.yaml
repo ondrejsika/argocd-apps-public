@@ -1,0 +1,11 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: sikalabs
+  namespace: hello-world
+spec:
+  url: https://github.com/sikalabs/charts.git
+  timeout: 10s
+  interval: 1m0s
+  ref:
+    branch: master

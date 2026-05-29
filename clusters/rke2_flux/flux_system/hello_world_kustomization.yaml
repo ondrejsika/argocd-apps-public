@@ -1,0 +1,13 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: hello-world
+  namespace: flux-system
+spec:
+  sourceRef:
+    kind: GitRepository
+    name: gitops
+  path: ./clusters/rke2_flux/hello_world
+  interval: 1m0s
+  prune: true
+  force: false
