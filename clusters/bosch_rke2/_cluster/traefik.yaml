@@ -36,6 +36,10 @@ spec:
             hostPort: 443
         ingressClass:
           isDefaultClass: true
+        providers:
+          kubernetesIngress:
+            ingressEndpoint:
+              hostname: "bosch.sikademo.com"
         metrics:
           prometheus:
             enabled: true
