@@ -38,6 +38,8 @@ spec:
           isDefaultClass: true
         providers:
           kubernetesIngress:
+            publishedService:
+              enabled: false
             ingressEndpoint:
               hostname: "bosch.sikademo.com"
         metrics:
