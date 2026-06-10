@@ -51,7 +51,7 @@ spec:
             pullPolicy: Always
           extraEnvs:
             - name: CLUSTER
-              value: "yac-dev"
+              value: "rke2"
             - name: DOMAIN
-              value: "apps.dev.yac.zone"
+              value: "rke2.sikademo.com"
           port: 8000
