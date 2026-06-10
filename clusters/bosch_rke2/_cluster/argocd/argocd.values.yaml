@@ -3,7 +3,7 @@ server:
     enabled: true
     hostname: argocd.bosch.sikademo.com
     tls: true
-    ingressClassName: nginx
+    ingressClassName: traefik
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
       nginx.ingress.kubernetes.io/backend-protocol: HTTPS
