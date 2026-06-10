@@ -2,7 +2,10 @@ server:
   ingress:
     enabled: true
     hostname: argocd.bosch.sikademo.com
+    tls: true
     ingressClassName: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt
 configs:
   params:
     server.insecure: "true"
