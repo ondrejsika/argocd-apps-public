@@ -21,6 +21,6 @@ spec:
     path: charts/hello-world
     helm:
       valuesObject:
-        TEXT: "Hello RKE2!"
+        TEXT: "Hello BOSCH!"
         host: hello.bosch.sikademo.com
         replicas: 3
