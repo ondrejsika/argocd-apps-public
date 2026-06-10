@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: default-backend
+  namespace: default-backend
+spec:
+  selector:
+    matchLabels:
+      app: default-backend
+  template:
+    metadata:
+      labels:
+        app: default-backend
+    spec:
+      containers:
+        - name: default-backend
+          image: ghcr.io/sikalabs/sikalabs-kubernetes-homepage:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          env:
+            - name: CLUSTER
+              value: "bosch-rke2"
+            - name: DOMAIN
+              value: "bosch.sikademo.com"
