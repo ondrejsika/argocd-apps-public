@@ -2,13 +2,10 @@ server:
   ingress:
     enabled: true
     hostname: argocd.bosch.sikademo.com
-    tls: true
     ingressClassName: traefik
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      nginx.ingress.kubernetes.io/backend-protocol: HTTPS
-      traefik.ingress.kubernetes.io/service.serversscheme: https
 configs:
+  params:
+    server.insecure: "true"
   cm:
     url: https://argocd.bosch.sikademo.com
     exec.enabled: "true"
