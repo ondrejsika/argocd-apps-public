@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: traefik
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://helm.traefik.io/traefik
+    chart: traefik
+    targetRevision: 40.3.0
+    helm:
+      valuesObject:
+        # https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+        # https://artifacthub.io/packages/helm/traefik/traefik?modal=values
+        deployment:
+          kind: DaemonSet
+        service:
+          type: ClusterIP
+        ports:
+          web:
+            hostPort: 80
+          websecure:
+            hostPort: 443
+        ingressClass:
+          isDefaultClass: true
+        metrics:
+          prometheus:
+            enabled: true
