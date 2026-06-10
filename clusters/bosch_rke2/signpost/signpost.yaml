@@ -22,6 +22,7 @@ spec:
     helm:
       valuesObject:
         host: signpost.bosch.sikademo.com
+        ingressClassName: traefik
         signpost_yaml:
           SiteHeading: rke2
           CompanyName: Training

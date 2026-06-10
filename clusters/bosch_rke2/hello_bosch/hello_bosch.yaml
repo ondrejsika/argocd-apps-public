@@ -24,3 +24,4 @@ spec:
         TEXT: "Hello BOSCH!"
         host: hello.bosch.sikademo.com
         replicas: 3
+        ingressClassName: traefik
