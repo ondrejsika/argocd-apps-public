@@ -35,6 +35,8 @@ spec:
                 Links:
                 - Title: ArgoCD
                   URL: https://argocd.bosch.sikademo.com
+                - Title: Vault
+                  URL: https://vault.bosch.sikademo.com
             - Blocks:
               - Heading: Apps
                 Links:
