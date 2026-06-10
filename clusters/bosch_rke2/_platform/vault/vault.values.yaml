@@ -23,12 +23,10 @@ server:
   dataStorage:
     enabled: true
     size: 1Gi
-    storageClassName: default
 
   auditStorage:
     enabled: true
     size: 1Gi
-    storageClassName: default
 
   ha:
     enabled: true
