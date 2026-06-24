@@ -30,7 +30,7 @@ spec:
       prune: true
       selfHeal: true
   source:
-    path: apps/example
+    path: clusters/example
     repoURL: https://github.com/ondrejsika/argocd-apps-public.git
     directory:
       recurse: true
