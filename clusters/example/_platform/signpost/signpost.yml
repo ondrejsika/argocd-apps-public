@@ -36,6 +36,8 @@ spec:
                   URL: https://argocd.k8s.sikademo.com
                 - Title: Headlamp
                   URL: https://headlamp.k8s.sikademo.com
+                - Title: Kafbat
+                  URL: https://kafbat.k8s.sikademo.com
             - Blocks:
               - Heading: Apps
                 Links:
