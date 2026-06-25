@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kafbat
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: platform
+  destination:
+    namespace: kafbat
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://kafbat.github.io/helm-charts
+    chart: kafka-ui
+    targetRevision: 1.6.4
+    helm:
+      valuesObject:
+        ingress:
+          enabled: true
+          ingressClassName: nginx
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+          host: kafbat.k8s.sikademo.com
+          tls:
+            enabled: true
+            secretName: kafbat.k8s.sikademo.com-tls
+        yamlApplicationConfig:
+          kafka:
+            clusters:
+              - name: ceps
+                bootstrapServers: ceps-kafka-bootstrap.kafka.svc:9092
+          auth:
+            type: OAUTH2
+            oauth2:
+              client:
+                keycloak:
+                  clientId: example_client_id
+                  clientSecret: example_client_secret
+                  scope: openid
+                  issuer-uri: https://sso.sikalabs.com/realms/training
+                  user-name-attribute: preferred_username
+                  client-name: keycloak
+                  provider: keycloak
+                  custom-params:
+                    type: oauth
