@@ -36,6 +36,8 @@ spec:
             clusters:
               - name: ceps
                 bootstrapServers: ceps-kafka-bootstrap.kafka.svc:9092
+              - name: ceps2
+                bootstrapServers: ceps2-kafka-bootstrap.kafka.svc:9092
           auth:
             type: OAUTH2
             oauth2:
