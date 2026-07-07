@@ -16,11 +16,13 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-  source:
-    repoURL: https://github.com/sikalabs/charts.git
-    path: charts/hello-world
-    helm:
-      valuesObject:
-        host: image-updater-example.k8s.sikademo.com
-        image: ttl.sh/image-updater-example
-        replicas: 2
+  sources:
+    - repoURL: https://github.com/sikalabs/charts.git
+      path: charts/hello-world
+      helm:
+        valuesObject:
+          host: image-updater-example.k8s.sikademo.com
+          image: ttl.sh/image-updater-example
+          replicas: 2
+    - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+      path: clusters/example/image_updater_example/manifests
