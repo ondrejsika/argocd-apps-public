@@ -38,8 +38,6 @@ spec:
                   URL: https://kargo.k3s-mgmt.sikademo.com
                 - Title: Vault
                   URL: https://vault.k3s-mgmt.sikademo.com
-                - Title: Hello K3s
-                  URL: https://hello.k3s-mgmt.sikademo.com
             - Blocks:
               - Heading: k3s-dev
                 Links:
