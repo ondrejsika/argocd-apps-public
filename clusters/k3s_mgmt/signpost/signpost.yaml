@@ -34,6 +34,8 @@ spec:
                 Links:
                 - Title: ArgoCD
                   URL: https://argocd.k3s-mgmt.sikademo.com
+                - Title: Kargo
+                  URL: https://kargo.k3s-mgmt.sikademo.com
                 - Title: Hello K3s
                   URL: https://hello.k3s-mgmt.sikademo.com
             - Blocks:
