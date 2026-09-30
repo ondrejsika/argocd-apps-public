@@ -41,7 +41,7 @@ spec:
             tokenSigningKey: VDq8SYFpzAtxZPIYvVLobJyBle6D6foX
           ingress:
             enabled: true
-            ingressClassName: haproxy
+            ingressClassName: nginx
             annotations:
               cert-manager.io/cluster-issuer: letsencrypt
             tls:
