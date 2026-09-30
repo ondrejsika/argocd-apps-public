@@ -1,3 +1,4 @@
 TEXT: "Hello K3s!"
+TEXT_SUFFIX: "(test)"
 host: hello.k3s-test.sikademo.com
 replicas: 3
