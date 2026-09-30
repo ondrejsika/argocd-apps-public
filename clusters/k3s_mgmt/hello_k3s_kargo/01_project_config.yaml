@@ -1,0 +1,13 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: ProjectConfig
+metadata:
+  name: hello-k3s-kargo
+  namespace: hello-k3s-kargo
+spec:
+  promotionPolicies:
+    - stageSelector:
+        name: hello-k3s-dev
+      autoPromotionEnabled: true
+    - stageSelector:
+        name: hello-k3s-test
+      autoPromotionEnabled: true

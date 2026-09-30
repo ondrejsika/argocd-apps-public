@@ -1,0 +1,14 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: hello-k3s-kargo
+  namespace: hello-k3s-kargo
+spec:
+  interval: 1m0s
+  subscriptions:
+    - image:
+        repoURL: ttl.sh/kargo-example
+        allowTagsRegexes:
+          - "^\\d{4}-\\d{2}-\\d{2}\\.\\d+$"
+        imageSelectionStrategy: NewestBuild
+        discoveryLimit: 5
