@@ -22,6 +22,12 @@ spec:
             checkout:
               - branch: master
                 path: ./repo
+              - commit: ${{ commitFrom("git@github.com:ondrejsika/argocd-apps-public.git").ID }}
+                path: ./source
+        - uses: copy
+          config:
+            inPath: ./source/clusters/k3s_test/hello_k3s/values/hello_k3s.common.values.yaml
+            outPath: ./repo/clusters/k3s_prod/hello_k3s/values/hello_k3s.common.values.yaml
         - uses: yaml-update
           config:
             path: ./repo/clusters/k3s_prod/hello_k3s/values/hello_k3s.env.values.yaml
@@ -31,7 +37,7 @@ spec:
         - uses: git-commit
           config:
             path: ./repo
-            message: 'chore(k3s_prod/hello_k3s): promote image ${{ imageFrom("ttl.sh/kargo-example").Tag }} to prod'
+            message: 'chore(k3s_prod/hello_k3s): promote image ${{ imageFrom("ttl.sh/kargo-example").Tag }} and common values ${{ commitFrom("git@github.com:ondrejsika/argocd-apps-public.git").ID[0:7] }} to prod'
             author:
               name: SikaLabs[bot]
               email: sikalabsbot@sikalabs.com

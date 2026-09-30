@@ -12,3 +12,10 @@ spec:
           - "^\\d{4}-\\d{2}-\\d{2}\\.\\d+$"
         imageSelectionStrategy: NewestBuild
         discoveryLimit: 5
+    - git:
+        repoURL: git@github.com:ondrejsika/argocd-apps-public.git
+        branch: master
+        commitSelectionStrategy: NewestFromBranch
+        includePaths:
+          - clusters/k3s_dev/hello_k3s/values/hello_k3s.common.values.yaml
+        discoveryLimit: 5
