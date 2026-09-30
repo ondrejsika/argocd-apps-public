@@ -23,7 +23,7 @@ spec:
                 path: ./repo
         - uses: yaml-update
           config:
-            path: ./repo/clusters/k3s_dev/hello_k3s/hello_k3s.values.yaml
+            path: ./repo/clusters/k3s_dev/hello_k3s/values/hello_k3s.env.values.yaml
             updates:
               - key: image
                 value: ${{ imageFrom("ttl.sh/kargo-example").RepoURL + ":" + imageFrom("ttl.sh/kargo-example").Tag }}
