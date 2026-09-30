@@ -26,7 +26,7 @@ spec:
     helm:
       valuesObject:
         image:
-          tag: v1.10.4
+          tag: v1.11.4
         crds:
           install: true
           keep: true
