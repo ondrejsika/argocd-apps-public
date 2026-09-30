@@ -1,0 +1,59 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: signpost
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: signpost
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: charts/signpost
+    helm:
+      valuesObject:
+        host: signpost.k3s-mgmt.sikademo.com
+        signpost_yaml:
+          SiteHeading: k3s
+          CompanyName: Training
+          CompanyDomain: sika.io
+          CompanyUrl: https://sika.io
+          Rows:
+          - Cols:
+            - Blocks:
+              - Heading: k3s-mgmt
+                Links:
+                - Title: ArgoCD
+                  URL: https://argocd.k3s-mgmt.sikademo.com
+                - Title: Hello K3s
+                  URL: https://hello.k3s-mgmt.sikademo.com
+            - Blocks:
+              - Heading: k3s-dev
+                Links:
+                - Title: ArgoCD
+                  URL: https://argocd.k3s-dev.sikademo.com
+                - Title: Hello K3s
+                  URL: https://hello.k3s-dev.sikademo.com
+            - Blocks:
+              - Heading: k3s-test
+                Links:
+                - Title: ArgoCD
+                  URL: https://argocd.k3s-test.sikademo.com
+                - Title: Hello K3s
+                  URL: https://hello.k3s-test.sikademo.com
+            - Blocks:
+              - Heading: k3s-prod
+                Links:
+                - Title: ArgoCD
+                  URL: https://argocd.k3s-prod.sikademo.com
+                - Title: Hello K3s
+                  URL: https://hello.k3s-prod.sikademo.com
