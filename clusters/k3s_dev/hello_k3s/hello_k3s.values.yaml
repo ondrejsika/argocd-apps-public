@@ -1,4 +1,4 @@
-image: ttl.sh/kargo-example:2026-09-30.0
+image: ttl.sh/kargo-example:2026-09-30.1
 TEXT_SUFFIX: "(dev)"
 host: hello.k3s-dev.sikademo.com
 replicas: 3
