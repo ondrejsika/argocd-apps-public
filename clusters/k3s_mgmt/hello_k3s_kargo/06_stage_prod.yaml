@@ -30,7 +30,7 @@ spec:
                 path: ./source
         - uses: copy
           config:
-            inPath: ./source/clusters/k3s_test/hello_k3s/values/hello_k3s.common.values.yaml
+            inPath: ./source/clusters/k3s_dev/hello_k3s/values/hello_k3s.common.values.yaml
             outPath: ./repo/clusters/k3s_prod/hello_k3s/values/hello_k3s.common.values.yaml
         - uses: git-commit
           config:
