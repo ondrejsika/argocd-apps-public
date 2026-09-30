@@ -22,7 +22,7 @@ spec:
             checkout:
               - branch: master
                 path: ./repo
-              - commit: ${{ commitFrom("git@github.com:ondrejsika/argocd-apps-public.git").ID }}
+              - branch: master
                 path: ./source
         - uses: copy
           config:
