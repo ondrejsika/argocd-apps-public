@@ -22,6 +22,10 @@ spec:
             checkout:
               - branch: master
                 path: ./repo
+        - uses: git-clone
+          config:
+            repoURL: git@github.com:ondrejsika/argocd-apps-public.git
+            checkout:
               - branch: master
                 path: ./source
         - uses: copy
