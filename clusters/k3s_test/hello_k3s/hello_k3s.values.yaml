@@ -1,5 +1,4 @@
 image: ttl.sh/kargo-example:2026-09-30.3
-TEXT: "Hello K3s!"
 TEXT_SUFFIX: "(test)"
 host: hello.k3s-test.sikademo.com
 replicas: 3
