@@ -1,0 +1,3 @@
+TEXT: "Hello K3s!"
+host: hello.k3s-prod.sikademo.com
+replicas: 3
