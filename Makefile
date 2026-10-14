@@ -65,3 +65,8 @@ setup_loki:
 	@slu check kubernetes_context -p do-fra1-loki
 	slu scripts kubernetes install-argocd
 	kubectl apply -f ./clusters/loki
+
+setup_elastic:
+	@slu check kubernetes_context -p do-fra1-elastic
+	slu scripts kubernetes install-argocd
+	kubectl apply -f ./clusters/elastic/_app_of_apps
