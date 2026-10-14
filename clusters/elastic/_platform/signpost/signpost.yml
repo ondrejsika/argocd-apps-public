@@ -23,8 +23,8 @@ spec:
       valuesObject:
         host: signpost.elastic.sikademo.com
         signpost_yaml:
-          SiteHeading: k8s
-          CompanyName: Training
+          SiteHeading: elastic.sikademo.com
+          CompanyName: elastic.sikademo.com cluster
           CompanyDomain: sika.io
           CompanyUrl: https://sika.io
           Rows:
