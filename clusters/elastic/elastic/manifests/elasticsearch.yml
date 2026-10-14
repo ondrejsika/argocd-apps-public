@@ -1,0 +1,31 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elastic
+  namespace: elastic
+  annotations:
+    eck.k8s.elastic.co/license: basic
+spec:
+  version: 9.5.5
+  nodeSets:
+    - name: master
+      count: 3
+      config:
+        node.roles:
+          - master
+          - ingest
+          - data
+        node.store.allow_mmap: false
+      volumeClaimTemplates:
+        - metadata:
+            name: elasticsearch-data # Do not change this name
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 20Gi
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true

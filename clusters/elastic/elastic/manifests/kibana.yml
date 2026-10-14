@@ -1,0 +1,30 @@
+apiVersion: kibana.k8s.elastic.co/v1
+kind: Kibana
+metadata:
+  name: elastic
+  namespace: elastic
+spec:
+  version: 9.5.5
+  count: 2
+  elasticsearchRef:
+    name: elastic
+  config:
+    server.publicBaseUrl: https://kb.elastic.sikademo.com
+  http:
+    tls:
+      selfSignedCertificate:
+        disabled: true
+  podTemplate:
+    spec:
+      containers:
+      - name: kibana
+        env:
+          - name: NODE_OPTIONS
+            value: "--max-old-space-size=2048"
+        resources:
+          requests:
+            memory: 2Gi
+            cpu: 1
+          limits:
+            memory: 2.5Gi
+            cpu: 4
