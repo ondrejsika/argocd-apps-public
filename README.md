@@ -46,3 +46,15 @@ make setup_example_lab0
 ```sh
 make setup_example_rke2
 ```
+
+### elastic cluster (elastic.sikademo.com)
+
+```sh
+make setup_elastic
+```
+
+or
+
+```
+kubectl apply -f https://raw.githubusercontent.com/ondrejsika/argocd-apps-public/refs/heads/master/clusters/elastic/_app_of_apps/app_of_apps.yml
+```
