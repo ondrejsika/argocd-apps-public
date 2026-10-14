@@ -23,7 +23,7 @@ make setup_panda
 make setup_sikademo
 ```
 
-### example cluster
+### example cluster (k8s.sikademo.com)
 
 ```sh
 make setup_example
