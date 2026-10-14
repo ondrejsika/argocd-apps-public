@@ -34,6 +34,12 @@ spec:
                 Links:
                 - Title: ArgoCD
                   URL: https://argocd.elastic.sikademo.com
+              - Heading: Elastic
+                Links:
+                - Title: Elasticsearch
+                  URL: https://es.elastic.sikademo.com
+                - Title: Kibana
+                  URL: https://kb.elastic.sikademo.com
             - Blocks:
               - Heading: Apps
                 Links:
