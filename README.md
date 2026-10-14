@@ -29,6 +29,12 @@ make setup_sikademo
 make setup_example
 ```
 
+or
+
+```
+kubectl apply -f https://raw.githubusercontent.com/ondrejsika/argocd-apps-public/refs/heads/master/clusters/example/_app_of_apps/app_of_apps.yml
+```
+
 ### example_lab0 cluster
 
 ```sh
