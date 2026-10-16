@@ -64,6 +64,12 @@ spec:
               claims:
                 groups:
                   - argocd-admins
+          argocd:
+            urls:
+              "": https://argocd.k3s-mgmt.sikademo.com
+              dev: https://argocd.k3s-dev.sikademo.com
+              test: https://argocd.k3s-test.sikademo.com
+              prod: https://argocd.k3s-prod.sikademo.com
           ingress:
             enabled: true
             ingressClassName: nginx

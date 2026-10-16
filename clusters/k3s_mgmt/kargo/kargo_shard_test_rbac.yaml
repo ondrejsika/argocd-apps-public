@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kargo-shard-test-rbac
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-95"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: kargo
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+  source:
+    repoURL: https://github.com/akuity/kargo.git
+    path: charts/kargo
+    targetRevision: v1.11.4
+    helm:
+      valuesObject:
+        # Only ServiceAccount & RBAC for the Kargo controller (shard)
+        # running in k3s_test cluster, the controller connects to this
+        # control plane using the token below
+        workloads:
+          install: false
+        dataPlane:
+          install: false
+          controller:
+            install: true
+        argocd:
+          dataPlane:
+            install: false
+            kargoController:
+              install: false
+        controller:
+          id: test
+        extraObjects:
+          - apiVersion: v1
+            kind: Secret
+            metadata:
+              name: kargo-controller-test-token
+              namespace: kargo
+              annotations:
+                kubernetes.io/service-account.name: kargo-controller-test
+            type: kubernetes.io/service-account-token
