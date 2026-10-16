@@ -39,6 +39,31 @@ spec:
             enabled: true
             passwordHash: "$2y$10$WSVPqKHxmyoc6L7RzlVilucuWXnjDDfDQmyQIfAjoG/PL3AEjyuBq"
             tokenSigningKey: VDq8SYFpzAtxZPIYvVLobJyBle6D6foX
+          oidc:
+            enabled: true
+            dex:
+              enabled: true
+              connectors:
+                - id: sso
+                  name: SSO
+                  type: oidc
+                  config:
+                    issuer: https://sso.sikalabs.com/realms/training
+                    clientID: example_client_id
+                    clientSecret: example_client_secret
+                    redirectURI: https://kargo.k3s-mgmt.sikademo.com/dex/callback
+                    scopes:
+                      - openid
+                      - profile
+                      - email
+                      - groups
+                    insecureEnableGroups: true
+            additionalScopes:
+              - groups
+            admins:
+              claims:
+                groups:
+                  - argocd-admins
           ingress:
             enabled: true
             ingressClassName: nginx
