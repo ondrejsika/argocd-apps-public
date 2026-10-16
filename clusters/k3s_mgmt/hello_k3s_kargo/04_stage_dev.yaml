@@ -6,6 +6,7 @@ metadata:
   annotations:
     kargo.akuity.io/color: "#2196F3"
 spec:
+  shard: dev
   requestedFreight:
     - origin:
         kind: Warehouse
@@ -35,15 +36,14 @@ spec:
               name: SikaLabs[bot]
               email: sikalabsbot@sikalabs.com
         - uses: git-push
+          as: push
           config:
             path: ./repo
-        - uses: http
+        - uses: argocd-update
           as: wait-for-rollout
-          retry:
-            timeout: 10m
           config:
-            method: GET
-            pollInterval: 10s
-            responseContentType: text/plain
-            url: https://hello.k3s-dev.sikademo.com/
-            successExpression: 'response.status == 200 && type(response.body) == "string" && response.body contains "${{ imageFrom("ttl.sh/kargo-example").Tag }} "'
+            apps:
+              - name: hello-k3s
+                sources:
+                  - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+                    desiredRevision: ${{ outputs.push.commit }}

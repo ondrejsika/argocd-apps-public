@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: hello-k3s
   namespace: argocd
+  annotations:
+    kargo.akuity.io/authorized-stage: hello-k3s-kargo:hello-k3s-prod
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
