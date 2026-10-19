@@ -75,3 +75,8 @@ setup_k3s_vault_test:
 	@slu check kubernetes_context -p test
 	slu scripts kubernetes install-argocd
 	kubectl apply -f ./clusters/k3s_vault_test/_app_of_apps
+
+setup_k3s_vault_prod:
+	@slu check kubernetes_context -p prod
+	slu scripts kubernetes install-argocd
+	kubectl apply -f ./clusters/k3s_vault_prod/_app_of_apps
