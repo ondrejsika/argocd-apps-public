@@ -1,0 +1,111 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: minio
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  sources:
+    - repoURL: https://charts.min.io/
+      chart: minio
+      targetRevision: 5.4.0
+      helm:
+        valuesObject:
+          # https://github.com/minio/minio/blob/master/helm/minio/values.yaml
+          rootUser: admin
+          rootPassword: asdfasdf
+
+          image:
+            repository: docker.io/openebs/minio
+            tag: RELEASE.2024-12-18T13-15-44Z
+
+          buckets:
+            - name: cnpg
+              policy: none
+              purge: false
+
+          replicas: 1
+          drivesPerNode: 1
+          mode: standalone
+
+          persistence:
+            enabled: true
+            storageClass: "minio-local-path"
+            size: 500Gi
+
+          service:
+            type: NodePort
+            nodePort: 32123
+
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 2
+              memory: 2Gi
+
+          oidc:
+            enabled: true
+            configUrl: "https://sso.sikalabs.com/realms/training/.well-known/openid-configuration"
+            clientId: example_client_id
+            clientSecret: example_client_secret
+            claimName: "groups"
+            scopes: "openid,profile,email,groups"
+            redirectUri: "https://minio-console.k3s1.sikademo.com/oauth_callback"
+            displayName: "SSO"
+
+          policies:
+            - name: kubernetes-admins
+              statements:
+                - effect: Allow
+                  actions:
+                    - 'admin:*'
+                - effect: Allow
+                  actions:
+                    - 'kms:*'
+                - effect: Allow
+                  actions:
+                    - 's3:*'
+                  resources:
+                    - 'arn:aws:s3:::*'
+
+          ingress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+              nginx.ingress.kubernetes.io/proxy-body-size: "0"
+            hosts:
+              - minio.k3s1.sikademo.com
+            tls:
+              - secretName: minio-api-tls
+                hosts:
+                  - minio.k3s1.sikademo.com
+
+          consoleIngress:
+            enabled: true
+            ingressClassName: nginx
+            annotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+            hosts:
+              - minio-console.k3s1.sikademo.com
+            tls:
+              - secretName: minio-console-tls
+                hosts:
+                  - minio-console.k3s1.sikademo.com
+    - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+      path: ./clusters/k3s1_sikademo_com/minio/manifests
+
