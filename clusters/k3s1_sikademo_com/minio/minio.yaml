@@ -31,6 +31,10 @@ spec:
             repository: docker.io/openebs/minio
             tag: RELEASE.2024-12-18T13-15-44Z
 
+          mcImage:
+            repository: docker.io/openebs/mc
+            tag: RELEASE.2024-11-21T17-21-54Z
+
           buckets:
             - name: cnpg
               policy: none
