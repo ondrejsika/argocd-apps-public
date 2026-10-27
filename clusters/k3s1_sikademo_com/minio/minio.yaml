@@ -28,8 +28,8 @@ spec:
           rootPassword: asdfasdf
 
           image:
-            repository: docker.io/openebs/minio
-            tag: RELEASE.2024-12-18T13-15-44Z
+            repository: docker.io/coollabsio/minio
+            tag: RELEASE.2025-10-15T17-29-55Z
 
           mcImage:
             repository: docker.io/openebs/mc
