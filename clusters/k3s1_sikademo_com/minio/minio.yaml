@@ -68,7 +68,7 @@ spec:
             displayName: "SSO"
 
           policies:
-            - name: kubernetes-admins
+            - name: minio-admins
               statements:
                 - effect: Allow
                   actions:
