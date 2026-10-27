@@ -4,7 +4,7 @@ default:
 setup_panda:
 	@slu check kubernetes_context -p panda
 	slu scripts kubernetes install-argocd
-	kubectl apply -f ./clusters/panda
+	kubectl apply -f ./clusters/panda/_app_of_apps
 
 setup_sikademo:
 	@slu check kubernetes_context -p do-fra1-sikademo
