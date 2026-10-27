@@ -42,7 +42,7 @@ spec:
 
           persistence:
             enabled: true
-            storageClass: "minio-local-path"
+            storageClass: "local-path"
             size: 500Gi
 
           service:
