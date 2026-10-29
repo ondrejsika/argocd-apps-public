@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: signpost
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: signpost
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: charts/signpost
+    helm:
+      valuesObject:
+        host: signpost.fuf2.sikademo.com
+        signpost_yaml:
+          SiteHeading: fuf2
+          CompanyName: Training
+          CompanyDomain: sika.io
+          CompanyUrl: https://sika.io
+          Rows:
+          - Cols:
+            - Blocks:
+              - Heading: Platform
+                Links:
+                - Title: ArgoCD
+                  URL: https://argocd.fuf2.sikademo.com
+            - Blocks:
+              - Heading: Apps
+                Links:
+                - Title: Example
+                  URL: https://example.fuf2.sikademo.com
