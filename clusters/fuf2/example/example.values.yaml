@@ -1,0 +1,3 @@
+TEXT: "Hello from fuf2 cluster!"
+host: example.fuf2.sikademo.com
+replicas: 3
