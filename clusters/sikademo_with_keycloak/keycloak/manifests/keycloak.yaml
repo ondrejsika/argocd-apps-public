@@ -6,6 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   instances: 1
+  image: ttl.sh/ghcr.io/sikalabs/keycloak-with-sikalabs-themes:26.8.1
   bootstrapAdmin:
     user:
       secret: keycloak-admin
