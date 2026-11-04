@@ -12,5 +12,5 @@ helm upgrade --install \
 Apply the `app-of-apps`
 
 ```
-kubectl apply -fhttps://raw.githubusercontent.com/ondrejsika/argocd-apps-public/refs/heads/master/clusters/k3s_kc1/_app_of_apps/app_of_apps.yml
+kubectl apply -f https://raw.githubusercontent.com/ondrejsika/argocd-apps-public/refs/heads/master/clusters/k3s_kc1/_app_of_apps/app_of_apps.yml
 ```
