@@ -25,6 +25,10 @@ spec:
         crds:
           enabled: true
           keep: true
+        config:
+          apiVersion: controller.config.cert-manager.io/v1alpha1
+          kind: ControllerConfiguration
+          enableGatewayAPI: true
         extraObjects:
           - |
             apiVersion: cert-manager.io/v1
@@ -39,5 +43,9 @@ spec:
                   name: letsencrypt-issuer-account-key
                 solvers:
                   - http01:
-                      ingress:
-                        class: nginx
+                      gatewayHTTPRoute:
+                        parentRefs:
+                          - name: gateway
+                            namespace: gateway
+                            sectionName: http
+                            kind: Gateway
