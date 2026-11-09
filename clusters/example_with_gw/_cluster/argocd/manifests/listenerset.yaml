@@ -15,6 +15,5 @@ spec:
       tls:
         mode: Terminate
         certificateRefs:
-          - group: ''
-            kind: Secret
+          - kind: Secret
             name: argocd.k8s.sikademo.com-tls
