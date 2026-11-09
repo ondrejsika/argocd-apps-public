@@ -1,4 +1,6 @@
 configs:
+  params:
+    server.insecure: true
   cm:
     url: https://argocd.k8s.sikademo.com
     exec.enabled: "true"
@@ -14,12 +16,3 @@ configs:
     policy.default: ""
     policy.csv: |
       g, argocd-admins, role:admin
-server:
-  ingress:
-    enabled: true
-    hostname: argocd.k8s.sikademo.com
-    tls: true
-    ingressClassName: nginx
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt
-      nginx.ingress.kubernetes.io/backend-protocol: HTTPS
