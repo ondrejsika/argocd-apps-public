@@ -12,7 +12,5 @@ spec:
     - argocd.k8s.sikademo.com
   rules:
     - backendRefs:
-        - group: ''
-          kind: Service
-          name: argocd-server
+        - name: argocd-server
           port: 80
