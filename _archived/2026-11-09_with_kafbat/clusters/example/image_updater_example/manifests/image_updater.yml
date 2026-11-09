@@ -1,0 +1,18 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: image-updater-example
+  namespace: argocd
+spec:
+  applicationRefs:
+    - namePattern: "image-updater-example"
+      images:
+        - alias: image
+          imageName: ttl.sh/image-updater-example:latest
+          commonUpdateSettings:
+            updateStrategy: digest
+            forceUpdate: true
+            platforms: [ "linux/amd64" ]
+          manifestTargets:
+            helm:
+              spec: "image"
