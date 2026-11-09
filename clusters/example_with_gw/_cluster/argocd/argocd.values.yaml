@@ -1,6 +1,7 @@
 configs:
   params:
     server.insecure: true
+    controller.diff.server.side: "true"
   cm:
     url: https://argocd.k8s.sikademo.com
     exec.enabled: "true"
