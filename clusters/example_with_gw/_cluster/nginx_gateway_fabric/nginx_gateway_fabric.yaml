@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-gateway-fabric
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "-9"
+spec:
+  project: system
+  destination:
+    namespace: nginx-gateway
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    - ServerSideApply=true
+  source:
+    repoURL: oci://ghcr.io/nginx/charts/nginx-gateway-fabric
+    targetRevision: 2.8.1
+    path: .
+    helm:
+      releaseName: ngf
+      valuesObject:
+        nginx:
+          kind: daemonSet
+          service:
+            type: ClusterIP
+          container:
+            hostPorts:
+              - port: 80
+                containerPort: 80
+              - port: 443
+                containerPort: 443
