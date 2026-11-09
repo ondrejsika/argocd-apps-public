@@ -22,7 +22,7 @@ spec:
   sources:
     - repoURL: https://haproxy-ingress.github.io/charts
       chart: haproxy-ingress
-      targetRevision: 0.16.0
+      targetRevision: 0.16.3
       helm:
         valuesObject:
           # https://artifacthub.io/packages/helm/haproxy-ingress/haproxy-ingress?modal=values
