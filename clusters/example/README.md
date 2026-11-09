@@ -7,5 +7,5 @@ helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-hel
 Apply from GitHub
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/ondrejsika/argocd-apps-public/refs/heads/master/clusters/example/_app_of_apps/app_of_apps.yaml
+kubectl apply -f https://raw.githubusercontent.com/ondrejsika/argocd-apps-public/refs/heads/master/clusters/example/_app_of_apps/app_of_apps.yml
 ```
