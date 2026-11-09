@@ -14,6 +14,14 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - SkipDryRunOnMissingResource=true
+    retry:
+      limit: 10
+      backoff:
+        duration: 10s
+        factor: 2
+        maxDuration: 3m
   sources:
     - repoURL: https://kubernetes-sigs.github.io/headlamp
       chart: headlamp
