@@ -3,11 +3,12 @@ server:
     enabled: true
     hostname: argocd.rke2.sikademo.com
     tls: true
-    ingressClassName: nginx
+    ingressClassName: traefik
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt
-      nginx.ingress.kubernetes.io/backend-protocol: HTTPS
 configs:
+  params:
+    server.insecure: true
   cm:
     url: https://argocd.rke2.sikademo.com
     exec.enabled: "true"
