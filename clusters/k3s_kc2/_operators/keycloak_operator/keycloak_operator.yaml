@@ -20,7 +20,7 @@ spec:
   source:
     repoURL: quay.io/keycloak
     chart: keycloak-operator-helm
-    targetRevision: 26.8.1
+    targetRevision: 26.8.2
     helm:
       valuesObject:
         operator:
