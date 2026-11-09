@@ -38,6 +38,14 @@ spec:
             hostPort: 80
           websecure:
             hostPort: 443
+        # Service is ClusterIP (hostPort), so it has no LB status to publish.
+        # Set the Ingress status explicitly, otherwise ArgoCD keeps Ingresses Progressing.
+        providers:
+          kubernetesIngress:
+            publishedService:
+              enabled: false
+            ingressEndpoint:
+              hostname: rke2.sikademo.com
         metrics:
           prometheus:
             serviceMonitor:
