@@ -1,3 +1,9 @@
+Install ArgoCD using Helm
+
+```
+helm upgrade --install argocd argo-cd --repo https://argoproj.github.io/argo-helm --create-namespace --namespace argocd --wait
+```
+
 Apply from GitHub
 
 ```
