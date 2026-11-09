@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: headlamp.k3s.sikademo.com
+  namespace: kube-system
+spec:
+  secretName: headlamp.k3s.sikademo.com-tls
+  dnsNames:
+    - headlamp.k3s.sikademo.com
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt

@@ -1,0 +1,19 @@
+apiVersion: gateway.networking.k8s.io/v1
+kind: ListenerSet
+metadata:
+  name: hello-world
+  namespace: hello-world
+spec:
+  parentRef:
+    name: gateway
+    namespace: gateway
+  listeners:
+    - name: https
+      hostname: hello-world.k3s.sikademo.com
+      port: 443
+      protocol: HTTPS
+      tls:
+        mode: Terminate
+        certificateRefs:
+          - kind: Secret
+            name: hello-world.k3s.sikademo.com-tls
