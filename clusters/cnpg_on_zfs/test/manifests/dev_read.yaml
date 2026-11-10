@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dev-read
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: dev-read
+  template:
+    metadata:
+      labels:
+        app: dev-read
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/sikalabsregistry/wip/slr:2026-11-10.1
+          command: [ "/bin/sh", "-c"]
+          args: [ "slr postgres-test-read-counter --uri $POSTGRES_URI" ]
+          env:
+            - name: POSTGRES_URI
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-dev-app
+                  key: fqdn-uri
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
