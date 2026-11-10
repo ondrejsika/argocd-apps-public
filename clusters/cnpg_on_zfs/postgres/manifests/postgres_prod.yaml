@@ -1,0 +1,10 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres-prod
+  namespace: postgres
+spec:
+  instances: 1
+  storage:
+    storageClass: zfs-pg
+    size: 50Gi
