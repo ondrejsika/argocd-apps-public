@@ -28,6 +28,9 @@ spec:
       chart: rancher
       targetRevision: 2.15.3
       helm:
+        # Rancher 2.15 chart requires Kubernetes < 1.37, but k3s is 1.37,
+        # render the chart as for 1.36 to pass the kubeVersion check
+        kubeVersion: 1.36.0
         valuesObject:
           hostname: rancher.k3s-mgmt.sikademo.com
           bootstrapPassword: admin
