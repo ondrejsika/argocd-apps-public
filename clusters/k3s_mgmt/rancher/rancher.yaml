@@ -1,0 +1,47 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rancher
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: cattle-system
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+    retry:
+      limit: 10
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m
+  sources:
+    - repoURL: https://releases.rancher.com/server-charts/latest
+      chart: rancher
+      targetRevision: 2.15.3
+      helm:
+        valuesObject:
+          hostname: rancher.k3s-mgmt.sikademo.com
+          bootstrapPassword: admin
+          replicas: 1
+          ingress:
+            ingressClassName: nginx
+            extraAnnotations:
+              cert-manager.io/cluster-issuer: letsencrypt
+              nginx.ingress.kubernetes.io/proxy-connect-timeout: "30"
+              nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
+              nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
+            tls:
+              source: secret
+              secretName: tls-rancher-ingress
+    # SSO (Keycloak OIDC) configuration, same as ArgoCD
+    - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+      path: ./clusters/k3s_mgmt/rancher/manifests

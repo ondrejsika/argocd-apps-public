@@ -1,0 +1,18 @@
+apiVersion: management.cattle.io/v3
+kind: AuthConfig
+metadata:
+  name: keycloakoidc
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+type: keyCloakOIDCConfig
+enabled: true
+accessMode: unrestricted
+clientId: example_client_id
+clientSecret: cattle-global-data:keycloakoidcconfig-clientsecret
+rancherUrl: https://rancher.k3s-mgmt.sikademo.com/verify-auth
+issuer: https://sso.sikalabs.com/realms/training
+authEndpoint: https://sso.sikalabs.com/realms/training/protocol/openid-connect/auth
+tokenEndpoint: https://sso.sikalabs.com/realms/training/protocol/openid-connect/token
+userInfoEndpoint: https://sso.sikalabs.com/realms/training/protocol/openid-connect/userinfo
+jwksUrl: https://sso.sikalabs.com/realms/training/protocol/openid-connect/certs
+scope: openid profile email groups

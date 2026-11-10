@@ -1,0 +1,9 @@
+# Members of the SSO group argocd-admins are Rancher admins (same as in ArgoCD)
+apiVersion: management.cattle.io/v3
+kind: GlobalRoleBinding
+metadata:
+  name: sso-argocd-admins
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+globalRoleName: admin
+groupPrincipalName: keycloakoidc_group://argocd-admins
