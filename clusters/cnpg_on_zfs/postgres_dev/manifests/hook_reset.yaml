@@ -1,0 +1,30 @@
+# PreSync hook: drop postgres-dev and the old snapshot, ArgoCD then recreates
+# the snapshot (wave 0) and postgres-dev from it (wave 1).
+# Order matters: the dev volume is a ZFS clone of the snapshot, so the clone
+# (dev PVC) must be gone before the snapshot can be destroyed.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: postgres-dev-reset
+  namespace: postgres
+  annotations:
+    argocd.argoproj.io/hook: PreSync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  backoffLimit: 1
+  activeDeadlineSeconds: 1200
+  template:
+    spec:
+      serviceAccountName: postgres-dev-reset
+      restartPolicy: Never
+      containers:
+        - name: reset
+          image: alpine/kubectl:1.37.2
+          command: ["sh", "-ec"]
+          args:
+            - |
+              kubectl -n postgres delete cluster postgres-dev --ignore-not-found --wait --timeout=5m
+              if kubectl -n postgres get pvc -l cnpg.io/cluster=postgres-dev -o name | grep -q .; then
+                kubectl -n postgres wait pvc -l cnpg.io/cluster=postgres-dev --for=delete --timeout=5m
+              fi
+              kubectl -n postgres delete volumesnapshot postgres-prod-daily --ignore-not-found --wait --timeout=10m

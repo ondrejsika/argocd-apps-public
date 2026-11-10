@@ -1,0 +1,24 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres-dev
+  namespace: postgres
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  instances: 1
+  storage:
+    storageClass: zfs-pg
+    # Keep the same size as postgres-prod, the volume is a ZFS clone of its snapshot
+    size: 50Gi
+  bootstrap:
+    recovery:
+      # A new password is generated into the postgres-dev-app Secret,
+      # so dev does not share the app password with prod
+      database: app
+      owner: app
+      volumeSnapshots:
+        storage:
+          name: postgres-prod-daily
+          kind: VolumeSnapshot
+          apiGroup: snapshot.storage.k8s.io

@@ -1,0 +1,64 @@
+# ArgoCD has no scheduled sync, this CronJob triggers a sync of the
+# postgres-dev Application daily by setting its operation field
+# (no argocd CLI or token needed)
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: postgres-dev-daily-reset
+  namespace: argocd
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: postgres-dev-daily-reset
+  namespace: argocd
+rules:
+  - apiGroups: ["argoproj.io"]
+    resources: ["applications"]
+    resourceNames: ["postgres-dev"]
+    verbs: ["get", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: postgres-dev-daily-reset
+  namespace: argocd
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: postgres-dev-daily-reset
+subjects:
+  - kind: ServiceAccount
+    name: postgres-dev-daily-reset
+    namespace: argocd
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: postgres-dev-daily-reset
+  namespace: argocd
+spec:
+  schedule: "0 4 * * *"
+  timeZone: Europe/Prague
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        spec:
+          serviceAccountName: postgres-dev-daily-reset
+          restartPolicy: Never
+          containers:
+            - name: sync
+              image: alpine/kubectl:1.37.2
+              command:
+                - kubectl
+                - -n
+                - argocd
+                - patch
+                - application
+                - postgres-dev
+                - --type
+                - merge
+                - -p
+                - '{"operation":{"initiatedBy":{"username":"cronjob/postgres-dev-daily-reset"},"sync":{"syncStrategy":{"hook":{}}}}}'

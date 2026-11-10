@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-dev
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  project: default
+  destination:
+    namespace: postgres
+    server: https://kubernetes.default.svc
+  # No automated sync: every sync runs the PreSync hook which drops and
+  # recreates postgres-dev from a fresh snapshot of postgres-prod.
+  # Syncs are triggered daily by the postgres-dev-daily-reset CronJob
+  # or manually by clicking Sync in the ArgoCD UI.
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+      - SkipDryRunOnMissingResource=true
+  source:
+    repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+    path: ./clusters/cnpg_on_zfs/postgres_dev/manifests
