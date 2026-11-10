@@ -21,3 +21,13 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    # Kargo resources (hello_k3s_kargo) need Kargo CRDs, which are installed
+    # by the kargo app, so skip the dry run and retry until they exist
+    syncOptions:
+      - SkipDryRunOnMissingResource=true
+    retry:
+      limit: 10
+      backoff:
+        duration: 30s
+        factor: 2
+        maxDuration: 5m
