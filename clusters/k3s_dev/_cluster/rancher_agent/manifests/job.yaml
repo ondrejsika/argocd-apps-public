@@ -12,6 +12,9 @@ metadata:
     argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
 spec:
   backoffLimit: 20
+  # Fail if the Secret is missing, otherwise the Job (Sync hook) waits forever
+  # and blocks ArgoCD from syncing a new revision (e.g. with the Secret)
+  activeDeadlineSeconds: 300
   template:
     spec:
       serviceAccountName: rancher-agent-import
