@@ -1,7 +1,7 @@
 Install K3s without the built-in Traefik (Traefik is installed by ArgoCD and binds host ports 80 and 443)
 
 ```
-curl -sfL https://get.k3s.io | sh -s - --disable traefik
+curl -sfL https://get.k3s.io | sh -s - --disable traefik --disable local-storage
 ```
 
 Set up kubectl
