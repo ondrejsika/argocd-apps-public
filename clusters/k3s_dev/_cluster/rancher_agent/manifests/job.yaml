@@ -1,0 +1,31 @@
+# Applies the Rancher import manifest (cattle-cluster-agent), after that
+# the agent is managed by Rancher, not by ArgoCD
+#
+# Secret rancher-import (key url) is created manually, see docs/rancher/README.md
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: rancher-agent-import
+  namespace: rancher-agent-import
+  annotations:
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+spec:
+  backoffLimit: 20
+  template:
+    spec:
+      serviceAccountName: rancher-agent-import
+      restartPolicy: OnFailure
+      containers:
+        - name: kubectl
+          image: registry.k8s.io/kubectl:v1.36.6
+          args:
+            - apply
+            - -f
+            - $(IMPORT_URL)
+          env:
+            - name: IMPORT_URL
+              valueFrom:
+                secretKeyRef:
+                  name: rancher-import
+                  key: url
