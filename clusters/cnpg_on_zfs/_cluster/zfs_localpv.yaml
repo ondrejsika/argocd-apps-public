@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: zfs-localpv
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  project: default
+  destination:
+    namespace: openebs
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    # https://github.com/openebs/zfs-localpv/tree/develop/deploy/helm/charts
+    repoURL: https://openebs.github.io/zfs-localpv
+    chart: zfs-localpv
+    targetRevision: 2.11.2
+    helm:
+      valuesObject:
+        # Snapshot CRDs and snapshot-controller are installed by the snapshot-controller app
+        crds:
+          csi:
+            volumeSnapshots:
+              enabled: false
+        zfsController:
+          snapshotController:
+            enabled: false
