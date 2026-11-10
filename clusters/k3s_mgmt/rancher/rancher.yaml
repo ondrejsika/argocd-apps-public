@@ -35,6 +35,9 @@ spec:
           hostname: rancher.k3s-mgmt.sikademo.com
           bootstrapPassword: admin
           replicas: 1
+          # Certificate is from Let's Encrypt (public CA), agents have to use
+          # the system CA store, strict mode requires the Rancher CA (cacerts)
+          agentTLSMode: system-store
           ingress:
             ingressClassName: nginx
             extraAnnotations:
