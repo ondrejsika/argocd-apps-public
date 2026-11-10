@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prod-info
+spec:
+  revisionHistoryLimit: 0
+  selector:
+    matchLabels:
+      app: prod-info
+  template:
+    metadata:
+      labels:
+        app: prod-info
+    spec:
+      containers:
+        - name: main
+          image: ghcr.io/sikalabsregistry/wip/slr:2026-11-10.2
+          command: [ "/bin/sh", "-c"]
+          args: [ "slr postgres-test-info --uri $POSTGRES_URI --watch" ]
+          env:
+            - name: POSTGRES_URI
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-prod-app
+                  key: fqdn-uri
+          resources:
+            requests:
+              cpu: 50m
+              memory: 50Mi
+            limits:
+              cpu: 500m
+              memory: 500Mi
