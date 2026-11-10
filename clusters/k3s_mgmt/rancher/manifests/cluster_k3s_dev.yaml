@@ -1,0 +1,9 @@
+# Imported cluster k3s_dev, the agent is installed by ArgoCD in k3s_dev
+apiVersion: provisioning.cattle.io/v1
+kind: Cluster
+metadata:
+  name: k3s-dev
+  namespace: fleet-default
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec: {}
