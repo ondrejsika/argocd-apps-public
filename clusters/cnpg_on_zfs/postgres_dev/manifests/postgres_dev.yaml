@@ -17,10 +17,12 @@ spec:
     size: 50Gi
   bootstrap:
     recovery:
-      # A new password is generated into the postgres-dev-app Secret,
-      # so dev does not share the app password with prod
+      # Static credentials (secret_postgres_dev_credentials.yaml), so the dev
+      # apps keep working across the daily reset
       database: app
       owner: app
+      secret:
+        name: postgres-dev-credentials
       volumeSnapshots:
         storage:
           name: postgres-prod-daily

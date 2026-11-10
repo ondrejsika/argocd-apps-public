@@ -21,7 +21,7 @@ spec:
             - name: POSTGRES_URI
               valueFrom:
                 secretKeyRef:
-                  name: postgres-dev-app
+                  name: postgres-dev-credentials
                   key: fqdn-uri
           resources:
             requests:
