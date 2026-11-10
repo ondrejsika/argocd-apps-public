@@ -1,0 +1,109 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: traefik
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  source:
+    repoURL: https://traefik.github.io/charts
+    chart: traefik
+    targetRevision: 42.3.1
+    helm:
+      valuesObject:
+        # https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
+        deployment:
+          kind: DaemonSet
+        service:
+          spec:
+            type: ClusterIP
+        ingressClass:
+          enabled: true
+          isDefaultClass: true
+          name: traefik
+        ports:
+          web:
+            hostPort: 80
+          websecure:
+            hostPort: 443
+        # Service is ClusterIP (hostPort), so it has no LB status to publish.
+        # Set the Ingress status explicitly, otherwise ArgoCD keeps Ingresses Progressing.
+        providers:
+          kubernetesIngress:
+            publishedService:
+              enabled: false
+            ingressEndpoint:
+              hostname: cnpg-on-zfs.sikademo.com
+        metrics:
+          prometheus:
+            serviceMonitor:
+              enabled: false
+        # Default backend (catch-all for unmatched hosts)
+        extraObjects:
+          - apiVersion: apps/v1
+            kind: Deployment
+            metadata:
+              name: default-backend
+              namespace: traefik
+            spec:
+              replicas: 1
+              selector:
+                matchLabels:
+                  app: default-backend
+              template:
+                metadata:
+                  labels:
+                    app: default-backend
+                spec:
+                  containers:
+                    - name: default-backend
+                      image: ghcr.io/sikalabs/sikalabs-kubernetes-homepage:latest
+                      imagePullPolicy: Always
+                      env:
+                        - name: CLUSTER
+                          value: "cnpg-on-zfs"
+                        - name: DOMAIN
+                          value: "cnpg-on-zfs.sikademo.com"
+                      ports:
+                        - containerPort: 8000
+          - apiVersion: v1
+            kind: Service
+            metadata:
+              name: default-backend
+              namespace: traefik
+            spec:
+              selector:
+                app: default-backend
+              ports:
+                - port: 80
+                  targetPort: 8000
+          - apiVersion: traefik.io/v1alpha1
+            kind: IngressRoute
+            metadata:
+              name: default-backend
+              namespace: traefik
+            spec:
+              entryPoints:
+                - web
+                - websecure
+              routes:
+                - match: PathPrefix(`/`)
+                  priority: 1
+                  kind: Rule
+                  services:
+                    - name: default-backend
+                      port: 80
+        accessLog:
+          enabled: true
