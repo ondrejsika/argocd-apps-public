@@ -19,18 +19,20 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true
-  source:
+  sources:
     # https://github.com/openebs/zfs-localpv/tree/develop/deploy/helm/charts
-    repoURL: https://openebs.github.io/zfs-localpv
-    chart: zfs-localpv
-    targetRevision: 2.11.2
-    helm:
-      valuesObject:
-        # Snapshot CRDs and snapshot-controller are installed by the snapshot-controller app
-        crds:
-          csi:
-            volumeSnapshots:
+    - repoURL: https://openebs.github.io/zfs-localpv
+      chart: zfs-localpv
+      targetRevision: 2.11.2
+      helm:
+        valuesObject:
+          # Snapshot CRDs and snapshot-controller are installed by the snapshot-controller app
+          crds:
+            csi:
+              volumeSnapshots:
+                enabled: false
+          zfsController:
+            snapshotController:
               enabled: false
-        zfsController:
-          snapshotController:
-            enabled: false
+    - repoURL: https://github.com/ondrejsika/argocd-apps-public.git
+      path: ./clusters/cnpg_on_zfs/_cluster/zfs_localpv/manifests

@@ -1,0 +1,13 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: zfs-pg
+provisioner: zfs.csi.openebs.io
+parameters:
+  poolname: tank/k8s
+  fstype: zfs
+  recordsize: 16k      # close to PG 8k pages, still compresses well
+  compression: lz4     # cheap, fast compression
+  atime: "off"         # no write traffic on reads
+allowVolumeExpansion: true
+volumeBindingMode: WaitForFirstConsumer
