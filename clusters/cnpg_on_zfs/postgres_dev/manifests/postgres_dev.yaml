@@ -7,6 +7,10 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   instances: 1
+  # Skip the smart shutdown (which waits up to 180s for clients to disconnect)
+  # and go straight to a fast shutdown, which terminates open connections,
+  # so the daily reset does not wait for connected apps
+  smartShutdownTimeout: 0
   storage:
     storageClass: zfs-pg
     # Keep the same size as postgres-prod, the volume is a ZFS clone of its snapshot
