@@ -5,6 +5,8 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
+  image: ghcr.io/sikalabs/keycloak-with-sikalabs-themes:26.8.1
+  startOptimized: false
   instances: 1
   bootstrapAdmin:
     user:
