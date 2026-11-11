@@ -34,10 +34,8 @@ spec:
                 Links:
                 - Title: ArgoCD
                   URL: https://argocd.keycloak.sikademo.com
-                - Title: Keycloak
-                  URL: https://keycloak.sikademo.com
             - Blocks:
               - Heading: Apps
                 Links:
-                - Title: Hello
-                  URL: https://hello.keycloak.sikademo.com
+                - Title: Keycloak
+                  URL: https://keycloak.sikademo.com
