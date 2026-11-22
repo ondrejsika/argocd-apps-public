@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: single-user-oidc-issuer
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: single-user-oidc-issuer
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+  source:
+    repoURL: https://github.com/sikalabs/charts.git
+    path: charts/one-image
+    helm:
+      valuesObject:
+        host: single-user-oidc-issuer.seq.sikademo.com
+        image: "ghcr.io/sikalabsregistry/single-user-oidc-issuer:dev-2026-11-22.0"
+        port: 8080
+        containerEnv:
+          - name: PORT
+            value: "8080"
+          - name: ISSUER
+            value: "https://single-user-oidc-issuer.seq.sikademo.com"
+          - name: UPSTREAM_ISSUER
+            value: "https://sso.sikalabs.com/realms/training"
+          - name: UPSTREAM_CLIENT_ID
+            value: "example_client_id"
+          - name: UPSTREAM_CLIENT_SECRET
+            value: "example_client_secret"
+          - name: CLIENT_ID
+            value: "seq"
+          - name: CLIENT_SECRET
+            value: "seq"
+          - name: REDIRECT_URIS
+            value: "*"
+          - name: STATIC_USER_SUB
+            value: "seq"
+          - name: STATIC_USER_PREFERRED_USERNAME
+            value: "seq"
+          - name: STATIC_USER_NAME
+            value: "seq"
+          - name: STATIC_USER_EMAIL
+            value: "seq@sikademo.com"
+
