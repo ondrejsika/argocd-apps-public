@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: seq
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  destination:
+    namespace: seq
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+  source:
+    repoURL: https://helm.datalust.co
+    chart: seq
+    targetRevision: 2026.1.1
+    helm:
+      valuesObject:
+        acceptEULA: "Y"
+        firstRunAdminPassword: adminadmin
+        baseURI: https://seq.sikademo.com/
+        persistence:
+          size: 20Gi
+        ui:
+          ingress:
+            enabled: true
+            hosts:
+              - seq.sikademo.com
+        ingress:
+          className: traefik
+          annotations:
+            cert-manager.io/cluster-issuer: letsencrypt
+            nginx.ingress.kubernetes.io/proxy-body-size: 50m
+          tls:
+            - secretName: seq.sikademo.com-tls
+              hosts:
+                - seq.sikademo.com
