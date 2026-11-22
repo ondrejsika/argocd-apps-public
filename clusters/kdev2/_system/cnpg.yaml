@@ -18,6 +18,6 @@ spec:
       - CreateNamespace=true
       - ServerSideApply=true
   source:
-    repoURL: https://cloudnative-pg.github.io/charts
+    repoURL: https://cloudnative-pg.io/charts/
     chart: cloudnative-pg
     targetRevision: 0.29.1
