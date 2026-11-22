@@ -24,6 +24,7 @@ spec:
         host: single-user-oidc-issuer.seq.sikademo.com
         image: "ghcr.io/sikalabsregistry/single-user-oidc-issuer:dev-2026-11-22.0"
         port: 8080
+        ingressClassName: "traefik"
         containerEnv:
           - name: PORT
             value: "8080"
