@@ -26,6 +26,11 @@ spec:
         # https://github.com/traefik/traefik-helm-chart/blob/master/traefik/values.yaml
         deployment:
           kind: DaemonSet
+        updateStrategy:
+          type: RollingUpdate
+          rollingUpdate:
+            maxSurge: 0
+            maxUnavailable: 1
         service:
           spec:
             type: ClusterIP
@@ -45,13 +50,25 @@ spec:
             publishedService:
               enabled: false
             ingressEndpoint:
-              hostname: rke2.sikademo.com
+              ip: 100.100.100.100
+          # Also serve Ingresses with ingressClassName: nginx (supports nginx.ingress.kubernetes.io/* annotations)
+          kubernetesIngressNGINX:
+            enabled: true
+            ingressClass: nginx
+            controllerClass: k8s.io/ingress-nginx
+            publishStatusAddress: 100.100.100.100
         metrics:
           prometheus:
             serviceMonitor:
               enabled: false
         # Default backend (catch-all for unmatched hosts)
         extraObjects:
+          - apiVersion: networking.k8s.io/v1
+            kind: IngressClass
+            metadata:
+              name: nginx
+            spec:
+              controller: k8s.io/ingress-nginx
           - apiVersion: apps/v1
             kind: Deployment
             metadata:
